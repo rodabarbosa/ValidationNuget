@@ -1,7 +1,25 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2;net461</TargetFrameworks>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Version>0.0.4</Version>
+		<Authors>Rodrigo Araujo Barbosa</Authors>
+		<Product>Documents validation</Product>
+		<Description>Pacote com métodos para validações de documentos e algoritmo para geração de documentos</Description>
+		<PackageReleaseNotes>
+			Está disponível as seguintes validações:
+			- CNPJ
+			- CPF
+			- PIS
+			- Título de Eleitor
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
-
+			Nota:
+			A geração dos documentos é somente para fins de facilitar testes
+		</PackageReleaseNotes>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="System.Globalization" Version="4.3.0" />
+		<PackageReference Include="System.Globalization.Extensions" Version="4.3.0" />
+	</ItemGroup>
 </Project>
