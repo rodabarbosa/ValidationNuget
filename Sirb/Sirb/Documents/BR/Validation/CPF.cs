@@ -6,14 +6,14 @@ using System.Text.RegularExpressions;
 namespace Sirb.Documents.BR.Validation
 {
 	/// <summary>
-	/// Manipulate CPF document
+	/// CCPF
 	/// </summary>
 	public static class CPF
 	{
 		/// <summary>
-		/// Validate CPF number
+		/// Validador de CPF
 		/// </summary>
-		/// <param name="value">CPF number</param>
+		/// <param name="value">CPF</param>
 		/// <returns></returns>
 		public static bool IsValid(string value)
 		{
@@ -47,6 +47,7 @@ namespace Sirb.Documents.BR.Validation
 			var digit11 = int.Parse(aux.Substring(10));
 			var sum1 = 0;
 			var sum2 = 0;
+
 			for (var i = 0; i < 9; i++)
 			{
 				sum1 += int.Parse(aux[i].ToString()) * (10 - i);
@@ -70,37 +71,33 @@ namespace Sirb.Documents.BR.Validation
 		}
 
 		/// <summary>
-		/// Remove mask from CPF number
+		/// Remove mascara do CPF
 		/// </summary>
 		/// <param name="value">CPF number</param>
 		/// <returns></returns>
 		public static string RemoveMask(string value) => value.OnlyNumbers();
 
 		/// <summary>
-		/// Place mask to CPF number
+		/// Adiciona mascara no CPF
 		/// </summary>
-		/// <param name="value">CPF number</param>
+		/// <param name="value">CPF</param>
 		/// <returns></returns>
 		public static string PlaceMask(string value) => string.IsNullOrEmpty(value) ? value : Regex.Replace(RemoveMask(value), @"(\d{3})(\d{3})(\d{3})(\d{2})", "$1.$2.$3-$4");
 
 		/// <summary>
-		/// Gets CPF number issuing state
+		/// Obtém estado emissor do CPF
 		/// </summary>
-		/// <param name="value">CPF number</param>
+		/// <param name="value">CPF</param>
+		/// <exception cref="InvalidOperationException">CPF deve ser valido</exception>
 		/// <returns></returns>
-		public static string Origin(string value)
+		public static string GetIssuingState(string value)
 		{
-			if (string.IsNullOrEmpty(value))
+			if (!IsValid(value))
 			{
-				return null;
+				throw new InvalidOperationException("Invalid number");
 			}
 
 			var aux = RemoveMask(value);
-			if (aux.Length != 11 || !IsValid(aux))
-			{
-				throw new Exception("Invalid number");
-			}
-
 			var digit = int.Parse(value.Substring(8, 1));
 			switch (digit)
 			{

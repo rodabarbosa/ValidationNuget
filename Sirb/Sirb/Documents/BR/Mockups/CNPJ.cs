@@ -4,12 +4,12 @@ using System.Text;
 namespace Sirb.Documents.BR.Mockups
 {
 	/// <summary>
-	/// Creates CNPJ Mockup
+	/// Gerador de número CNPJ
 	/// </summary>
 	public static class CNPJ
 	{
 		/// <summary>
-		/// Generate CNPJ number
+		/// Gera número CNPJ
 		/// </summary>
 		/// <returns></returns>
 		public static string Generate()

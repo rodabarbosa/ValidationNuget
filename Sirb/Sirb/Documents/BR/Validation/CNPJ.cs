@@ -5,14 +5,14 @@ using System.Text.RegularExpressions;
 namespace Sirb.Documents.BR.Validation
 {
 	/// <summary>
-	/// Manipulate CNPJ document
+	/// CNPJ
 	/// </summary>
 	public static class CNPJ
 	{
 		/// <summary>
-		/// Validate CNPJ number
+		/// Validador de CNPJ
 		/// </summary>
-		/// <param name="value">CNPJ number</param>
+		/// <param name="value">CNPJ</param>
 		/// <returns></returns>
 		public static bool IsValid(string value)
 		{
@@ -65,17 +65,17 @@ namespace Sirb.Documents.BR.Validation
 		}
 
 		/// <summary>
-		/// Remove mask from CNPJ number
+		/// Remove mascara do CNPJ
 		/// </summary>
-		/// <param name="value">CNPJ number</param>
+		/// <param name="value">CNPJ</param>
 		/// <returns></returns>
 		public static string RemoveMask(string value) => value.OnlyNumbers();
 
 		/// <summary>
-		/// Place mask to CNPJ number
+		/// Adiciona mascara ao CNPJ
 		/// </summary>
 		/// <param name="value">CNPJ number</param>
 		/// <returns></returns>
-		public static string PlaceMask(string value) => string.IsNullOrEmpty(value) ? value : Regex.Replace(RemoveMask(value), @"(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})", "$1.$2.$3.$4-$5");
+		public static string PlaceMask(string value) => string.IsNullOrEmpty(value) ? value : Regex.Replace(RemoveMask(value), @"(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})", "$1.$2.$3/$4-$5");
 	}
 }

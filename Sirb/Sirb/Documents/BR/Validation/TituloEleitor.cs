@@ -4,14 +4,14 @@ using System.Text.RegularExpressions;
 namespace Sirb.Documents.BR.Validation
 {
 	/// <summary>
-	/// Manipulate Titulo de Eleitor document
+	/// Título de Eleitor
 	/// </summary>
 	public static class TituloEleitor
 	{
 		/// <summary>
-		/// Validate Titulo de Eleitor number
+		/// Validador de Título de Eleitor
 		/// </summary>
-		/// <param name="value">Titulo de Eleitor number</param>
+		/// <param name="value">Titulo de Eleitor</param>
 		/// <returns></returns>
 		public static bool IsValid(string value)
 		{
@@ -27,7 +27,7 @@ namespace Sirb.Documents.BR.Validation
 			}
 
 			var total = 0;
-			for (var i = 0; i < 9; i++)
+			for (var i = 0; i < 8; i++)
 			{
 				total += int.Parse(aux[i].ToString()) * (i + 2);
 			}
@@ -48,7 +48,7 @@ namespace Sirb.Documents.BR.Validation
 				digit2 = 0;
 			}
 
-			var stateDigit = int.Parse($"{digit1}{digit2}");
+			var stateDigit = int.Parse($"{aux[8].ToString()}{aux[9].ToString()}");
 			return stateDigit > 0
 					&& stateDigit < 29
 					&& aux[10].ToString().Equals(digit1.ToString())
@@ -56,16 +56,16 @@ namespace Sirb.Documents.BR.Validation
 		}
 
 		/// <summary>
-		/// Remove mask from Titulo de Eleitor number
+		/// Remove mascara do Titulo de Eleitor
 		/// </summary>
-		/// <param name="value">Titulo de Eleitor number</param>
+		/// <param name="value">Titulo de Eleitor</param>
 		/// <returns></returns>
 		public static string RemoveMask(string value) => value.OnlyNumbers();
 
 		/// <summary>
-		/// Place mask to Titulo de Eleitor number
+		/// Adiciona mascara no Título de Eleitor
 		/// </summary>
-		/// <param name="value">Titulo de Eleitor number</param>
+		/// <param name="value">Titulo de Eleitor</param>
 		/// <returns></returns>
 		public static string PlaceMask(string value) => string.IsNullOrEmpty(value) ? value : Regex.Replace(RemoveMask(value), @"(\d{4})(\d{4})(\d{4})", "$1.$2.$3");
 	}

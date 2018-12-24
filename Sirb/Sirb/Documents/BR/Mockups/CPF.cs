@@ -5,12 +5,12 @@ using System.Text;
 namespace Sirb.Documents.BR.Mockups
 {
 	/// <summary>
-	/// Responsable for CPF mockup
+	/// Gerador de número CPF
 	/// </summary>
 	public static class CPF
 	{
 		/// <summary>
-		/// Generate CPF number
+		/// Gera número CPF
 		/// </summary>
 		/// <param name="value"></param>
 		/// <returns></returns>

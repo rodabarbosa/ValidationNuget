@@ -4,14 +4,14 @@ using System.Text.RegularExpressions;
 namespace Sirb.Documents.BR.Validation
 {
 	/// <summary>
-	/// Manipulate PIS document
+	/// PIS
 	/// </summary>
 	public static class PIS
 	{
 		/// <summary>
-		/// Validate PIS number
+		/// Validador de PIS
 		/// </summary>
-		/// <param name="value">PIS number</param>
+		/// <param name="value">PIS</param>
 		/// <returns></returns>
 		public static bool IsValid(string value)
 		{
@@ -33,17 +33,17 @@ namespace Sirb.Documents.BR.Validation
 		}
 
 		/// <summary>
-		/// Remove mask from PIS number
+		/// Remove mascara do PIS
 		/// </summary>
-		/// <param name="value">PIS number</param>
+		/// <param name="value">PIS</param>
 		/// <returns></returns>
 		public static string RemoveMask(string value) => value.OnlyNumbers();
 
 		/// <summary>
-		/// Place mask to PIS number
+		/// Adiciona mascara no PIS
 		/// </summary>
-		/// <param name="value">PIS number</param>
+		/// <param name="value">PIS</param>
 		/// <returns></returns>
-		public static string PlaceMask(string value) => (string.IsNullOrEmpty(value)) ? value : Regex.Replace(RemoveMask(value), @"(\d{3})(\d{5})(\d{2})(\d{2})", "$1.$2.$3/$4");
+		public static string PlaceMask(string value) => (string.IsNullOrEmpty(value)) ? value : Regex.Replace(RemoveMask(value), @"(\d{3})(\d{5})(\d{2})(\d{1})", "$1.$2.$3/$4");
 	}
 }

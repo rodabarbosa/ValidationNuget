@@ -4,14 +4,13 @@ using System.Text;
 namespace Sirb.Documents.BR.Mockups
 {
 	/// <summary>
-	/// Responsable for PIS mockup
+	/// Gerador de número PIS
 	/// </summary>
 	public static class PIS
 	{
 		/// <summary>
-		/// Generate PIS number
+		/// Gera número PIS
 		/// </summary>
-		/// <param name="value"></param>
 		/// <returns></returns>
 		public static string Generate()
 		{
