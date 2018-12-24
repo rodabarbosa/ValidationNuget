@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2;net461</TargetFrameworks>
-		<PackageId>AppLogger.Sirb</PackageId>
+		<PackageId>Sirb.Validation</PackageId>
 		<PackageVersion>1.0.0</PackageVersion>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<Version>1.0.0</Version>
@@ -23,6 +23,7 @@ Nota:
 		<PackageTags>CPF CNPJ PIS TituloEleitor</PackageTags>
 		<PackageLicenseUrl></PackageLicenseUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/rodabarbosa/ValidationNuget</PackageProjectUrl>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2|AnyCPU'">
 		<DocumentationFile>C:\Projetos\DOTNET\ValidationNuget\Sirb\Sirb\Sirb.xml</DocumentationFile>
