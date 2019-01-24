@@ -7,21 +7,21 @@ namespace ValidationTest
 		[Fact]
 		public void ValidateValid()
 		{
-			var value = "49.616.903/0001-90";// valid
+			const string value = "49.616.903/0001-90";// valid
 			Assert.True(Sirb.Documents.BR.Validation.CNPJ.IsValid(value));
 		}
 
 		[Fact]
 		public void ValidateInvalid()
 		{
-			var value = "49.616.903/0001-00";// invalid
+			const string value = "49.616.903/0001-00";// invalid
 			Assert.True(!Sirb.Documents.BR.Validation.CNPJ.IsValid(value));
 		}
 
 		[Fact]
 		public void PlaceMask()
 		{
-			var value = "29373908000122";
+			const string value = "29373908000122";
 			var masked = Sirb.Documents.BR.Validation.CNPJ.PlaceMask(value);
 			Assert.Matches(@"(\d{2}).(\d{3}).(\d{3})/(\d{4})-(\d{2})", masked);
 		}

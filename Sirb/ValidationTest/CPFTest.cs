@@ -7,21 +7,21 @@ namespace ValidationTest
 		[Fact]
 		public void ValidateValid()
 		{
-			var value = "715.470.830-18"; // valid
+			const string value = "715.470.830-18"; // valid
 			Assert.True(Sirb.Documents.BR.Validation.CPF.IsValid(value));
 		}
 
 		[Fact]
 		public void ValidateInvalid()
 		{
-			var value = "715.470.830-33"; // invalid
+			const string value = "715.470.830-33"; // invalid
 			Assert.True(!Sirb.Documents.BR.Validation.CPF.IsValid(value));
 		}
 
 		[Fact]
 		public void PlaceMask()
 		{
-			var value = "71547083018";
+			const string value = "71547083018";
 			var masked = Sirb.Documents.BR.Validation.CPF.PlaceMask(value);
 			Assert.Matches(@"(\d{3}).(\d{3}).(\d{3})-(\d{2})", masked);
 		}

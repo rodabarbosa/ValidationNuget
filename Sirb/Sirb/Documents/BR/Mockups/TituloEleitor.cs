@@ -53,7 +53,10 @@ namespace Sirb.Documents.BR.Mockups
 				{
 					digit12 = 0;
 				}
-				sb.Append($"{digit9}{digit10}{digit11}{digit12}");
+				sb.Append(digit9)
+					.Append(digit10)
+					.Append(digit11)
+					.Append(digit12);
 				done = true;
 			}
 

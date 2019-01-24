@@ -22,7 +22,9 @@ namespace Sirb.Extensions
 			var capitalizedString = new StringBuilder();
 			foreach (var item in strings)
 			{
-				capitalizedString.Append($"{item.First().ToString().ToUpper()}{item.Substring(1).ToLower()} ");
+				capitalizedString.Append(item[0].ToString().ToUpper())
+								.Append(item.Substring(1).ToLower())
+								.Append(" ");
 			}
 
 			return capitalizedString.ToString().Trim();

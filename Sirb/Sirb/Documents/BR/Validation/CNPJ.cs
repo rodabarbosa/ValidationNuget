@@ -54,7 +54,7 @@ namespace Sirb.Documents.BR.Validation
 			div = (div < 2) ? 0 : (11 - div);
 
 			var digit = div.ToString();
-			tempCnpj = tempCnpj + digit;
+			tempCnpj += digit;
 
 			sum2 += int.Parse(tempCnpj[12].ToString()) * multiplier2[12];
 			div = sum2 % 11;

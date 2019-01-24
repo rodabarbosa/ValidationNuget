@@ -16,14 +16,14 @@
 		AL,
 
 		/// <summary>
-		/// Amapá
-		/// </summary>
-		AP,
-
-		/// <summary>
 		/// Amazonas
 		/// </summary>
 		AM,
+
+		/// <summary>
+		/// Amapá
+		/// </summary>
+		AP,
 
 		/// <summary>
 		/// Bahia
@@ -64,6 +64,11 @@
 		/// Mato Grosso do Sul
 		/// </summary>
 		MS,
+
+		/// <summary>
+		/// Mato Grosso
+		/// </summary>
+		MT,
 
 		/// <summary>
 		/// Pará
@@ -116,14 +121,14 @@
 		RS,
 
 		/// <summary>
-		/// Sergipe
-		/// </summary>
-		SE,
-
-		/// <summary>
 		/// Santa Catarina
 		/// </summary>
 		SC,
+
+		/// <summary>
+		/// Sergipe
+		/// </summary>
+		SE,
 
 		/// <summary>
 		/// São Paulo

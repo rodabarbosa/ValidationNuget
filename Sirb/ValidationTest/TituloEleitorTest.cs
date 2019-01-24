@@ -7,21 +7,21 @@ namespace ValidationTest
 		[Fact]
 		public void ValidateValid()
 		{
-			var value = "470080440124"; // valid
+			const string value = "470080440124"; // valid
 			Assert.True(Sirb.Documents.BR.Validation.TituloEleitor.IsValid(value));
 		}
 
 		[Fact]
 		public void ValidateInvalid()
 		{
-			var value = "4754.5200.0101"; // invalid
+			const string value = "4754.5200.0101"; // invalid
 			Assert.True(!Sirb.Documents.BR.Validation.TituloEleitor.IsValid(value));
 		}
 
 		[Fact]
 		public void PlaceMask()
 		{
-			var value = "475452000132";
+			const string value = "475452000132";
 			var masked = Sirb.Documents.BR.Validation.TituloEleitor.PlaceMask(value);
 			Assert.Matches(@"(\d{4}).(\d{4}).(\d{4})", masked);
 		}

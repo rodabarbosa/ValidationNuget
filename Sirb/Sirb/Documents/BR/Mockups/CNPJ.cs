@@ -34,7 +34,8 @@ namespace Sirb.Documents.BR.Mockups
 
 			rest = total2 % 11;
 			var digit2 = (rest < 2) ? 0 : 11 - rest;
-			sb.Append($"{digit1}{digit2}");
+			sb.Append(digit1)
+				.Append(digit2);
 
 			return sb.ToString();
 		}

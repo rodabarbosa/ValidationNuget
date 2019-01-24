@@ -13,14 +13,15 @@
 - CPF
 - PIS
 - Título de Eleitor
+- Inscrição Estadual
 
 Nota:
 * A geração dos documentos é somente para fins de facilitar testes
 		</PackageReleaseNotes>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-		<AssemblyVersion>1.0.0.0</AssemblyVersion>
-		<FileVersion>1.0.0.0</FileVersion>
-		<PackageTags>CPF CNPJ PIS TituloEleitor</PackageTags>
+		<AssemblyVersion>1.0.0.1</AssemblyVersion>
+		<FileVersion>1.0.0.1</FileVersion>
+		<PackageTags>CPF CNPJ PIS TituloEleitor InscricaoEstadual</PackageTags>
 		<PackageLicenseUrl></PackageLicenseUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageProjectUrl>https://github.com/rodabarbosa/ValidationNuget</PackageProjectUrl>
