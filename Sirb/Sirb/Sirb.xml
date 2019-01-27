@@ -167,6 +167,17 @@
             <param name="value"></param>
             <returns></returns>
         </member>
+        <member name="T:Sirb.Documents.BR.Mockups.InscricaoEstadual">
+            <summary>
+            Gerador de Inscrição Estadual
+            </summary>
+        </member>
+        <member name="M:Sirb.Documents.BR.Mockups.InscricaoEstadual.Generate(Sirb.Documents.BR.Enumeration.State)">
+            <summary>
+            Gera Número de Inscrição Estadual
+            </summary>
+            <param name="state">State</param>
+        </member>
         <member name="T:Sirb.Documents.BR.Mockups.PIS">
             <summary>
             Gerador de número PIS
@@ -253,6 +264,19 @@
             <summary>
             Inscrição Estadual
             </summary>
+        </member>
+        <member name="M:Sirb.Documents.BR.Validation.InscricaoEstadual.RemoveMask(System.String)">
+            <summary>
+            Remove mascara da Inscrição Estadual
+            </summary>
+            <param name="value">Inscrição Estadual</param>
+        </member>
+        <member name="M:Sirb.Documents.BR.Validation.InscricaoEstadual.PlaceMask(Sirb.Documents.BR.Enumeration.State,System.String)">
+            <summary>
+            Adiciona mascara a inscrição estadual
+            </summary>
+            <param name="uf">Uf da Inscrição</param>
+            <param name="value">Inscrição Estadual</param>
         </member>
         <member name="M:Sirb.Documents.BR.Validation.InscricaoEstadual.IsValid(Sirb.Documents.BR.Enumeration.State,System.String)">
             <summary>

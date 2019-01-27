@@ -20,12 +20,12 @@ namespace Sirb.Documents.BR.Mockups
 			var sb = new StringBuilder();
 			var total1 = 0;
 			var total2 = 0;
-			var genDigit = 0;
 			if (value == null)
 			{
 				value = (State)random.Next(10);
 			}
 
+			int genDigit;
 			for (var i = 0; i < 9; i++)
 			{
 				genDigit = i < 8 ? random.Next(10) : (int)value.Value;

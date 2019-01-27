@@ -3,6 +3,7 @@ using Sirb.Extensions;
 using System;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Sirb.Documents.BR.Validation
 {
@@ -11,6 +12,144 @@ namespace Sirb.Documents.BR.Validation
 	/// </summary>
 	public static class InscricaoEstadual
 	{
+		/// <summary>
+		/// Remove mascara da Inscrição Estadual
+		/// </summary>
+		/// <param name="value">Inscrição Estadual</param>
+		public static string RemoveMask(string value) => string.IsNullOrEmpty(value) ? value : value.OnlyNumbers();
+
+		/// <summary>
+		/// Adiciona mascara a inscrição estadual
+		/// </summary>
+		/// <param name="uf">Uf da Inscrição</param>
+		/// <param name="value">Inscrição Estadual</param>
+		public static string PlaceMask(State uf, string value)
+		{
+			if (string.IsNullOrEmpty(value))
+			{
+				return value;
+			}
+
+			switch (uf)
+			{
+				// 01.004.823/001-12
+				case State.AC:
+					return Regex.Replace(RemoveMask(value), @"(\d{2})(\d{3})(\d{3})(\d{3})(\d{2})", "$1.$2.$3/$4-$5");
+
+				// 12345678-9
+				case State.AL:
+					return Regex.Replace(RemoveMask(value), @"(\d{8})(\d{1})", "$1-$2");
+
+				// 99.999.999-9
+				case State.AM:
+					return Regex.Replace(RemoveMask(value), @"(\d{2})(\d{3})(\d{3})(\d{2})", "$1.$2.$3-$4");
+
+				// 11.111111-11
+				case State.AP:
+					return Regex.Replace(RemoveMask(value), @"(\d{2})(\d{6})(\d{1})", "$1.$2-$3");
+
+				// 123456-63
+				case State.BA:
+					return Regex.Replace(RemoveMask(value), @"(\d{6})(\d{2})", "$1-$2");
+
+				// 06000001-5
+				case State.CE:
+					return Regex.Replace(RemoveMask(value), @"(\d{8})(\d{1})", "$1.-$2");
+
+				// 00.111111.222-33
+				case State.DF:
+					return Regex.Replace(RemoveMask(value), @"(\d{2})(\d{6})(\d{3})(\d{2})", "$1.$2.$3-$4");
+
+				// No mask
+				case State.ES:
+					return RemoveMask(value);
+
+				// 12.345.678-9
+				case State.GO:
+					return Regex.Replace(RemoveMask(value), @"(\d{2})(\d{3})(\d{3})(\d{1})", "$1.$2.$3-$4");
+
+				case State.MA:
+					return Regex.Replace(RemoveMask(value), @"(\d{2})(\d{3})(\d{3})(\d{3})(\d{2})", "$1.$2.$3/$4-$5");
+
+				// 062.307.904/0081
+				case State.MG:
+					return Regex.Replace(RemoveMask(value), @"(\d{3})(\d{3})(\d{3})(\d{4})", "$1.$2.$3/$4");
+
+				// 11.111.111-1
+				case State.MS:
+					return Regex.Replace(RemoveMask(value), @"(\d{2})(\d{3})(\d{3})(\d{1})", "$1.$2.$3-$4");
+
+				// 0013000001-9
+				case State.MT:
+					return Regex.Replace(RemoveMask(value), @"(\d{10})(\d{1})", "$1-$2");
+
+				// 15-999999-5
+				case State.PA:
+					return Regex.Replace(RemoveMask(value), @"(\d{2})(\d{6})(\d{1})", "$1-$2-$3");
+
+				// 12345678-9
+				case State.PB:
+					return Regex.Replace(RemoveMask(value), @"(\d{8})(\d{1})", "$1-$2");
+
+				// 0321418-40
+				case State.PE:
+					return Regex.Replace(RemoveMask(value), @"(\d{7})(\d{2})", "$1-$2");
+
+				//  012345679
+				case State.PI:
+					return RemoveMask(value);
+
+				//  NNNNNNNN-DD
+				case State.PR:
+					return Regex.Replace(RemoveMask(value), @"(\d{8})(\d{2})", "$1-$2");
+
+				// 00.000.00-0
+				case State.RJ:
+					return Regex.Replace(RemoveMask(value), @"(\d{2})(\d{3})(\d{2})(\d{1})", "$1.$2.$3-$4");
+
+				// 9  d = 20.040.040-1
+				// 10 d = 20.0.040.040-0
+				case State.RN:
+					return value.Length == 9 ?
+						Regex.Replace(RemoveMask(value), @"(\d{2})(\d{3})(\d{3})(\d{1})", "$1.$2.$3-$4") :
+						Regex.Replace(RemoveMask(value), @"(\d{2})(\d{1})(\d{3})(\d{3})(\d{1})", "$1.$2.$3.$4-$5");
+
+				// 101.62521-3
+				case State.RO:
+					return Regex.Replace(RemoveMask(value), @"(\d{2})(\d{5})(\d{1})", "$1.$2-$3");
+
+				// 24006628-1
+				case State.RR:
+					return Regex.Replace(RemoveMask(value), @"(\d{8})(\d{1})", "$1-$2");
+
+				// 224/3658792
+				case State.RS:
+					return Regex.Replace(RemoveMask(value), @"(\d{3})(\d{7})", "$1/$2");
+
+				// 251.040.852
+				case State.SC:
+					return Regex.Replace(RemoveMask(value), @"(\d{3})(\d{3})(\d{3})", "$1.$2.$3");
+
+				// 27123456-3
+				case State.SE:
+					return Regex.Replace(RemoveMask(value), @"(\d{8})(\d{1})", "$1-$2");
+
+				// P  d = P-01100424.3/002
+				// N d = 110.042.490.114
+				case State.SP:
+					return value.StartsWith("P", StringComparison.OrdinalIgnoreCase) ?
+						Regex.Replace(RemoveMask(value), @"(\d{8})(\d{1})(\d{3})", "P-$1.$2/$3") :
+						Regex.Replace(RemoveMask(value), @"(\d{3})(\d{3})(\d{3})(\d{3})", "$1.$2.$3.$4");
+
+				// 12.345.678-9
+				case State.TO:
+					return Regex.Replace(RemoveMask(value), @"(\d{2})(\d{3})(\d{3})(\d{1})", "$1.$2.$3-$4");
+
+				default:
+					throw new ArgumentException("UF não identificada.");
+			}
+		}
+
 		/// <summary>
 		/// Validador de inscrição estadual
 		/// </summary>
@@ -99,9 +238,6 @@ namespace Sirb.Documents.BR.Validation
 			var sum = 0;
 			var startWeight = 4;
 			var endWeight = 9;
-			var digit1 = 0;
-			var digit2 = 0;
-
 			int weight;
 			for (var i = 0; i < 11; i++)
 			{
@@ -119,7 +255,7 @@ namespace Sirb.Documents.BR.Validation
 				sum += int.Parse(value[i].ToString()) * weight;
 			}
 
-			digit1 = 11 - (sum % 11);
+			var digit1 = 11 - (sum % 11);
 			if (digit1 == 10 || digit1 == 11)
 			{
 				digit1 = 0;
@@ -144,7 +280,7 @@ namespace Sirb.Documents.BR.Validation
 				sum += int.Parse(value[i].ToString()) * weight;
 			}
 
-			digit2 = 11 - (sum % 11);
+			var digit2 = 11 - (sum % 11);
 			if (digit2 == 10 || digit2 == 11)
 			{
 				digit2 = 0;
@@ -169,13 +305,12 @@ namespace Sirb.Documents.BR.Validation
 			}
 
 			var sum = 0;
-			var digit = 0;
 			for (var i = 0; i < 8; i++)
 			{
 				sum += int.Parse(value[i].ToString()) * (9 - i);
 			}
 
-			digit = sum * 10 % 11;
+			var digit = sum * 10 % 11;
 			if (digit == 10)
 			{
 				digit = 0;
@@ -272,8 +407,6 @@ namespace Sirb.Documents.BR.Validation
 
 			var rest = sum % module;
 			var digit2 = rest == 0 || (module == 11 && rest == 1) ? 0 : module - rest;
-
-			var digit1 = -1;
 			sum = digit2 * 2;
 			length =
 			weight = length == 8 ? 8 : 9;
@@ -283,7 +416,7 @@ namespace Sirb.Documents.BR.Validation
 			}
 
 			rest = sum % module;
-			digit1 = rest == 0 || (module == 11 && rest == 1) ? 0 : module - rest;
+			var digit1 = rest == 0 || (module == 11 && rest == 1) ? 0 : module - rest;
 			var dv = digit1.ToString() + digit2.ToString();
 			return value.EndsWith(dv);
 		}
@@ -296,13 +429,12 @@ namespace Sirb.Documents.BR.Validation
 			}
 
 			var sum = 0;
-			var digit = -1;
 			for (var i = 0; i < 8; i++)
 			{
 				sum += int.Parse(value[i].ToString()) * (9 - i);
 			}
 
-			digit = 11 - (sum % 11);
+			var digit = 11 - (sum % 11);
 			if (digit == 10 || digit == 11)
 			{
 				digit = 0;
@@ -394,7 +526,7 @@ namespace Sirb.Documents.BR.Validation
 		private static bool ValidateGO(string value)
 		{
 			var startDigitsAllowed = new string[] { "10", "11", "15" };
-			var startDigit = value.Substring(1, 2);
+			var startDigit = value.Substring(0, 2);
 			if (value.Length != 9 || !startDigitsAllowed.Contains(startDigit))
 			{
 				return false;
@@ -408,7 +540,6 @@ namespace Sirb.Documents.BR.Validation
 
 			var sum = 0;
 			var weight = 9;
-
 			for (var i = 0; i < 8; i++)
 			{
 				sum += int.Parse(value[i].ToString()) * weight;
@@ -438,7 +569,7 @@ namespace Sirb.Documents.BR.Validation
 			}
 
 			var sum = 0;
-			for (int i = 0; i < 8; i++)
+			for (var i = 0; i < 8; i++)
 			{
 				sum += int.Parse(value[i].ToString()) * (9 - i);
 			}
@@ -495,7 +626,6 @@ namespace Sirb.Documents.BR.Validation
 			sum = digit1 * 2;
 			startWeight = 3;
 			endWeight = 11;
-			var digit2 = -1;
 			for (var i = 0; i < 11; i++)
 			{
 				if (i < 2)
@@ -512,7 +642,7 @@ namespace Sirb.Documents.BR.Validation
 				sum += int.Parse(value[i].ToString()) * weight;
 			}
 
-			digit2 = 11 - (sum % 11);
+			var digit2 = 11 - (sum % 11);
 			if (sum % 11 == 0 || sum % 11 == 1)
 			{
 				digit2 = 0;
@@ -551,7 +681,7 @@ namespace Sirb.Documents.BR.Validation
 			var startWeight = 3;
 			var endWeight = 9;
 			int weight;
-			for (int i = 0; i < value.Length - 1; i++)
+			for (int i = 0; i < 10; i++)
 			{
 				if (i < 2)
 				{
@@ -703,51 +833,29 @@ namespace Sirb.Documents.BR.Validation
 				return false;
 			}
 
-			var sum = 0;
-			var startWeight = 3;
-			var endWeight = 7;
+			var sum1 = 0;
+			var sum2 = 0;
 			int weight;
+			int valueParse;
 			for (var i = 0; i < 8; i++)
 			{
-				if (i < 2)
-				{
-					weight = startWeight;
-					startWeight--;
-				}
-				else
-				{
-					weight = endWeight;
-					endWeight--;
-				}
-				sum += int.Parse(value[i].ToString()) * weight;
+				valueParse = int.Parse(value[i].ToString());
+				weight = (i < 2 ? 3 : 9) - i;
+				sum1 += valueParse * weight;
+
+				weight = (i < 3 ? 4 : 10) - i;
+				sum2 += valueParse * weight;
 			}
 
-			var digit1 = 11 - (sum % 11);
-			if ((sum % 11) == 0 || (sum % 11) == 1)
+			var digit1 = 11 - (sum1 % 11);
+			if ((sum1 % 11) == 0 || (sum1 % 11) == 1)
 			{
 				digit1 = 0;
 			}
 
-			sum = digit1 * 2;
-			startWeight = 4;
-			endWeight = 7;
-			for (int i = 0; i < value.Length - 2; i++)
-			{
-				if (i < 3)
-				{
-					weight = startWeight;
-					startWeight--;
-				}
-				else
-				{
-					weight = endWeight;
-					endWeight--;
-				}
-				sum += int.Parse(value[i].ToString()) * weight;
-			}
-
-			var digit2 = 11 - (sum % 11);
-			if ((sum % 11) == 0 || (sum % 11) == 1)
+			sum2 += digit1 * 2;
+			var digit2 = 11 - (sum2 % 11);
+			if ((sum2 % 11) < 2)
 			{
 				digit2 = 0;
 			}
@@ -764,9 +872,11 @@ namespace Sirb.Documents.BR.Validation
 			}
 
 			var sum = 0;
-			for (var i = 0; i < value.Length - 1; i++)
+			int weight;
+			for (var i = 0; i < 7; i++)
 			{
-				sum += int.Parse(value[i].ToString()) * (i == 0 ? 2 : 8 - i);
+				weight = (i == 0 ? 2 : 8) - i;
+				sum += int.Parse(value[i].ToString()) * weight;
 			}
 
 			var digit = 11 - (sum % 11);
@@ -780,37 +890,16 @@ namespace Sirb.Documents.BR.Validation
 
 		private static bool ValidateRN(string value)
 		{
-			if (value.Length < 9 && value.Length > 10 && !value.StartsWith("20"))
+			var weight = value.Length;
+			if (weight < 9 && weight > 10 && !value.StartsWith("20"))
 			{
 				return false;
 			}
-
-			return value.Length == 9 ? ValidateRNNineDigits(value) : ValidateRNTenDigits(value);
-		}
-
-		private static bool ValidateRNNineDigits(string value)
-		{
+			var length = value.Length - 1;
 			var sum = 0;
-			for (var i = 0; i < value.Length - 1; i++)
+			for (var i = 0; i < length; i++)
 			{
-				sum += int.Parse(value[i].ToString()) * (9 - i);
-			}
-
-			var digit = sum * 10 % 11;
-			if (digit == 10)
-			{
-				digit = 0;
-			}
-
-			return value.EndsWith(digit.ToString());
-		}
-
-		private static bool ValidateRNTenDigits(string value)
-		{
-			var sum = 0;
-			for (var i = 0; i < value.Length - 1; i++)
-			{
-				sum += int.Parse(value[i].ToString()) * (10 - i);
+				sum += int.Parse(value[i].ToString()) * (weight - i);
 			}
 
 			var digit = sum * 10 % 11;
@@ -830,21 +919,10 @@ namespace Sirb.Documents.BR.Validation
 			}
 
 			var sum = 0;
-			var startWeight = 6;
-			var endWeight = 9;
 			int weight;
 			for (var i = 0; i < 13; i++)
 			{
-				if (i < 5)
-				{
-					weight = startWeight;
-					startWeight--;
-				}
-				else
-				{
-					weight = endWeight;
-					endWeight--;
-				}
+				weight = (i < 5 ? 6 : 14) - i;
 				sum += int.Parse(value[i].ToString()) * weight;
 			}
 
@@ -947,7 +1025,6 @@ namespace Sirb.Documents.BR.Validation
 		private static bool ValidateSPWithP(string value)
 		{
 			var valueAux = value.PadRight(12, '0');
-			var valueAux2 = valueAux.Substring(0, 7);
 			var sum = 0;
 			var weight = 1;
 			for (var i = 0; i < 8; i++)
@@ -969,7 +1046,7 @@ namespace Sirb.Documents.BR.Validation
 			var strRest = rest.ToString();
 			var strDigit1 = strRest[strRest.Length - 1].ToString();
 
-			valueAux2 = (valueAux.Substring(0, 8) + (strDigit1 + valueAux.Substring(9, 3)));
+			var valueAux2 = valueAux.Substring(0, 8) + (strDigit1 + valueAux.Substring(9, 3));
 			return valueAux2.Equals(value);
 		}
 
@@ -979,9 +1056,9 @@ namespace Sirb.Documents.BR.Validation
 			var sum = 0;
 			var weight = 1;
 
-			for (var i = 1; i < 9; i++)
+			for (var i = 0; i < 8; i++)
 			{
-				sum += int.Parse(valueAux[i - 1].ToString()) * weight;
+				sum += int.Parse(valueAux[i].ToString()) * weight;
 				weight++;
 
 				if (weight == 2)
@@ -994,8 +1071,9 @@ namespace Sirb.Documents.BR.Validation
 				}
 			}
 
-			var rest = (sum % 11);
-			var strDigit1 = rest.ToString()[rest.ToString().Length - 1].ToString();
+			var rest = sum % 11;
+			var strRest = rest.ToString();
+			var strDigit1 = strRest[strRest.Length - 1].ToString();
 
 			var valueAux2 = (valueAux.Substring(0, 8) + (strDigit1 + valueAux.Substring(9, 2)));
 			sum = 0;
@@ -1012,7 +1090,7 @@ namespace Sirb.Documents.BR.Validation
 			}
 
 			rest = (sum % 11);
-			var strRest = rest.ToString();
+			strRest = rest.ToString();
 			var strDigit2 = strRest[strRest.Length - 1].ToString();
 			valueAux2 += strDigit2;
 
@@ -1021,7 +1099,7 @@ namespace Sirb.Documents.BR.Validation
 
 		private static bool ValidateTO(string value)
 		{
-			if (value.Length != 9 && value.Length != 11)
+			if (!(value.Length == 9 || value.Length == 11))
 			{
 				return false;
 			}
@@ -1029,7 +1107,7 @@ namespace Sirb.Documents.BR.Validation
 			var valueAux = value;
 			if (value.Length == 9)
 			{
-				valueAux = value.Substring(1, 2) + "02" + value.Substring(2, value.Length);
+				valueAux = value.Substring(0, 2) + "02" + value.Substring(1, value.Length);
 			}
 
 			var sum = 0;

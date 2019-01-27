@@ -20,7 +20,7 @@ namespace Sirb.Documents.BR.Mockups
 			var random = new Random();
 			var total1 = 0;
 			var total2 = 0;
-			var value = 0;
+			int value;
 			for (var i = 0; i < 12; i++)
 			{
 				value = random.Next(10);

@@ -98,8 +98,7 @@ namespace Sirb.Documents.BR.Validation
 			}
 
 			var aux = RemoveMask(value);
-			var digit = int.Parse(value.Substring(8, 1));
-			switch (digit)
+			switch (int.Parse(aux.Substring(8, 1)))
 			{
 				case 0: return "RS";
 				case 1: return "DF, GO, MS, TO";

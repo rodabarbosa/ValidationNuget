@@ -18,8 +18,8 @@ namespace Sirb.Documents.BR.Mockups
 			var sb = new StringBuilder();
 			var multiplier = new int[10] { 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
 			var total = 0;
-			var genDigit = 0;
 
+			int genDigit;
 			for (var i = 0; i < 10; i++)
 			{
 				genDigit = random.Next(10);
