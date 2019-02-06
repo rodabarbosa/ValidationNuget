@@ -954,7 +954,7 @@ namespace Sirb.Documents.BR.Mockups
 				digit = 0;
 			}
 			sb.Append(digit);
-			return sb.ToString(); throw new NotImplementedException();
+			return sb.ToString();
 		}
 	}
 }

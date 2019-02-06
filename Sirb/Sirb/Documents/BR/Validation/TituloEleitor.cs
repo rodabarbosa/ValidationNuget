@@ -67,6 +67,6 @@ namespace Sirb.Documents.BR.Validation
 		/// </summary>
 		/// <param name="value">Titulo de Eleitor</param>
 		/// <returns></returns>
-		public static string PlaceMask(string value) => string.IsNullOrEmpty(value) ? value : Regex.Replace(RemoveMask(value), @"(\d{4})(\d{4})(\d{4})", "$1.$2.$3");
+		public static string PlaceMask(string value) => string.IsNullOrEmpty(value) ? null : Regex.Replace(RemoveMask(value), @"(\d{4})(\d{4})(\d{4})", "$1.$2.$3");
 	}
 }
