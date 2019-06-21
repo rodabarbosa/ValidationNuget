@@ -16,7 +16,7 @@ namespace Sirb.Documents.BR.Validation
 		/// Remove mascara da Inscrição Estadual
 		/// </summary>
 		/// <param name="value">Inscrição Estadual</param>
-		public static string RemoveMask(string value) => string.IsNullOrEmpty(value) ? null : value.OnlyNumbers();
+		public static string RemoveMask(string value) => string.IsNullOrEmpty(value) ? value : value.OnlyNumbers();
 
 		/// <summary>
 		/// Adiciona mascara a inscrição estadual
@@ -167,62 +167,61 @@ namespace Sirb.Documents.BR.Validation
 				return ValidateSP(value);
 			}
 
-			var valueNormalized = value.OnlyNumbers();
 			switch (uf)
 			{
-				case State.AC: return ValidateAC(valueNormalized);
+				case State.AC: return ValidateAC(value.OnlyNumbers());
 
-				case State.AL: return ValidateAL(valueNormalized);
+				case State.AL: return ValidateAL(value.OnlyNumbers());
 
-				case State.AM: return ValidateAM(valueNormalized);
+				case State.AM: return ValidateAM(value.OnlyNumbers());
 
-				case State.AP: return ValidateAP(valueNormalized);
+				case State.AP: return ValidateAP(value.OnlyNumbers());
 
-				case State.BA: return ValidateBA(valueNormalized);
+				case State.BA: return ValidateBA(value.OnlyNumbers());
 
-				case State.CE: return ValidateCE(valueNormalized);
+				case State.CE: return ValidateCE(value.OnlyNumbers());
 
-				case State.DF: return ValidateDF(valueNormalized);
+				case State.DF: return ValidateDF(value.OnlyNumbers());
 
-				case State.ES: return ValidateES(valueNormalized);
+				case State.ES: return ValidateES(value.OnlyNumbers());
 
-				case State.GO: return ValidateGO(valueNormalized);
+				case State.GO: return ValidateGO(value.OnlyNumbers());
 
-				case State.MA: return ValidateMA(valueNormalized);
+				case State.MA: return ValidateMA(value.OnlyNumbers());
 
-				case State.MG: return ValidateMG(valueNormalized);
+				case State.MG: return ValidateMG(value.OnlyNumbers());
 
-				case State.MS: return ValidateMS(valueNormalized);
+				case State.MS: return ValidateMS(value.OnlyNumbers());
 
-				case State.MT: return ValidateMT(valueNormalized);
+				case State.MT: return ValidateMT(value.OnlyNumbers());
 
-				case State.PA: return ValidatePA(valueNormalized);
+				case State.PA: return ValidatePA(value.OnlyNumbers());
 
-				case State.PB: return ValidatePB(valueNormalized);
+				case State.PB: return ValidatePB(value.OnlyNumbers());
 
-				case State.PE: return ValidatePE(valueNormalized);
+				case State.PE: return ValidatePE(value.OnlyNumbers());
 
-				case State.PI: return ValidatePI(valueNormalized);
+				case State.PI: return ValidatePI(value.OnlyNumbers());
 
-				case State.PR: return ValidatePR(valueNormalized);
+				case State.PR: return ValidatePR(value.OnlyNumbers());
 
-				case State.RJ: return ValidateRJ(valueNormalized);
+				case State.RJ: return ValidateRJ(value.OnlyNumbers());
 
-				case State.RN: return ValidateRN(valueNormalized);
+				case State.RN: return ValidateRN(value.OnlyNumbers());
 
-				case State.RO: return ValidateRO(valueNormalized);
+				case State.RO: return ValidateRO(value.OnlyNumbers());
 
-				case State.RR: return ValidateRR(valueNormalized);
+				case State.RR: return ValidateRR(value.OnlyNumbers());
 
-				case State.RS: return ValidateRS(valueNormalized);
+				case State.RS: return ValidateRS(value.OnlyNumbers());
 
-				case State.SC: return ValidateSC(valueNormalized);
+				case State.SC: return ValidateSC(value.OnlyNumbers());
 
-				case State.SE: return ValidateSE(valueNormalized);
+				case State.SE: return ValidateSE(value.OnlyNumbers());
 
-				case State.SP: return ValidateSP(valueNormalized);
+				case State.SP: return ValidateSP(value.OnlyNumbers());
 
-				case State.TO: return ValidateTO(valueNormalized);
+				case State.TO: return ValidateTO(value.OnlyNumbers());
 
 				default:
 					throw new ArgumentException("A UF informada não é válida.");
@@ -236,28 +235,52 @@ namespace Sirb.Documents.BR.Validation
 				return false;
 			}
 
-			var sum1 = 0;
-			var sum2 = 0;
+			var sum = 0;
+			var startWeight = 4;
+			var endWeight = 9;
 			int weight;
-			int valueParse;
 			for (var i = 0; i < 11; i++)
 			{
-				valueParse = int.Parse(value[i].ToString());
-				weight = (i < 3 ? 4 : 12) - i;
-				sum1 += valueParse * weight;
+				if (i < 3)
+				{
+					weight = startWeight;
+					startWeight--;
+				}
+				else
+				{
+					weight = endWeight;
+					endWeight--;
+				}
 
-				weight = (i < 4 ? 5 : 13) - i;
-				sum2 += valueParse * weight;
+				sum += int.Parse(value[i].ToString()) * weight;
 			}
 
-			var digit1 = 11 - (sum1 % 11);
+			var digit1 = 11 - (sum % 11);
 			if (digit1 == 10 || digit1 == 11)
 			{
 				digit1 = 0;
 			}
 
-			sum2 += digit1 * 2;
-			var digit2 = 11 - (sum2 % 11);
+			sum = digit1 * 2;
+			startWeight = 5;
+			endWeight = 9;
+			for (var i = 0; i < 11; i++)
+			{
+				if (i < 4)
+				{
+					weight = startWeight;
+					startWeight--;
+				}
+				else
+				{
+					weight = endWeight;
+					endWeight--;
+				}
+
+				sum += int.Parse(value[i].ToString()) * weight;
+			}
+
+			var digit2 = 11 - (sum % 11);
 			if (digit2 == 10 || digit2 == 11)
 			{
 				digit2 = 0;
@@ -323,7 +346,7 @@ namespace Sirb.Documents.BR.Validation
 
 			var digit1 = -1;
 			var sum = -1;
-			var x = long.Parse(value.Substring(0, 8));
+			var x = long.Parse(value.Substring(1, 8));
 			if (x >= 3017001L && x <= 3019022L)
 			{
 				digit1 = 1;
@@ -374,24 +397,25 @@ namespace Sirb.Documents.BR.Validation
 				module = 11;
 			}
 
-			var sum1 = 0;
-			var sum2 = 0;
+			var sum = 0;
 			var length = value.Length;
-			var weight1 = length == 8 ? 7 : 8;
-			var weight2 = length == 8 ? 8 : 9;
-			int valueParse;
+			var weight = length == 8 ? 7 : 8;
 			for (var i = 0; i < length - 2; i++)
 			{
-				valueParse = int.Parse(value[i].ToString());
-				sum1 += valueParse * (weight1 - i);
-				sum2 += valueParse * (weight2 - i);
+				sum += int.Parse(value[i].ToString()) * (weight - i);
 			}
 
-			var rest = sum1 % module;
+			var rest = sum % module;
 			var digit2 = rest == 0 || (module == 11 && rest == 1) ? 0 : module - rest;
-			sum2 += digit2 * 2;
+			sum = digit2 * 2;
+			length =
+			weight = length == 8 ? 8 : 9;
+			for (var i = 0; i < length - 2; i++)
+			{
+				sum += int.Parse(value[i].ToString()) * (weight - i);
+			}
 
-			rest = sum2 % module;
+			rest = sum % module;
 			var digit1 = rest == 0 || (module == 11 && rest == 1) ? 0 : module - rest;
 			var dv = digit1.ToString() + digit2.ToString();
 			return value.EndsWith(dv);
@@ -426,28 +450,52 @@ namespace Sirb.Documents.BR.Validation
 				return false;
 			}
 
-			var sum1 = 0;
-			var sum2 = 0;
+			var sum = 0;
+			var startWeight = 4;
+			var endWeight = 9;
 			int weight;
-			int valueParse;
 			for (var i = 0; i < 11; i++)
 			{
-				valueParse = int.Parse(value[i].ToString());
-				weight = (i < 3 ? 4 : 12) - i;
-				sum1 += valueParse * weight;
+				if (i < 3)
+				{
+					weight = startWeight;
+					startWeight--;
+				}
+				else
+				{
+					weight = endWeight;
+					endWeight--;
+				}
 
-				weight = (i < 4 ? 5 : 13) - i;
-				sum2 += valueParse * weight;
+				sum += int.Parse(value[i].ToString()) * weight;
 			}
 
-			var digit1 = 11 - (sum1 % 11);
+			var digit1 = 11 - (sum % 11);
 			if (digit1 == 11 || digit1 == 10)
 			{
 				digit1 = 0;
 			}
 
-			sum2 += digit1 * 2;
-			var digit2 = 11 - (sum2 % 11);
+			sum = digit1 * 2;
+			startWeight = 5;
+			endWeight = 9;
+			for (var i = 0; i < 11; i++)
+			{
+				if (i < 4)
+				{
+					weight = startWeight;
+					startWeight--;
+				}
+				else
+				{
+					weight = endWeight;
+					endWeight--;
+				}
+
+				sum += int.Parse(value[i].ToString()) * weight;
+			}
+
+			var digit2 = 11 - (sum % 11);
 			if (digit2 == 11 || digit2 == 10)
 			{
 				digit2 = 0;
@@ -491,9 +539,11 @@ namespace Sirb.Documents.BR.Validation
 			}
 
 			var sum = 0;
+			var weight = 9;
 			for (var i = 0; i < 8; i++)
 			{
-				sum += int.Parse(value[i].ToString()) * (9 - i);
+				sum += int.Parse(value[i].ToString()) * weight;
+				weight--;
 			}
 
 			var rest = sum % 11;
@@ -547,6 +597,8 @@ namespace Sirb.Documents.BR.Validation
 			}
 
 			var sum = 0;
+			var startWeight = 1;
+			var endWeight = 2;
 			var valueAux = sb.ToString();
 			int weight;
 			int calculatedValue;
@@ -554,7 +606,7 @@ namespace Sirb.Documents.BR.Validation
 			int length;
 			for (var i = 0; i < sb.Length; i++)
 			{
-				weight = i % 2 == 0 ? 1 : 2;
+				weight = i % 2 == 0 ? startWeight : endWeight;
 				calculatedValue = int.Parse(valueAux[i].ToString()) * weight;
 				strcalculatedValue = calculatedValue.ToString();
 				length = strcalculatedValue.Length;
@@ -572,9 +624,21 @@ namespace Sirb.Documents.BR.Validation
 			var digit1 = sumAux - sum;
 
 			sum = digit1 * 2;
+			startWeight = 3;
+			endWeight = 11;
 			for (var i = 0; i < 11; i++)
 			{
-				weight = (i < 2 ? 3 : 13) - i;
+				if (i < 2)
+				{
+					weight = startWeight;
+					startWeight--;
+				}
+				else
+				{
+					weight = endWeight;
+					endWeight--;
+				}
+
 				sum += int.Parse(value[i].ToString()) * weight;
 			}
 
@@ -614,10 +678,21 @@ namespace Sirb.Documents.BR.Validation
 			}
 
 			var sum = 0;
+			var startWeight = 3;
+			var endWeight = 9;
 			int weight;
 			for (int i = 0; i < 10; i++)
 			{
-				weight = (i < 2 ? 3 : 11) - i;
+				if (i < 2)
+				{
+					weight = startWeight;
+					startWeight--;
+				}
+				else
+				{
+					weight = endWeight;
+					endWeight--;
+				}
 				sum += int.Parse(value[i].ToString()) * weight;
 			}
 
@@ -942,9 +1017,10 @@ namespace Sirb.Documents.BR.Validation
 			return value.EndsWith(digit.ToString());
 		}
 
-		private static bool ValidateSP(string value) => value.StartsWith("P", StringComparison.OrdinalIgnoreCase) ?
-														ValidateSPWithP(value.OnlyNumbers()) :
-														ValidateSPCommom(value.OnlyNumbers());
+		private static bool ValidateSP(string value)
+		{
+			return value.StartsWith("P", StringComparison.OrdinalIgnoreCase) ? ValidateSPWithP(value.OnlyNumbers()) : ValidateSPCommom(value.OnlyNumbers());
+		}
 
 		private static bool ValidateSPWithP(string value)
 		{
@@ -1038,12 +1114,11 @@ namespace Sirb.Documents.BR.Validation
 			var weight = 9;
 			for (var i = 0; i < valueAux.Length - 1; i++)
 			{
-				if (i == 2 || i == 3)
+				if (i != 2 && i != 3)
 				{
-					continue;
+					sum += int.Parse(valueAux[i].ToString()) * weight;
+					weight--;
 				}
-				sum += int.Parse(valueAux[i].ToString()) * weight;
-				weight--;
 			}
 
 			var digit = 11 - (sum % 11);

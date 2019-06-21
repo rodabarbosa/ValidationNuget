@@ -82,7 +82,7 @@ namespace Sirb.Documents.BR.Validation
 		/// </summary>
 		/// <param name="value">CPF</param>
 		/// <returns></returns>
-		public static string PlaceMask(string value) => string.IsNullOrEmpty(value) ? null : Regex.Replace(RemoveMask(value), @"(\d{3})(\d{3})(\d{3})(\d{2})", "$1.$2.$3-$4");
+		public static string PlaceMask(string value) => string.IsNullOrEmpty(value) ? value : Regex.Replace(RemoveMask(value), @"(\d{3})(\d{3})(\d{3})(\d{2})", "$1.$2.$3-$4");
 
 		/// <summary>
 		/// Obtém estado emissor do CPF
