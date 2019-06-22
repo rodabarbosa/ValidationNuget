@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2;net461</TargetFrameworks>
+		<TargetFrameworks>netstandard2.0;net46;net461;net462;net47;net471;net472</TargetFrameworks>
 		<PackageId>Sirb.Validation</PackageId>
-		<PackageVersion>1.0.0</PackageVersion>
+		<PackageVersion>1.0.2</PackageVersion>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>1.0.0</Version>
+		<Version>1.0.2</Version>
 		<Authors>Rodrigo Araujo Barbosa</Authors>
 		<Product>Validação de documentos</Product>
 		<Description>Pacote com métodos para validações de documentos e algoritmo para geração de documentos</Description>
@@ -19,8 +19,8 @@ Nota:
 * A geração dos documentos é somente para fins de facilitar testes
 		</PackageReleaseNotes>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-		<AssemblyVersion>1.0.0.1</AssemblyVersion>
-		<FileVersion>1.0.0.1</FileVersion>
+		<AssemblyVersion>1.0.1.0</AssemblyVersion>
+		<FileVersion>1.0.1.0</FileVersion>
 		<PackageTags>CPF CNPJ PIS TituloEleitor InscricaoEstadual</PackageTags>
 		<PackageLicenseUrl></PackageLicenseUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -31,6 +31,5 @@ Nota:
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="System.Globalization" Version="4.3.0" />
-		<PackageReference Include="System.Globalization.Extensions" Version="4.3.0" />
 	</ItemGroup>
 </Project>

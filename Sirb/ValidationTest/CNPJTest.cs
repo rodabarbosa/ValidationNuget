@@ -4,27 +4,14 @@ namespace ValidationTest
 {
 	public class CNPJTest
 	{
-		[Fact]
-		public void ValidateValid()
-		{
-			const string value = "49.616.903/0001-90";// valid
-			Assert.True(Sirb.Documents.BR.Validation.CNPJ.IsValid(value));
-		}
+		[Theory]
+		[InlineData("49.616.903/0001-90")] // valid
+		[InlineData("49.616.903/0001-00")] // invalid
+		public void ValidateValid(string value) => Assert.True(Sirb.Documents.BR.Validation.CNPJ.IsValid(value));
 
-		[Fact]
-		public void ValidateInvalid()
-		{
-			const string value = "49.616.903/0001-00";// invalid
-			Assert.True(!Sirb.Documents.BR.Validation.CNPJ.IsValid(value));
-		}
-
-		[Fact]
-		public void PlaceMask()
-		{
-			const string value = "29373908000122";
-			var masked = Sirb.Documents.BR.Validation.CNPJ.PlaceMask(value);
-			Assert.Matches(@"(\d{2}).(\d{3}).(\d{3})/(\d{4})-(\d{2})", masked);
-		}
+		[Theory]
+		[InlineData("29373908000122")]
+		public void PlaceMask(string value) => Assert.Matches(@"(\d{2}).(\d{3}).(\d{3})/(\d{4})-(\d{2})", Sirb.Documents.BR.Validation.CNPJ.PlaceMask(value));
 
 		[Fact]
 		public void GenerateAndValidate()

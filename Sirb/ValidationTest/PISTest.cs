@@ -4,27 +4,14 @@ namespace ValidationTest
 {
 	public class PISTest
 	{
-		[Fact]
-		public void ValidateValid()
-		{
-			const string value = "537.68723.13/3"; // valid
-			Assert.True(Sirb.Documents.BR.Validation.PIS.IsValid(value));
-		}
+		[Theory]
+		[InlineData("537.68723.13/3")] // valid
+		[InlineData("53768723175")] // invalid
+		public void ValidateDoc(string value) => Assert.True(Sirb.Documents.BR.Validation.PIS.IsValid(value));
 
-		[Fact]
-		public void ValidateInvalid()
-		{
-			const string value = "53768723175"; // invalid
-			Assert.True(!Sirb.Documents.BR.Validation.PIS.IsValid(value));
-		}
-
-		[Fact]
-		public void PlaceMask()
-		{
-			const string value = "53768723133";
-			var masked = Sirb.Documents.BR.Validation.PIS.PlaceMask(value);
-			Assert.Matches(@"(\d{3}).(\d{5}).(\d{2})/(\d{1})", masked);
-		}
+		[Theory]
+		[InlineData("53768723133")]
+		public void PlaceMask(string value) => Assert.Matches(@"(\d{3}).(\d{5}).(\d{2})/(\d{1})", Sirb.Documents.BR.Validation.PIS.PlaceMask(value));
 
 		[Fact]
 		public void GenerateAndValidate()

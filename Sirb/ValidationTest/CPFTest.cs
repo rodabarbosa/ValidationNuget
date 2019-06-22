@@ -4,27 +4,15 @@ namespace ValidationTest
 {
 	public class CPFTest
 	{
-		[Fact]
-		public void ValidateValid()
-		{
-			const string value = "715.470.830-18"; // valid
-			Assert.True(Sirb.Documents.BR.Validation.CPF.IsValid(value));
-		}
+		[Theory]
+		[InlineData("715.470.830-18")] // valid
+		[InlineData("715.470.830-33")] // invalid
+		public void ValidateDoc(string value) => Assert.True(Sirb.Documents.BR.Validation.CPF.IsValid(value));
 
-		[Fact]
-		public void ValidateInvalid()
-		{
-			const string value = "715.470.830-33"; // invalid
-			Assert.True(!Sirb.Documents.BR.Validation.CPF.IsValid(value));
-		}
+		[Theory]
+		[InlineData("71547083018")]
+		public void PlaceMask(string value) => Assert.Matches(@"(\d{3}).(\d{3}).(\d{3})-(\d{2})", Sirb.Documents.BR.Validation.CPF.PlaceMask(value));
 
-		[Fact]
-		public void PlaceMask()
-		{
-			const string value = "71547083018";
-			var masked = Sirb.Documents.BR.Validation.CPF.PlaceMask(value);
-			Assert.Matches(@"(\d{3}).(\d{3}).(\d{3})-(\d{2})", masked);
-		}
 
 		[Fact]
 		public void GenerateAndValidate()

@@ -4,27 +4,14 @@ namespace ValidationTest
 {
 	public class TituloEleitorTest
 	{
-		[Fact]
-		public void ValidateValid()
-		{
-			const string value = "470080440124"; // valid
-			Assert.True(Sirb.Documents.BR.Validation.TituloEleitor.IsValid(value));
-		}
+		[Theory]
+		[InlineData("470080440124")] // valid
+		[InlineData("4754.5200.0101")] // invalid
+		public void ValidateDoc(string value) => Assert.True(Sirb.Documents.BR.Validation.TituloEleitor.IsValid(value));
 
-		[Fact]
-		public void ValidateInvalid()
-		{
-			const string value = "4754.5200.0101"; // invalid
-			Assert.True(!Sirb.Documents.BR.Validation.TituloEleitor.IsValid(value));
-		}
-
-		[Fact]
-		public void PlaceMask()
-		{
-			const string value = "475452000132";
-			var masked = Sirb.Documents.BR.Validation.TituloEleitor.PlaceMask(value);
-			Assert.Matches(@"(\d{4}).(\d{4}).(\d{4})", masked);
-		}
+		[Theory]
+		[InlineData("475452000132")]
+		public void PlaceMask(string value) => Assert.Matches(@"(\d{4}).(\d{4}).(\d{4})", Sirb.Documents.BR.Validation.TituloEleitor.PlaceMask(value));
 
 		[Fact]
 		public void GenerateAndValidate()

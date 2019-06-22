@@ -24,7 +24,7 @@ namespace Sirb.Extensions
 			{
 				capitalizedString.Append(item[0].ToString().ToUpper())
 								.Append(item.Substring(1).ToLower())
-								.Append(" ");
+								.Append(string.Empty);
 			}
 
 			return capitalizedString.ToString().Trim();
