@@ -14,24 +14,29 @@ namespace Sirb.Documents.BR.Mockups
 		/// <returns></returns>
 		public static string Generate()
 		{
-			var random = new Random();
-			var sb = new StringBuilder();
-			var multiplier = new int[10] { 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
-			var total = 0;
+			Random random = new Random();
+			StringBuilder sb = new StringBuilder();
+			int[] multiplier = new int[10] { 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
+			int total = 0;
 
 			int genDigit;
-			for (var i = 0; i < 10; i++)
+			for (int i = 0; i < 10; i++)
 			{
 				genDigit = random.Next(10);
 				sb.Append(genDigit.ToString());
 				total += genDigit * multiplier[i];
 			}
 
-			var rest = total % 11;
-			var digit = rest < 2 ? 0 : 11 - rest;
+			int digit = GetDigit(total);
 
 			sb.Append(digit.ToString());
 			return sb.ToString();
+		}
+
+		private static int GetDigit(int value)
+		{
+			int rest = value % 11;
+			return rest < 2 ? 0 : 11 - rest;
 		}
 	}
 }

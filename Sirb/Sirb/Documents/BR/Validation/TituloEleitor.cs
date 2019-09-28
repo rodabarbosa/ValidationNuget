@@ -15,52 +15,54 @@ namespace Sirb.Documents.BR.Validation
 		/// <returns></returns>
 		public static bool IsValid(string value)
 		{
-			if (string.IsNullOrEmpty(value))
-			{
+			string aux = RemoveMask(value);
+			if (string.IsNullOrEmpty(aux) || aux.Length != 12)
 				return false;
-			}
 
-			var aux = RemoveMask(value);
-			if (aux.Length != 12)
-			{
-				return false;
-			}
-
-			var total = 0;
-			for (var i = 0; i < 8; i++)
-			{
-				total += int.Parse(aux[i].ToString()) * (i + 2);
-			}
-			var digit1 = total % 11;
-			if (digit1 > 9)
-			{
-				digit1 = 0;
-			}
-
-			total = 0;
-			for (var i = 8; i < 11; i++)
-			{
-				total += int.Parse(aux[i].ToString()) * (i - 1);
-			}
-			var digit2 = total % 11;
-			if (digit2 > 9)
-			{
-				digit2 = 0;
-			}
-
-			var stateDigit = int.Parse($"{aux[8].ToString()}{aux[9].ToString()}");
-			return stateDigit > 0
-					&& stateDigit < 29
+			int digit1 = GetFirstDigit(aux);
+			int digit2 = GetSecondDigit(aux);
+			int stateDigit = GetStateDigit(aux);
+			return IsStateDigitValid(stateDigit)
 					&& aux[10].ToString().Equals(digit1.ToString())
 					&& aux[11].ToString().Equals(digit2.ToString());
 		}
+
+		private static int GetFirstDigit(string value)
+		{
+			int total = 0;
+			for (int i = 0; i < 8; i++)
+				total += int.Parse(value[i].ToString()) * (i + 2);
+
+			int digit = total % 11;
+			if (digit > 9)
+				digit = 0;
+
+			return digit;
+		}
+
+		private static int GetSecondDigit(string value)
+		{
+			int total = 0;
+			for (int i = 8; i < 11; i++)
+				total += int.Parse(value[i].ToString()) * (i - 1);
+
+			int digit = total % 11;
+			if (digit > 9)
+				digit = 0;
+
+			return digit;
+		}
+
+		private static int GetStateDigit(string value) => int.Parse($"{value[8].ToString()}{value[9].ToString()}");
+
+		private static bool IsStateDigitValid(int digit) => digit > 0 && digit < 29;
 
 		/// <summary>
 		/// Remove mascara do Titulo de Eleitor
 		/// </summary>
 		/// <param name="value">Titulo de Eleitor</param>
 		/// <returns></returns>
-		public static string RemoveMask(string value) => value.OnlyNumbers();
+		public static string RemoveMask(string value) => string.IsNullOrEmpty(value) ? value : value.OnlyNumbers();
 
 		/// <summary>
 		/// Adiciona mascara no Título de Eleitor

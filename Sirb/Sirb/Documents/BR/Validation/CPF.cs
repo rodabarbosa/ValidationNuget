@@ -17,13 +17,23 @@ namespace Sirb.Documents.BR.Validation
 		/// <returns></returns>
 		public static bool IsValid(string value)
 		{
-			if (string.IsNullOrEmpty(value))
-			{
+			string onlyNumbersValue = RemoveMask(value);
+			if (!HasValidParams(onlyNumbersValue))
 				return false;
-			}
 
-			var aux = RemoveMask(value);
-			var invalidNumbers = new List<string>
+			int tenthDigit = GetTenthDigit(onlyNumbersValue);
+			int eleventh = GetEleventhDigit(onlyNumbersValue);
+			int[] sums = GetSum(onlyNumbersValue);
+
+			int tenthDigitComparison = GetMoodulusForDigitComparison(sums[0]);
+			int eleventhDigitComparison = GetMoodulusForDigitComparison(sums[1]);
+
+			return tenthDigitComparison == tenthDigit && eleventhDigitComparison == eleventh;
+		}
+
+		private static bool HasValidParams(string value)
+		{
+			List<string> invalidNumbers = new List<string>
 			{
 				"00000000000",
 				"11111111111",
@@ -34,40 +44,40 @@ namespace Sirb.Documents.BR.Validation
 				"66666666666",
 				"77777777777",
 				"88888888888",
-				"99999999999",
-				"01234567890"
+				"99999999999"
+				//"01234567890"
 			};
 
-			if (aux.Length != 11 || invalidNumbers.Contains(aux))
+			return !(string.IsNullOrEmpty(value) || value.Length != 11 || invalidNumbers.Contains(value));
+		}
+
+		private static int GetTenthDigit(string onlyNumbersValue) => int.Parse(onlyNumbersValue.Substring(9, 1));
+
+		private static int GetEleventhDigit(string onlyNumbersValue) => int.Parse(onlyNumbersValue.Substring(10));
+
+		private static int GetMoodulusForDigitComparison(int value)
+		{
+			int modulus = value * 10 % 11;
+			if (modulus == 10)
 			{
-				return false;
+				modulus = 0;
 			}
 
-			var digit10 = int.Parse(aux.Substring(9, 1));
-			var digit11 = int.Parse(aux.Substring(10));
-			var sum1 = 0;
-			var sum2 = 0;
+			return modulus;
+		}
 
-			for (var i = 0; i < 9; i++)
+		private static int[] GetSum(string onlyNumbersValue)
+		{
+			int[] sums = new int[] { 0, 0 };
+			for (int i = 0; i < 9; i++)
 			{
-				sum1 += int.Parse(aux[i].ToString()) * (10 - i);
-				sum2 += int.Parse(aux[i].ToString()) * (11 - i);
+				sums[0] += int.Parse(onlyNumbersValue[i].ToString()) * (10 - i);
+				sums[1] += int.Parse(onlyNumbersValue[i].ToString()) * (11 - i);
 			}
 
-			var div1 = sum1 * 10 % 11;
-			if (div1 == 10)
-			{
-				div1 = 0;
-			}
+			sums[1] += GetTenthDigit(onlyNumbersValue) * 2;
 
-			sum2 += digit10 * 2;
-			var div2 = sum2 * 10 % 11;
-			if (div2 == 10)
-			{
-				div2 = 0;
-			}
-
-			return div1 == digit10 && div2 == digit11;
+			return sums;
 		}
 
 		/// <summary>
@@ -75,7 +85,7 @@ namespace Sirb.Documents.BR.Validation
 		/// </summary>
 		/// <param name="value">CPF number</param>
 		/// <returns></returns>
-		public static string RemoveMask(string value) => value.OnlyNumbers();
+		public static string RemoveMask(string value) => string.IsNullOrEmpty(value) ? value : value.OnlyNumbers();
 
 		/// <summary>
 		/// Adiciona mascara no CPF
@@ -93,11 +103,9 @@ namespace Sirb.Documents.BR.Validation
 		public static string GetIssuingState(string value)
 		{
 			if (!IsValid(value))
-			{
 				throw new InvalidOperationException("Invalid number");
-			}
 
-			var aux = RemoveMask(value);
+			string aux = RemoveMask(value);
 			switch (int.Parse(aux.Substring(8, 1)))
 			{
 				case 0: return "RS";

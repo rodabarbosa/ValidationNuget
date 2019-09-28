@@ -5,9 +5,14 @@ namespace ValidationTest
 	public class PISTest
 	{
 		[Theory]
-		[InlineData("537.68723.13/3")] // valid
-		[InlineData("53768723175")] // invalid
-		public void ValidateDoc(string value) => Assert.True(Sirb.Documents.BR.Validation.PIS.IsValid(value));
+		[InlineData("56303289843")]
+		[InlineData("80589607730")]
+		public void Validate_Valid(string value) => Assert.True(Sirb.Documents.BR.Validation.PIS.IsValid(value));
+
+		[Theory]
+		[InlineData("80589607700")]
+		[InlineData("27593988377")]
+		public void Validate_Invalid(string value) => Assert.False(Sirb.Documents.BR.Validation.PIS.IsValid(value));
 
 		[Theory]
 		[InlineData("53768723133")]
@@ -16,8 +21,8 @@ namespace ValidationTest
 		[Fact]
 		public void GenerateAndValidate()
 		{
-			var value = Sirb.Documents.BR.Mockups.PIS.Generate();
-			var result = Sirb.Documents.BR.Validation.PIS.IsValid(value);
+			string value = Sirb.Documents.BR.Mockups.PIS.Generate();
+			bool result = Sirb.Documents.BR.Validation.PIS.IsValid(value);
 			Assert.True(result);
 		}
 	}

@@ -5,9 +5,14 @@ namespace ValidationTest
 	public class CNPJTest
 	{
 		[Theory]
-		[InlineData("49.616.903/0001-90")] // valid
-		[InlineData("49.616.903/0001-00")] // invalid
-		public void ValidateValid(string value) => Assert.True(Sirb.Documents.BR.Validation.CNPJ.IsValid(value));
+		[InlineData("49.616.903/0001-90")]
+		[InlineData("72.923.755/0001-79")]
+		public void Validate_Valid(string value) => Assert.True(Sirb.Documents.BR.Validation.CNPJ.IsValid(value));
+
+		[Theory]
+		[InlineData("49.616.903/0001-00")]
+		[InlineData("72.923.755/0001-70")]
+		public void Validate_Invalid(string value) => Assert.False(Sirb.Documents.BR.Validation.CNPJ.IsValid(value));
 
 		[Theory]
 		[InlineData("29373908000122")]
@@ -16,7 +21,7 @@ namespace ValidationTest
 		[Fact]
 		public void GenerateAndValidate()
 		{
-			var value = Sirb.Documents.BR.Mockups.CNPJ.Generate();
+			string value = Sirb.Documents.BR.Mockups.CNPJ.Generate();
 			Assert.True(Sirb.Documents.BR.Validation.CNPJ.IsValid(value));
 		}
 	}

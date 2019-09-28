@@ -38,11 +38,12 @@ namespace Sirb.Extensions
 				case State.SC: return 9;
 
 				case State.SP: return 8;
-
+				/*
 				case State.DF:
 				case State.GO:
 				case State.MS:
-				case State.TO:
+				case State.TO: return 1;
+				*/
 				default: return 1;
 			}
 		}

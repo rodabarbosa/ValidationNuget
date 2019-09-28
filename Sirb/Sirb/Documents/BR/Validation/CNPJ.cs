@@ -16,11 +16,23 @@ namespace Sirb.Documents.BR.Validation
 		/// <returns></returns>
 		public static bool IsValid(string value)
 		{
-			if (string.IsNullOrEmpty(value))
+			string aux = RemoveMask(value);
+
+			if (!HasValidParams(aux))
 				return false;
 
-			var aux = RemoveMask(value);
-			var invalidNumbers = new List<string>
+			int[] sums = GetSum(aux);
+
+			int tenthDigit = GetModulusForDigitComparison(sums[0]);
+			int elevenDigit = GetModulusForDigitComparison(sums[1]);
+
+			string lastTwoDigits = tenthDigit.ToString() + elevenDigit.ToString();
+			return aux.EndsWith(lastTwoDigits);
+		}
+
+		private static bool HasValidParams(string value)
+		{
+			List<string> invalidNumbers = new List<string>
 			{
 				"00000000000000",
 				"11111111111111",
@@ -34,34 +46,29 @@ namespace Sirb.Documents.BR.Validation
 				"99999999999999"
 			};
 
-			if (aux.Length != 14 || invalidNumbers.Contains(aux))
-				return false;
+			return !(string.IsNullOrEmpty(value) || value.Length != 14 || invalidNumbers.Contains(value));
+		}
 
+		private static int[] GetSum(string value)
+		{
 			int[] multiplier1 = new int[12] { 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
 			int[] multiplier2 = new int[13] { 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
+			int[] sums = new int[] { 0, 0 };
 
-			string tempCnpj = aux.Substring(0, 12);
-
-			var sum1 = 0;
-			var sum2 = 0;
 			for (int i = 0; i < 12; i++)
 			{
-				sum1 += int.Parse(tempCnpj[i].ToString()) * multiplier1[i];
-				sum2 += int.Parse(tempCnpj[i].ToString()) * multiplier2[i];
+				sums[0] += int.Parse(value[i].ToString()) * multiplier1[i];
+				sums[1] += int.Parse(value[i].ToString()) * multiplier2[i];
 			}
+			sums[1] += int.Parse(value[12].ToString()) * multiplier2[12];
 
-			var div = sum1 % 11;
-			div = (div < 2) ? 0 : (11 - div);
+			return sums;
+		}
 
-			var digit = div.ToString();
-			tempCnpj += digit;
-
-			sum2 += int.Parse(tempCnpj[12].ToString()) * multiplier2[12];
-			div = sum2 % 11;
-			div = (div < 2) ? 0 : (11 - div);
-
-			digit += div.ToString();
-			return aux.EndsWith(digit);
+		private static int GetModulusForDigitComparison(int value)
+		{
+			int modulus = value % 11;
+			return (modulus < 2) ? 0 : (11 - modulus);
 		}
 
 		/// <summary>
@@ -69,7 +76,7 @@ namespace Sirb.Documents.BR.Validation
 		/// </summary>
 		/// <param name="value">CNPJ</param>
 		/// <returns></returns>
-		public static string RemoveMask(string value) => value.OnlyNumbers();
+		public static string RemoveMask(string value) => string.IsNullOrEmpty(value) ? value : value.OnlyNumbers();
 
 		/// <summary>
 		/// Adiciona mascara ao CNPJ

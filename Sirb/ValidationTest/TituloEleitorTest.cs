@@ -5,9 +5,14 @@ namespace ValidationTest
 	public class TituloEleitorTest
 	{
 		[Theory]
-		[InlineData("470080440124")] // valid
-		[InlineData("4754.5200.0101")] // invalid
-		public void ValidateDoc(string value) => Assert.True(Sirb.Documents.BR.Validation.TituloEleitor.IsValid(value));
+		[InlineData("470080440124")]
+		[InlineData("876807870728")]
+		public void Validate_Valid(string value) => Assert.True(Sirb.Documents.BR.Validation.TituloEleitor.IsValid(value));
+
+		[Theory]
+		[InlineData("876807870700")]
+		[InlineData("316816351122")]
+		public void Validate_Invalid(string value) => Assert.False(Sirb.Documents.BR.Validation.TituloEleitor.IsValid(value));
 
 		[Theory]
 		[InlineData("475452000132")]
@@ -16,8 +21,8 @@ namespace ValidationTest
 		[Fact]
 		public void GenerateAndValidate()
 		{
-			var value = Sirb.Documents.BR.Mockups.TituloEleitor.Generate();
-			var result = Sirb.Documents.BR.Validation.TituloEleitor.IsValid(value);
+			string value = Sirb.Documents.BR.Mockups.TituloEleitor.Generate();
+			bool result = Sirb.Documents.BR.Validation.TituloEleitor.IsValid(value);
 			Assert.True(result);
 		}
 	}
