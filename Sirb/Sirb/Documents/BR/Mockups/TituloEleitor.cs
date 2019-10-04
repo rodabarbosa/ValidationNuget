@@ -1,5 +1,6 @@
-﻿using System;
-using System.Text;
+﻿using Sirb.Extensions;
+using System;
+using System.Collections.Generic;
 
 namespace Sirb.Documents.BR.Mockups
 {
@@ -14,49 +15,55 @@ namespace Sirb.Documents.BR.Mockups
 		/// <returns></returns>
 		public static string Generate()
 		{
-			StringBuilder sb = new StringBuilder();
+			int[] generatedNumbers = GenerateNumbers();
+			return generatedNumbers.ConvertToString();
+		}
+
+		private static int[] GenerateNumbers()
+		{
+			List<int> generatedNumbers = new List<int>();
 			Random random = new Random();
 			int total = 0;
-			int value;
-			int stateDigit;
-			int digit9;
-			int digit10;
-			int digit11;
-			int digit12;
 			for (int i = 0; i < 8; i++)
 			{
-				value = random.Next(10);
-				sb.Append(value.ToString());
-				total += value * (i + 2);
+				generatedNumbers.Add(random.Next(10));
+				total += generatedNumbers[generatedNumbers.Count - 1] * (i + 2);
 			}
 
-			digit11 = total % 11;
-			if (digit11 > 9)
-				digit11 = 0;
+			GenerateAndIncludeCalculatedDigits(generatedNumbers, random, total);
+			return generatedNumbers.ToArray();
+		}
 
-			bool done = false;
-			while (!done)
+		private static void GenerateAndIncludeCalculatedDigits(List<int> generatedNumbers, Random random, int total)
+		{
+			bool validDigits = false;
+			int ninethDigit = 0;
+			int tenthDigit = 0;
+			int eleventhDigit = GetDigitValue(total);
+			int twelfth = 0;
+			int stateDigit;
+			while (!validDigits)
 			{
-				digit9 = random.Next(10);
-				digit10 = random.Next(10);
-				stateDigit = int.Parse($"{digit9}{digit10}");
+				ninethDigit = random.Next(10);
+				tenthDigit = random.Next(10);
+				stateDigit = int.Parse($"{ninethDigit}{tenthDigit}");
 				if (!(stateDigit > 0 && stateDigit < 29))
 					continue;
 
-				total = (digit9 * 7) + (digit10 * 8) + (digit11 * 9);
-				digit12 = total % 11;
-				if (digit12 > 9)
-					digit12 = 0;
-
-				sb.Append(digit9)
-					.Append(digit10)
-					.Append(digit11)
-					.Append(digit12);
-
-				done = true;
+				total = (ninethDigit * 7) + (tenthDigit * 8) + (eleventhDigit * 9);
+				twelfth = GetDigitValue(total);
+				validDigits = true;
 			}
+			generatedNumbers.Add(ninethDigit);
+			generatedNumbers.Add(tenthDigit);
+			generatedNumbers.Add(eleventhDigit);
+			generatedNumbers.Add(twelfth);
+		}
 
-			return sb.ToString();
+		private static int GetDigitValue(int valueSummation)
+		{
+			int remainder = valueSummation % 11;
+			return remainder > 9 ? 0 : remainder;
 		}
 	}
 }

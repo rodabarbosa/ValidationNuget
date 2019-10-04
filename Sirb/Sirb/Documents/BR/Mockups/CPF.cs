@@ -1,6 +1,7 @@
 ﻿using Sirb.Documents.BR.Enumeration;
+using Sirb.Extensions;
 using System;
-using System.Text;
+using System.Collections.Generic;
 
 namespace Sirb.Documents.BR.Mockups
 {
@@ -12,37 +13,49 @@ namespace Sirb.Documents.BR.Mockups
 		/// <summary>
 		/// Gera número CPF
 		/// </summary>
-		/// <param name="value"></param>
+		/// <param name="state"></param>
 		/// <returns></returns>
-		public static string Generate(State? value = null)
+		public static string Generate(State? state = null)
+		{
+			if (state == null)
+				state = GetRandomState();
+
+			int[] generatedNumbers = GenerateNumbers(state.Value);
+			return generatedNumbers.ConvertToString();
+		}
+
+		private static State GetRandomState()
 		{
 			Random random = new Random();
-			StringBuilder sb = new StringBuilder();
-			int total1 = 0;
-			int total2 = 0;
-			if (value == null)
-			{
-				value = (State)random.Next(10);
-			}
+			return (State)random.Next(10);
+		}
 
-			int genDigit;
+		private static int[] GenerateNumbers(State state)
+		{
+			List<int> generatedNumbers = new List<int>();
+			Random random = new Random();
+			int totalTenthDigit = 0;
+			int totalEleventhDigit = 0;
+
 			for (int i = 0; i < 9; i++)
 			{
-				genDigit = i < 8 ? random.Next(10) : (int)value.Value;
-				sb.Append(genDigit.ToString());
-				total1 += genDigit * (10 - i);
-				total2 += genDigit * (11 - i);
+				generatedNumbers.Add(i < 8 ? random.Next(10) : (int)state);
+				totalTenthDigit += generatedNumbers[generatedNumbers.Count - 1] * (10 - i);
+				totalEleventhDigit += generatedNumbers[generatedNumbers.Count - 1] * (11 - i);
 			}
 
-			int rest = total1 % 11;
-			int digit1 = rest < 2 ? 0 : 11 - rest;
+			generatedNumbers.Add(GetDigitValue(totalTenthDigit));
+			totalEleventhDigit += generatedNumbers[generatedNumbers.Count - 1] * 2;
 
-			total2 += digit1 * 2;
-			rest = total2 % 11;
-			int digit2 = (rest < 2) ? 0 : 11 - rest;
-			sb.Append(digit1)
-				.Append(digit2);
-			return sb.ToString();
+			generatedNumbers.Add(GetDigitValue(totalEleventhDigit));
+
+			return generatedNumbers.ToArray();
+		}
+
+		private static int GetDigitValue(int valueSummation)
+		{
+			int remainder = valueSummation % 11;
+			return remainder < 2 ? 0 : 11 - remainder;
 		}
 	}
 }

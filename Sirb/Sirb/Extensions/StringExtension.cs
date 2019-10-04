@@ -12,7 +12,7 @@ namespace Sirb.Extensions
 
 		public static string NoNumbers(this string value) => Regex.Replace(value, @"[\d]", string.Empty);
 
-		public static string ToCapitalize(this string value)
+		public static string ToCapitalizeAll(this string value)
 		{
 			if (string.IsNullOrEmpty(value))
 				return value;
@@ -21,12 +21,19 @@ namespace Sirb.Extensions
 			StringBuilder capitalizedString = new StringBuilder();
 			foreach (string item in strings)
 			{
-				capitalizedString.Append(item[0].ToString().ToUpper())
-								.Append(item.Substring(1).ToLower())
-								.Append(string.Empty);
+				capitalizedString.Append(item.ToCapitalize()).Append(string.Empty);
 			}
 
 			return capitalizedString.ToString().Trim();
+		}
+
+		public static string ToCapitalize(this string value)
+		{
+			if (string.IsNullOrEmpty(value))
+				return value;
+
+			string aux = value.Trim();
+			return aux[0].ToString().ToUpper() + aux.Substring(1).ToLower();
 		}
 
 		public static string RemoveLatinCharacters(this string value)

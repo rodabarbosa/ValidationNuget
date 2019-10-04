@@ -1,5 +1,6 @@
-﻿using System;
-using System.Text;
+﻿using Sirb.Extensions;
+using System;
+using System.Collections.Generic;
 
 namespace Sirb.Documents.BR.Mockups
 {
@@ -14,30 +15,48 @@ namespace Sirb.Documents.BR.Mockups
 		/// <returns></returns>
 		public static string Generate()
 		{
-			StringBuilder sb = new StringBuilder();
-			int[] multiplier1 = new int[12] { 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
-			int[] multiplier2 = new int[12] { 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3 };
+			int[] generatedNumbers = GenerateNumbers();
+			return generatedNumbers.ConvertToString();
+		}
+
+		private static int[] GenerateNumbers()
+		{
+			List<int> generatedNambers = new List<int>();
 			Random random = new Random();
-			int total1 = 0;
-			int total2 = 0;
-			int value;
+			int totalThirteenDigit = 0;
+			int totalFourteenDigit = 0;
+
 			for (int i = 0; i < 12; i++)
 			{
-				value = random.Next(10);
-				sb.Append(value.ToString());
-				total1 += value * multiplier1[i];
-				total2 += value * multiplier2[i];
+				generatedNambers.Add(random.Next(10));
+				totalThirteenDigit += generatedNambers[generatedNambers.Count - 1] * CalculateBeforeLastDigitWeight(i);
+				totalFourteenDigit += generatedNambers[generatedNambers.Count - 1] * CalculateLastDigitWeight(i);
 			}
-			int rest = total1 % 11;
-			int digit1 = rest < 2 ? 0 : 11 - rest;
-			total2 += digit1 * 2;
 
-			rest = total2 % 11;
-			int digit2 = (rest < 2) ? 0 : 11 - rest;
-			sb.Append(digit1)
-				.Append(digit2);
+			generatedNambers.Add(GetDigitValue(totalThirteenDigit));
+			totalFourteenDigit += generatedNambers[generatedNambers.Count - 1] * 2;
 
-			return sb.ToString();
+			generatedNambers.Add(GetDigitValue(totalFourteenDigit));
+
+			return generatedNambers.ToArray();
+		}
+
+		private static int CalculateBeforeLastDigitWeight(int index)
+		{
+			int value = index < 4 ? 5 : 13;
+			return value - index;
+		}
+
+		private static int CalculateLastDigitWeight(int index)
+		{
+			int value = index < 5 ? 6 : 14;
+			return value - index;
+		}
+
+		private static int GetDigitValue(int summationValue)
+		{
+			int remainder = summationValue % 11;
+			return remainder < 2 ? 0 : 11 - remainder;
 		}
 	}
 }
