@@ -27,6 +27,8 @@ namespace Sirb.Documents.BR.Validation
 					&& aux[11].ToString().Equals(digit2.ToString());
 		}
 
+		#region Validation
+
 		private static int GetFirstDigit(string value)
 		{
 			int total = 0;
@@ -56,6 +58,8 @@ namespace Sirb.Documents.BR.Validation
 		private static int GetStateDigit(string value) => int.Parse($"{value[8].ToString()}{value[9].ToString()}");
 
 		private static bool IsStateDigitValid(int digit) => digit > 0 && digit < 29;
+
+		#endregion Validation
 
 		/// <summary>
 		/// Remove mascara do Titulo de Eleitor

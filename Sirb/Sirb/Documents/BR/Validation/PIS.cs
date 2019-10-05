@@ -25,6 +25,8 @@ namespace Sirb.Documents.BR.Validation
 			return value.EndsWith(lastDigit.ToString());
 		}
 
+		#region Validation
+
 		private static int GetSum(string value)
 		{
 			int sum = 0;
@@ -33,6 +35,8 @@ namespace Sirb.Documents.BR.Validation
 
 			return sum;
 		}
+
+		#endregion Validation
 
 		/// <summary>
 		/// Remove mascara do PIS
