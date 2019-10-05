@@ -1,4 +1,5 @@
-﻿using Sirb.Extensions;
+﻿using Sirb.Documents.BR.Rules;
+using Sirb.Extensions;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -7,7 +8,7 @@ namespace Sirb.Documents.BR.Validation
 	/// <summary>
 	/// CNPJ
 	/// </summary>
-	public static class CNPJ
+	public static class Cnpj
 	{
 		/// <summary>
 		/// Validador de CNPJ
@@ -17,16 +18,15 @@ namespace Sirb.Documents.BR.Validation
 		public static bool IsValid(string value)
 		{
 			string aux = RemoveMask(value);
-
 			if (!HasValidParams(aux))
 				return false;
 
 			int[] sums = GetSum(aux);
 
-			int tenthDigit = GetModulusForDigitComparison(sums[0]);
-			int elevenDigit = GetModulusForDigitComparison(sums[1]);
+			int beforeLastDigit = CnpjRule.CalculateDigitValue(sums[0]);
+			int lastDigit = CnpjRule.CalculateDigitValue(sums[1]);
 
-			string lastTwoDigits = tenthDigit.ToString() + elevenDigit.ToString();
+			string lastTwoDigits = beforeLastDigit.ToString() + lastDigit.ToString();
 			return aux.EndsWith(lastTwoDigits);
 		}
 
@@ -51,24 +51,16 @@ namespace Sirb.Documents.BR.Validation
 
 		private static int[] GetSum(string value)
 		{
-			int[] multiplier1 = new int[12] { 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
-			int[] multiplier2 = new int[13] { 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
 			int[] sums = new int[] { 0, 0 };
 
 			for (int i = 0; i < 12; i++)
 			{
-				sums[0] += int.Parse(value[i].ToString()) * multiplier1[i];
-				sums[1] += int.Parse(value[i].ToString()) * multiplier2[i];
+				sums[0] += int.Parse(value[i].ToString()) * CnpjRule.CalculateBeforeLastDigitWeight(i);
+				sums[1] += int.Parse(value[i].ToString()) * CnpjRule.CalculateLastDigitWeight(i);
 			}
-			sums[1] += int.Parse(value[12].ToString()) * multiplier2[12];
+			sums[1] += int.Parse(value[12].ToString()) * 2;
 
 			return sums;
-		}
-
-		private static int GetModulusForDigitComparison(int value)
-		{
-			int modulus = value % 11;
-			return (modulus < 2) ? 0 : (11 - modulus);
 		}
 
 		/// <summary>

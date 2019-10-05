@@ -1,4 +1,5 @@
-﻿using Sirb.Extensions;
+﻿using Sirb.Documents.BR.Rules;
+using Sirb.Extensions;
 using System;
 using System.Collections.Generic;
 
@@ -7,7 +8,7 @@ namespace Sirb.Documents.BR.Mockups
 	/// <summary>
 	/// Gerador de número PIS
 	/// </summary>
-	public static class PIS
+	public static class Pis
 	{
 		/// <summary>
 		/// Gera número PIS
@@ -23,23 +24,17 @@ namespace Sirb.Documents.BR.Mockups
 		{
 			List<int> generatedNumbers = new List<int>();
 			Random random = new Random();
-			int[] multiplier = new int[10] { 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
+
 			int total = 0;
 			for (int i = 0; i < 10; i++)
 			{
 				generatedNumbers.Add(random.Next(10));
-				total += generatedNumbers[generatedNumbers.Count - 1] * multiplier[i];
+				total += generatedNumbers[generatedNumbers.Count - 1] * PisRule.CalculateWeight(i);
 			}
 
-			generatedNumbers.Add(GetDigitValue(total));
+			generatedNumbers.Add(PisRule.CalculateLastDigit(total));
 
 			return generatedNumbers.ToArray();
-		}
-
-		private static int GetDigitValue(int value)
-		{
-			int remainder = value % 11;
-			return remainder < 2 ? 0 : 11 - remainder;
 		}
 	}
 }

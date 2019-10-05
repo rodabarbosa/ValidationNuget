@@ -1,4 +1,5 @@
-﻿using Sirb.Extensions;
+﻿using Sirb.Documents.BR.Rules;
+using Sirb.Extensions;
 using System;
 using System.Collections.Generic;
 
@@ -7,7 +8,7 @@ namespace Sirb.Documents.BR.Mockups
 	/// <summary>
 	/// Gerador de número CNPJ
 	/// </summary>
-	public static class CNPJ
+	public static class Cnpj
 	{
 		/// <summary>
 		/// Gera número CNPJ
@@ -23,40 +24,22 @@ namespace Sirb.Documents.BR.Mockups
 		{
 			List<int> generatedNambers = new List<int>();
 			Random random = new Random();
-			int totalThirteenDigit = 0;
-			int totalFourteenDigit = 0;
+			int totalTBeforeLastDigit = 0;
+			int totalLastDigit = 0;
 
 			for (int i = 0; i < 12; i++)
 			{
 				generatedNambers.Add(random.Next(10));
-				totalThirteenDigit += generatedNambers[generatedNambers.Count - 1] * CalculateBeforeLastDigitWeight(i);
-				totalFourteenDigit += generatedNambers[generatedNambers.Count - 1] * CalculateLastDigitWeight(i);
+				totalTBeforeLastDigit += generatedNambers[generatedNambers.Count - 1] * CnpjRule.CalculateBeforeLastDigitWeight(i);
+				totalLastDigit += generatedNambers[generatedNambers.Count - 1] * CnpjRule.CalculateLastDigitWeight(i);
 			}
 
-			generatedNambers.Add(GetDigitValue(totalThirteenDigit));
-			totalFourteenDigit += generatedNambers[generatedNambers.Count - 1] * 2;
+			generatedNambers.Add(CnpjRule.CalculateDigitValue(totalTBeforeLastDigit));
+			totalLastDigit += generatedNambers[generatedNambers.Count - 1] * 2;
 
-			generatedNambers.Add(GetDigitValue(totalFourteenDigit));
+			generatedNambers.Add(CnpjRule.CalculateDigitValue(totalLastDigit));
 
 			return generatedNambers.ToArray();
-		}
-
-		private static int CalculateBeforeLastDigitWeight(int index)
-		{
-			int value = index < 4 ? 5 : 13;
-			return value - index;
-		}
-
-		private static int CalculateLastDigitWeight(int index)
-		{
-			int value = index < 5 ? 6 : 14;
-			return value - index;
-		}
-
-		private static int GetDigitValue(int summationValue)
-		{
-			int remainder = summationValue % 11;
-			return remainder < 2 ? 0 : 11 - remainder;
 		}
 	}
 }

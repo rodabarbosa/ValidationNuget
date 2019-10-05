@@ -23,16 +23,20 @@ namespace Sirb.Documents.BR.Mockups
 		{
 			List<int> generatedNumbers = new List<int>();
 			Random random = new Random();
+
 			int total = 0;
 			for (int i = 0; i < 8; i++)
 			{
 				generatedNumbers.Add(random.Next(10));
-				total += generatedNumbers[generatedNumbers.Count - 1] * (i + 2);
+				total += generatedNumbers[generatedNumbers.Count - 1] * CalculateWeight(i);
 			}
 
 			GenerateAndIncludeCalculatedDigits(generatedNumbers, random, total);
+
 			return generatedNumbers.ToArray();
 		}
+
+		private static int CalculateWeight(int index) => index + 2;
 
 		private static void GenerateAndIncludeCalculatedDigits(List<int> generatedNumbers, Random random, int total)
 		{

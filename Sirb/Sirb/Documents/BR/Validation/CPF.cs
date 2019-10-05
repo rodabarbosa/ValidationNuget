@@ -1,4 +1,5 @@
-﻿using Sirb.Extensions;
+﻿using Sirb.Documents.BR.Rules;
+using Sirb.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -8,7 +9,7 @@ namespace Sirb.Documents.BR.Validation
 	/// <summary>
 	/// CCPF
 	/// </summary>
-	public static class CPF
+	public static class Cpf
 	{
 		/// <summary>
 		/// Validador de CPF
@@ -25,8 +26,8 @@ namespace Sirb.Documents.BR.Validation
 			int eleventh = GetEleventhDigit(onlyNumbersValue);
 			int[] sums = GetSum(onlyNumbersValue);
 
-			int tenthDigitComparison = GetMoodulusForDigitComparison(sums[0]);
-			int eleventhDigitComparison = GetMoodulusForDigitComparison(sums[1]);
+			int tenthDigitComparison = GetModulusForDigitComparison(sums[0]);
+			int eleventhDigitComparison = GetModulusForDigitComparison(sums[1]);
 
 			return tenthDigitComparison == tenthDigit && eleventhDigitComparison == eleventh;
 		}
@@ -55,24 +56,24 @@ namespace Sirb.Documents.BR.Validation
 
 		private static int GetEleventhDigit(string onlyNumbersValue) => int.Parse(onlyNumbersValue.Substring(10));
 
-		private static int GetMoodulusForDigitComparison(int value)
+		private static int GetModulusForDigitComparison(int summationValue)
 		{
-			int modulus = value * 10 % 11;
-			if (modulus == 10)
-			{
-				modulus = 0;
-			}
+			int value = summationValue * 10 % 11;
+			if (value == 10)
+				value = 0;
 
-			return modulus;
+			return value;
 		}
 
 		private static int[] GetSum(string onlyNumbersValue)
 		{
 			int[] sums = new int[] { 0, 0 };
+			int value;
 			for (int i = 0; i < 9; i++)
 			{
-				sums[0] += int.Parse(onlyNumbersValue[i].ToString()) * (10 - i);
-				sums[1] += int.Parse(onlyNumbersValue[i].ToString()) * (11 - i);
+				value = int.Parse(onlyNumbersValue[i].ToString());
+				sums[0] += value * CpfRule.CalculateBeforeLastDigitWeight(i);
+				sums[1] += value * CpfRule.CalculateLastDigitWeight(i);
 			}
 
 			sums[1] += GetTenthDigit(onlyNumbersValue) * 2;

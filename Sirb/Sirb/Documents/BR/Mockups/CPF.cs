@@ -1,4 +1,5 @@
 ﻿using Sirb.Documents.BR.Enumeration;
+using Sirb.Documents.BR.Rules;
 using Sirb.Extensions;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ namespace Sirb.Documents.BR.Mockups
 	/// <summary>
 	/// Gerador de número CPF
 	/// </summary>
-	public static class CPF
+	public static class Cpf
 	{
 		/// <summary>
 		/// Gera número CPF
@@ -34,25 +35,25 @@ namespace Sirb.Documents.BR.Mockups
 		{
 			List<int> generatedNumbers = new List<int>();
 			Random random = new Random();
-			int totalTenthDigit = 0;
-			int totalEleventhDigit = 0;
 
+			int totalBeforeLastDigit = 0;
+			int totalLastDigit = 0;
 			for (int i = 0; i < 9; i++)
 			{
 				generatedNumbers.Add(i < 8 ? random.Next(10) : (int)state);
-				totalTenthDigit += generatedNumbers[generatedNumbers.Count - 1] * (10 - i);
-				totalEleventhDigit += generatedNumbers[generatedNumbers.Count - 1] * (11 - i);
+				totalBeforeLastDigit += generatedNumbers[generatedNumbers.Count - 1] * CpfRule.CalculateBeforeLastDigitWeight(i);
+				totalLastDigit += generatedNumbers[generatedNumbers.Count - 1] * CpfRule.CalculateLastDigitWeight(i);
 			}
 
-			generatedNumbers.Add(GetDigitValue(totalTenthDigit));
-			totalEleventhDigit += generatedNumbers[generatedNumbers.Count - 1] * 2;
+			generatedNumbers.Add(CalculateDigitValue(totalBeforeLastDigit));
+			totalLastDigit += generatedNumbers[generatedNumbers.Count - 1] * 2;
 
-			generatedNumbers.Add(GetDigitValue(totalEleventhDigit));
+			generatedNumbers.Add(CalculateDigitValue(totalLastDigit));
 
 			return generatedNumbers.ToArray();
 		}
 
-		private static int GetDigitValue(int valueSummation)
+		private static int CalculateDigitValue(int valueSummation)
 		{
 			int remainder = valueSummation % 11;
 			return remainder < 2 ? 0 : 11 - remainder;

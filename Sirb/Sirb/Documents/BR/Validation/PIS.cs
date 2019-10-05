@@ -1,4 +1,5 @@
-﻿using Sirb.Extensions;
+﻿using Sirb.Documents.BR.Rules;
+using Sirb.Extensions;
 using System.Text.RegularExpressions;
 
 namespace Sirb.Documents.BR.Validation
@@ -6,7 +7,7 @@ namespace Sirb.Documents.BR.Validation
 	/// <summary>
 	/// PIS
 	/// </summary>
-	public static class PIS
+	public static class Pis
 	{
 		/// <summary>
 		/// Validador de PIS
@@ -20,24 +21,17 @@ namespace Sirb.Documents.BR.Validation
 				return false;
 
 			int sum = GetSum(aux);
-			int div = GetDigit(sum);
-			return value.EndsWith(div.ToString());
+			int lastDigit = PisRule.CalculateLastDigit(sum);
+			return value.EndsWith(lastDigit.ToString());
 		}
 
 		private static int GetSum(string value)
 		{
-			int[] multiplier = new int[10] { 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
 			int sum = 0;
 			for (int i = 0; i < 10; i++)
-				sum += int.Parse(value[i].ToString()) * multiplier[i];
+				sum += int.Parse(value[i].ToString()) * PisRule.CalculateWeight(i);
 
 			return sum;
-		}
-
-		private static int GetDigit(int sum)
-		{
-			int div = sum % 11;
-			return (div < 2) ? 0 : (11 - div);
 		}
 
 		/// <summary>
