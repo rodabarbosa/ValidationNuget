@@ -32,8 +32,6 @@ namespace Sirb.Documents.BR.Validation
 			return tenthDigitComparison == tenthDigit && eleventhDigitComparison == eleventh;
 		}
 
-		#region Validation
-
 		private static bool HasValidParams(string value)
 		{
 			List<string> invalidNumbers = new List<string>
@@ -82,8 +80,6 @@ namespace Sirb.Documents.BR.Validation
 
 			return sums;
 		}
-
-		#endregion Validation
 
 		/// <summary>
 		/// Remove mascara do CPF

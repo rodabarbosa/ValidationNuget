@@ -30,8 +30,6 @@ namespace Sirb.Documents.BR.Validation
 			return aux.EndsWith(lastTwoDigits);
 		}
 
-		#region Validation
-
 		private static bool HasValidParams(string value)
 		{
 			List<string> invalidNumbers = new List<string>
@@ -60,13 +58,10 @@ namespace Sirb.Documents.BR.Validation
 				sums[0] += int.Parse(value[i].ToString()) * CnpjRule.CalculateBeforeLastDigitWeight(i);
 				sums[1] += int.Parse(value[i].ToString()) * CnpjRule.CalculateLastDigitWeight(i);
 			}
-
 			sums[1] += int.Parse(value[12].ToString()) * 2;
 
 			return sums;
 		}
-
-		#endregion Validation
 
 		/// <summary>
 		/// Remove mascara do CNPJ

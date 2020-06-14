@@ -21,14 +21,14 @@ namespace Sirb.Documents.BR.Validation
 		/// <summary>
 		/// Adiciona mascara a inscrição estadual
 		/// </summary>
-		/// <param name="state">Uf da Inscrição</param>
+		/// <param name="uf">Uf da Inscrição</param>
 		/// <param name="value">Inscrição Estadual</param>
-		public static string PlaceMask(State state, string value)
+		public static string PlaceMask(State uf, string value)
 		{
 			if (string.IsNullOrEmpty(value))
 				return value;
 
-			switch (state)
+			switch (uf)
 			{
 				// 01.004.823/001-12
 				case State.AC: return StateMaskAC(value);
@@ -188,15 +188,15 @@ namespace Sirb.Documents.BR.Validation
 		/// <summary>
 		/// Validador de inscrição estadual
 		/// </summary>
-		/// <param name="state">UF</param>
+		/// <param name="uf">UF</param>
 		/// <param name="value">Inscricao Estadual</param>
-		public static bool IsValid(State state, string value)
+		public static bool IsValid(State uf, string value)
 		{
 			if (string.IsNullOrEmpty(value))
 				return false;
 
 			string onlyNumberValue = RemoveMask(value);
-			switch (state)
+			switch (uf)
 			{
 				case State.AC: return ValidateAC(onlyNumberValue);
 
