@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;netstandard2.1;net46;net461;net462;net47;net471;net472</TargetFrameworks>
+		<TargetFrameworks>netstandard2.0;netstandard2.1;net46;net461;net462;net47;net471;net472;net48</TargetFrameworks>
 		<PackageId>Sirb.Validation</PackageId>
 		<PackageVersion>1.0.2</PackageVersion>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -18,8 +18,8 @@
 Nota:
 * A geração dos documentos é somente para fins de facilitar testes</PackageReleaseNotes>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-		<AssemblyVersion>1.0.2.1</AssemblyVersion>
-		<FileVersion>1.0.2.1</FileVersion>
+		<AssemblyVersion>1.0.2.2</AssemblyVersion>
+		<FileVersion>1.0.2.2</FileVersion>
 		<PackageTags>CPF CNPJ PIS TituloEleitor InscricaoEstadual</PackageTags>
 		<PackageLicenseUrl></PackageLicenseUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>

@@ -42,5 +42,13 @@ namespace Sirb.Extensions
 			System.Collections.Generic.IEnumerable<char> filtered = decomposed.Where(c => char.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark);
 			return new String(filtered.ToArray());
 		}
+
+		public static string Reverse(this string value)
+		{
+			var sb = new StringBuilder();
+			for (int i = value.Length; i > 0; i--)
+				sb.Append(value[i - 1]);
+			return sb.ToString();
+		}
 	}
 }
