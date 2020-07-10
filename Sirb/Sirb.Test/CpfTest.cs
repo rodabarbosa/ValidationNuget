@@ -1,8 +1,9 @@
+using System;
 using Xunit;
 
-namespace ValidationTest
+namespace Sirb.Test
 {
-	public class CPFTest
+	public class CpfTest
 	{
 		[Theory]
 		[InlineData("715.470.830-18")]

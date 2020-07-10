@@ -1,8 +1,8 @@
 ﻿using Xunit;
 
-namespace ValidationTest
+namespace Sirb.Test
 {
-	public class CNPJTest
+	public class CnpjTest
 	{
 		[Theory]
 		[InlineData("49.616.903/0001-90")]

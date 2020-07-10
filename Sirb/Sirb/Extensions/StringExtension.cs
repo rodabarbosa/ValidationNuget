@@ -45,9 +45,13 @@ namespace Sirb.Extensions
 
 		public static string Reverse(this string value)
 		{
+			if (string.IsNullOrEmpty(value))
+				return value;
+
 			var sb = new StringBuilder();
 			for (int i = value.Length; i > 0; i--)
 				sb.Append(value[i - 1]);
+
 			return sb.ToString();
 		}
 	}

@@ -1,8 +1,8 @@
 using Xunit;
 
-namespace ValidationTest
+namespace Sirb.Test
 {
-	public class PISTest
+	public class PisTest
 	{
 		[Theory]
 		[InlineData("56303289843")]

@@ -1,7 +1,7 @@
 using System.Reflection;
 using Xunit;
 
-namespace ValidationTest
+namespace Sirb.Test
 {
 	public class RenavamTest
 	{

@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace ValidationTest
+namespace Sirb.Test
 {
 	public class TituloEleitorTest
 	{

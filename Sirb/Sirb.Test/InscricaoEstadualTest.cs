@@ -2,7 +2,7 @@ using Sirb.Documents.BR.Enumeration;
 using Sirb.Documents.BR.Validation;
 using Xunit;
 
-namespace ValidationTest
+namespace Sirb.Test
 {
 	public class InscricaoEstadualTest
 	{

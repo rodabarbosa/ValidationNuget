@@ -1,7 +1,7 @@
-﻿using Sirb.Documents.BR.Rules;
-using Sirb.Extensions;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Sirb.Documents.BR.Rules;
+using Sirb.Extensions;
 
 namespace Sirb.Documents.BR.Validation
 {
