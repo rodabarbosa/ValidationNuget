@@ -14,13 +14,14 @@
 - PIS
 - Título de Eleitor
 - Inscrição Estadual
+- Renavam
 
 Nota:
 * A geração dos documentos é somente para fins de facilitar testes</PackageReleaseNotes>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 		<AssemblyVersion>1.0.2.2</AssemblyVersion>
 		<FileVersion>1.0.2.2</FileVersion>
-		<PackageTags>CPF CNPJ PIS TituloEleitor InscricaoEstadual</PackageTags>
+		<PackageTags>CPF CNPJ PIS TituloEleitor InscricaoEstadual Renavam</PackageTags>
 		<PackageLicenseUrl></PackageLicenseUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageProjectUrl>https://github.com/rodabarbosa/ValidationNuget</PackageProjectUrl>

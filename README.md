@@ -1,7 +1,21 @@
 # ValitationNuget
+
 Validação de documentos brasileiros
 
-Versão 1.0
-Disponibilizado validadores para CPF, CNPJ, PIS e TTítulo de Eleitor
+## Nota
 
-* Para Fins de teste e estudos também esta disponível métodos para os números dos documentos citados acima.
+Os métodos de gerar documentos são disponibilizados somente para auxilio aos desenvolvedores durante o processo de desenvolvimento de suas aplicações.
+
+### versão 1.2
+
+* Inclusão Validador de Renavam.
+* Inclusão de gerador de Renavam.
+
+### Versão 1.1
+
+* Melhoramento de performace.
+* Incluso pacote para dotnet core 3.
+
+### Versão 1.0
+
+* Disponibilizado validadores para CPF, CNPJ, PIS e Título de Eleitor.
