@@ -11,6 +11,8 @@ namespace Sirb.Documents.BR.Mockups
 	/// </summary>
 	public static class Cpf
 	{
+		private static Random _random = new Random();
+
 		/// <summary>
 		/// Gera número CPF
 		/// </summary>
@@ -34,13 +36,12 @@ namespace Sirb.Documents.BR.Mockups
 		private static int[] GenerateNumbers(State state)
 		{
 			List<int> generatedNumbers = new List<int>();
-			Random random = new Random();
 
 			int totalBeforeLastDigit = 0;
 			int totalLastDigit = 0;
 			for (int i = 0; i < 9; i++)
 			{
-				generatedNumbers.Add(i < 8 ? random.Next(10) : (int)state);
+				generatedNumbers.Add(i < 8 ? _random.Next(10) : (int)state);
 				totalBeforeLastDigit += generatedNumbers[generatedNumbers.Count - 1] * CpfRule.CalculateBeforeLastDigitWeight(i);
 				totalLastDigit += generatedNumbers[generatedNumbers.Count - 1] * CpfRule.CalculateLastDigitWeight(i);
 			}
@@ -56,7 +57,8 @@ namespace Sirb.Documents.BR.Mockups
 		private static int CalculateDigitValue(int valueSummation)
 		{
 			int remainder = valueSummation % 11;
-			return remainder < 2 ? 0 : 11 - remainder;
+			int subtractionValue = remainder < 2 ? 0 : 11;
+			return subtractionValue - remainder;
 		}
 	}
 }

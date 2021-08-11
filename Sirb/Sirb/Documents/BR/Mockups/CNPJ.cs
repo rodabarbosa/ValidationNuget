@@ -10,6 +10,7 @@ namespace Sirb.Documents.BR.Mockups
 	/// </summary>
 	public static class Cnpj
 	{
+		private static Random _random = new Random();
 		/// <summary>
 		/// Gera número CNPJ
 		/// </summary>
@@ -23,13 +24,13 @@ namespace Sirb.Documents.BR.Mockups
 		private static int[] GenerateNumbers()
 		{
 			List<int> generatedNambers = new List<int>();
-			Random random = new Random();
+
 			int totalTBeforeLastDigit = 0;
 			int totalLastDigit = 0;
 
 			for (int i = 0; i < 12; i++)
 			{
-				generatedNambers.Add(random.Next(10));
+				generatedNambers.Add(_random.Next(10));
 				totalTBeforeLastDigit += generatedNambers[generatedNambers.Count - 1] * CnpjRule.CalculateBeforeLastDigitWeight(i);
 				totalLastDigit += generatedNambers[generatedNambers.Count - 1] * CnpjRule.CalculateLastDigitWeight(i);
 			}

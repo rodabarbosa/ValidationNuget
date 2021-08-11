@@ -10,6 +10,7 @@ namespace Sirb.Documents.BR.Mockups
 	/// </summary>
 	public static class Pis
 	{
+		private static Random _random = new Random();
 		/// <summary>
 		/// Gera número PIS
 		/// </summary>
@@ -23,12 +24,11 @@ namespace Sirb.Documents.BR.Mockups
 		private static int[] GenerateNumbers()
 		{
 			List<int> generatedNumbers = new List<int>();
-			Random random = new Random();
 
 			int total = 0;
 			for (int i = 0; i < 10; i++)
 			{
-				generatedNumbers.Add(random.Next(10));
+				generatedNumbers.Add(_random.Next(10));
 				total += generatedNumbers[generatedNumbers.Count - 1] * PisRule.CalculateWeight(i);
 			}
 

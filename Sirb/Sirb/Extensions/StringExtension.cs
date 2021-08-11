@@ -6,11 +6,11 @@ using System.Text.RegularExpressions;
 
 namespace Sirb.Extensions
 {
-	internal static class StringExtension
+	public static class StringExtension
 	{
-		public static string OnlyNumbers(this string value) => Regex.Replace(value, @"[^\d]", string.Empty);
+		public static string OnlyNumbers(this string value) => Regex.Replace(value, @"[^\d]", "");
 
-		public static string NoNumbers(this string value) => Regex.Replace(value, @"[\d]", string.Empty);
+		public static string NoNumbers(this string value) => Regex.Replace(value, @"[\d]", "");
 
 		public static string ToCapitalizeAll(this string value)
 		{
@@ -21,7 +21,7 @@ namespace Sirb.Extensions
 			StringBuilder capitalizedString = new StringBuilder();
 			foreach (string item in strings)
 			{
-				capitalizedString.Append(item.ToCapitalize()).Append(string.Empty);
+				capitalizedString.Append(item.ToCapitalize()).Append("");
 			}
 
 			return capitalizedString.ToString().Trim();

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using Sirb.Extensions;
 
 namespace Sirb.Documents.BR.Mockups
@@ -10,6 +9,8 @@ namespace Sirb.Documents.BR.Mockups
 	/// </summary>
 	public static class Renavam
 	{
+		private static Random _random = new Random();
+
 		/// <summary>
 		/// Gera número Renavam
 		/// </summary>
@@ -21,14 +22,12 @@ namespace Sirb.Documents.BR.Mockups
 		}
 
 		private static int[] GenerateNumbers()
-
 		{
-			var random = new Random();
 			var listInt = new List<int>();
 
 			int length = 10;
 			for (int i = 0; i < length; i++)
-				listInt.Add(random.Next(9));
+				listInt.Add(_random.Next(9));
 
 			var reverseList = new List<int>();
 			for (int i = length; i > 0; i--)

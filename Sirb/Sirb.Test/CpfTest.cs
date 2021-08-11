@@ -1,4 +1,4 @@
-using System;
+using Sirb.Extensions;
 using Xunit;
 
 namespace Sirb.Test
@@ -18,6 +18,15 @@ namespace Sirb.Test
 		[Theory]
 		[InlineData("71547083018")]
 		public void PlaceMask(string value) => Assert.Matches(@"(\d{3}).(\d{3}).(\d{3})-(\d{2})", Sirb.Documents.BR.Validation.Cpf.PlaceMask(value));
+
+		[Theory]
+		[InlineData("715.470.830-18")]
+		public void RemoveMask(string value)
+		{
+			string aux = value.OnlyNumbers();
+			int returnValue;
+			Assert.True(int.TryParse(value, out returnValue));
+		}
 
 		[Fact]
 		public void GenerateAndValidate()

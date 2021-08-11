@@ -6,16 +6,20 @@ Validação de documentos brasileiros
 
 Os métodos de gerar documentos são disponibilizados somente para auxilio aos desenvolvedores durante o processo de desenvolvimento de suas aplicações.
 
-### versão 1.2
+### Versão 1.1.0
 
-* Inclusão Validador de Renavam.
-* Inclusão de gerador de Renavam.
+- Inclusão de compatibilidade a DOTNET 5.
 
-### Versão 1.1
+### versão 1.0.2
 
-* Melhoramento de performace.
-* Incluso pacote para dotnet core 3.
+- Inclusão Validador de Renavam.
+- Inclusão de gerador de Renavam.
+
+### Versão 1.0.1
+
+- Melhoramento de performace.
+- Incluso pacote para dotnet core 3.
 
 ### Versão 1.0
 
-* Disponibilizado validadores para CPF, CNPJ, PIS e Título de Eleitor.
+- Disponibilizado validadores para CPF, CNPJ, PIS e Título de Eleitor.
