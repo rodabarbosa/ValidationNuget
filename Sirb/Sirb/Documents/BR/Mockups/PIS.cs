@@ -1,40 +1,41 @@
-﻿using Sirb.Documents.BR.Rules;
-using Sirb.Extensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Sirb.Documents.BR.Rules;
+using Sirb.Extensions;
 
 namespace Sirb.Documents.BR.Mockups
 {
-	/// <summary>
-	/// Gerador de número PIS
-	/// </summary>
-	public static class Pis
-	{
-		private static Random _random = new Random();
-		/// <summary>
-		/// Gera número PIS
-		/// </summary>
-		/// <returns></returns>
-		public static string Generate()
-		{
-			int[] generatedNumbers = GenerateNumbers();
-			return generatedNumbers.ConvertToString();
-		}
+    /// <summary>
+    /// Gerador de número PIS
+    /// </summary>
+    public static class Pis
+    {
+        private static readonly Random _random = new Random();
 
-		private static int[] GenerateNumbers()
-		{
-			List<int> generatedNumbers = new List<int>();
+        /// <summary>
+        /// Gera número PIS
+        /// </summary>
+        /// <returns></returns>
+        public static string Generate()
+        {
+            int[] generatedNumbers = GenerateNumbers();
+            return generatedNumbers.ConvertToString();
+        }
 
-			int total = 0;
-			for (int i = 0; i < 10; i++)
-			{
-				generatedNumbers.Add(_random.Next(10));
-				total += generatedNumbers[generatedNumbers.Count - 1] * PisRule.CalculateWeight(i);
-			}
+        private static int[] GenerateNumbers()
+        {
+            List<int> generatedNumbers = new List<int>();
 
-			generatedNumbers.Add(PisRule.CalculateLastDigit(total));
+            int total = 0;
+            for (int i = 0; i < 10; i++)
+            {
+                generatedNumbers.Add(_random.Next(10));
+                total += generatedNumbers[generatedNumbers.Count - 1] * PisRule.CalculateWeight(i);
+            }
 
-			return generatedNumbers.ToArray();
-		}
-	}
+            generatedNumbers.Add(PisRule.CalculateLastDigit(total));
+
+            return generatedNumbers.ToArray();
+        }
+    }
 }

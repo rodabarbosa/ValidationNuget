@@ -1,7 +1,7 @@
 ﻿namespace Sirb.Documents.BR.Interfaces
 {
-	internal interface IInscricaoEstadualInternal
-	{
-		string Generate();
-	}
+    internal interface IInscricaoEstadualInternal
+    {
+        string Generate();
+    }
 }

@@ -1,46 +1,47 @@
-﻿using Sirb.Documents.BR.Rules;
-using Sirb.Extensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Sirb.Documents.BR.Rules;
+using Sirb.Extensions;
 
 namespace Sirb.Documents.BR.Mockups
 {
-	/// <summary>
-	/// Gerador de número CNPJ
-	/// </summary>
-	public static class Cnpj
-	{
-		private static Random _random = new Random();
-		/// <summary>
-		/// Gera número CNPJ
-		/// </summary>
-		/// <returns></returns>
-		public static string Generate()
-		{
-			int[] generatedNumbers = GenerateNumbers();
-			return generatedNumbers.ConvertToString();
-		}
+    /// <summary>
+    /// Gerador de número CNPJ
+    /// </summary>
+    public static class Cnpj
+    {
+        private static readonly Random _random = new Random();
 
-		private static int[] GenerateNumbers()
-		{
-			List<int> generatedNambers = new List<int>();
+        /// <summary>
+        /// Gera número CNPJ
+        /// </summary>
+        /// <returns></returns>
+        public static string Generate()
+        {
+            int[] generatedNumbers = GenerateNumbers();
+            return generatedNumbers.ConvertToString();
+        }
 
-			int totalTBeforeLastDigit = 0;
-			int totalLastDigit = 0;
+        private static int[] GenerateNumbers()
+        {
+            List<int> generatedNambers = new List<int>();
 
-			for (int i = 0; i < 12; i++)
-			{
-				generatedNambers.Add(_random.Next(10));
-				totalTBeforeLastDigit += generatedNambers[generatedNambers.Count - 1] * CnpjRule.CalculateBeforeLastDigitWeight(i);
-				totalLastDigit += generatedNambers[generatedNambers.Count - 1] * CnpjRule.CalculateLastDigitWeight(i);
-			}
+            int totalTBeforeLastDigit = 0;
+            int totalLastDigit = 0;
 
-			generatedNambers.Add(CnpjRule.CalculateDigitValue(totalTBeforeLastDigit));
-			totalLastDigit += generatedNambers[generatedNambers.Count - 1] * 2;
+            for (int i = 0; i < 12; i++)
+            {
+                generatedNambers.Add(_random.Next(10));
+                totalTBeforeLastDigit += generatedNambers[generatedNambers.Count - 1] * CnpjRule.CalculateBeforeLastDigitWeight(i);
+                totalLastDigit += generatedNambers[generatedNambers.Count - 1] * CnpjRule.CalculateLastDigitWeight(i);
+            }
 
-			generatedNambers.Add(CnpjRule.CalculateDigitValue(totalLastDigit));
+            generatedNambers.Add(CnpjRule.CalculateDigitValue(totalTBeforeLastDigit));
+            totalLastDigit += generatedNambers[generatedNambers.Count - 1] * 2;
 
-			return generatedNambers.ToArray();
-		}
-	}
+            generatedNambers.Add(CnpjRule.CalculateDigitValue(totalLastDigit));
+
+            return generatedNambers.ToArray();
+        }
+    }
 }

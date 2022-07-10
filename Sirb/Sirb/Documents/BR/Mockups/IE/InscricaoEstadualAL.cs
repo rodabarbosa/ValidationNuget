@@ -4,40 +4,44 @@ using System.Linq;
 
 namespace Sirb.Documents.BR.Mockups.IE
 {
-	internal class InscricaoEstadualAL : InscricaoEstadualBase
-	{
-		protected override int[] GenerateNumbers()
-		{
-			List<int> generatedNumbers = new List<int> { 2, 4, GetValidThirdDigit(_random) };
+    internal class InscricaoEstadualAL : InscricaoEstadualBase
+    {
+        protected override int[] GenerateNumbers()
+        {
+            List<int> generatedNumbers = new List<int> { 2, 4, GetValidThirdDigit(_random) };
 
-			int total = 50 + (generatedNumbers[generatedNumbers.Count - 1] * 7);
+            int total = 50 + generatedNumbers[generatedNumbers.Count - 1] * 7;
 
-			for (int i = 0; i < 5; i++)
-			{
-				generatedNumbers.Add(_random.Next(10));
-				total += generatedNumbers[generatedNumbers.Count - 1] * CalculateWeight(i);
-			}
-			generatedNumbers.Add(CalculateLastDigit(total));
+            for (int i = 0; i < 5; i++)
+            {
+                generatedNumbers.Add(_random.Next(10));
+                total += generatedNumbers[generatedNumbers.Count - 1] * CalculateWeight(i);
+            }
 
-			return generatedNumbers.ToArray();
-		}
+            generatedNumbers.Add(CalculateLastDigit(total));
 
-		private int GetValidThirdDigit(Random random)
-		{
-			int[] thirdDigitAllowed = new int[] { 0, 3, 5, 7, 8 };
-			int value = random.Next(10);
-			while (!thirdDigitAllowed.Contains(value))
-				value = random.Next(10);
+            return generatedNumbers.ToArray();
+        }
 
-			return value;
-		}
+        private static int GetValidThirdDigit(Random random)
+        {
+            int[] thirdDigitAllowed = { 0, 3, 5, 7, 8 };
+            int value = random.Next(10);
+            while (!thirdDigitAllowed.Contains(value))
+                value = random.Next(10);
 
-		private int CalculateWeight(int index) => 6 - index;
+            return value;
+        }
 
-		protected override int CalculateLastDigit(int summationValue)
-		{
-			int remainder = summationValue * 10 % 11;
-			return remainder == 10 ? 0 : remainder;
-		}
-	}
+        private static int CalculateWeight(int index)
+        {
+            return 6 - index;
+        }
+
+        protected override int CalculateLastDigit(int summationValue)
+        {
+            int remainder = summationValue * 10 % 11;
+            return remainder == 10 ? 0 : remainder;
+        }
+    }
 }
