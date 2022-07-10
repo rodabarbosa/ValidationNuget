@@ -1,9 +1,15 @@
 ﻿namespace Sirb.Documents.BR.Rules
 {
-	internal static class CpfRule
-	{
-		public static int CalculateBeforeLastDigitWeight(int index) => 10 - index;
+    internal static class CpfRule
+    {
+        public static int CalculateBeforeLastDigitWeight(int index)
+        {
+            return 10 - index;
+        }
 
-		public static int CalculateLastDigitWeight(int index) => 11 - index;
-	}
+        public static int CalculateLastDigitWeight(int index)
+        {
+            return 11 - index;
+        }
+    }
 }

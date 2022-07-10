@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;netstandard2.1;net46;net461;net462;net47;net471;net472;net48;net5.0</TargetFrameworks>
+		<TargetFrameworks>net46;net461;net462;net47;net471;net472;net48;net5.0;net6.0;netcoreapp3.1;netstandard2.0;netstandard2.1</TargetFrameworks>
 		<PackageId>Sirb.Validation</PackageId>
-		<PackageVersion>1.1.1</PackageVersion>
+		<PackageVersion>1.1.2</PackageVersion>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<Version>1.1.1.0</Version>
 		<Authors>Rodrigo Araujo Barbosa</Authors>
@@ -17,10 +17,10 @@
 
 Nota:
 * A geração dos documentos é somente para fins de facilitar testes</Description>
-		<PackageReleaseNotes>Incluso compatibilidade com .NET 5</PackageReleaseNotes>
+		<PackageReleaseNotes>Incluso compatibilidade com .NET 6</PackageReleaseNotes>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-		<AssemblyVersion>1.1.1.0</AssemblyVersion>
-		<FileVersion>1.1.1.0</FileVersion>
+		<AssemblyVersion>1.1.2.0</AssemblyVersion>
+		<FileVersion>1.1.2.0</FileVersion>
 		<PackageTags>CPF CNPJ PIS TituloEleitor InscricaoEstadual Renavam</PackageTags>
 		<PackageLicenseUrl></PackageLicenseUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -77,6 +77,6 @@ Nota:
 		</PackageReference>
 	</ItemGroup>
 	<ItemGroup>
-		<None Include="..\..\README.md" Pack="true" PackagePath="\"/>
+		<None Include="..\..\README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 </Project>

@@ -6,9 +6,13 @@ Validação de documentos brasileiros
 
 Os métodos de gerar documentos são disponibilizados somente para auxilio aos desenvolvedores durante o processo de desenvolvimento de suas aplicações.
 
+### Versão 1.2.0
+
+- Inclusão de compatibilidade a .NET 6.0
+
 ### Versão 1.1.0
 
-- Inclusão de compatibilidade a DOTNET 5.
+- Inclusão de compatibilidade a .NET 5.
 
 ### versão 1.0.2
 

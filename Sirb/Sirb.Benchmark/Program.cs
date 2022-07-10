@@ -1,13 +1,11 @@
 ﻿using BenchmarkDotNet.Running;
 
-namespace Sirb.Benchmark
-{
-	internal class Program
-	{
-		private static void Main(string[] args)
-		{
-			BenchmarkRunner.Run<StringBenchmark>();
-		}
-	}
-}
+namespace Sirb.Benchmark;
 
+internal static class Program
+{
+    public static void Main(string[] args)
+    {
+        BenchmarkRunner.Run<StringBenchmark>();
+    }
+}
