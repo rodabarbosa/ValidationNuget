@@ -2,9 +2,9 @@
 	<PropertyGroup>
 		<TargetFrameworks>net46;net461;net462;net47;net471;net472;net48;net5.0;net6.0;netcoreapp3.1;netstandard2.0;netstandard2.1</TargetFrameworks>
 		<PackageId>Sirb.Validation</PackageId>
-		<PackageVersion>1.1.2</PackageVersion>
+		<PackageVersion>1.2.0</PackageVersion>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>1.1.1.0</Version>
+		<Version>1.2.0.0</Version>
 		<Authors>Rodrigo Araujo Barbosa</Authors>
 		<Product>Validação de documentos</Product>
 		<Description>Está disponível as seguintes validações:
