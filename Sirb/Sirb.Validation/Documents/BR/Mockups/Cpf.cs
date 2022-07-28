@@ -17,10 +17,12 @@ namespace Sirb.Validation.Documents.BR.Mockups
         /// Gera número CPF
         /// </summary>
         /// <param name="state"></param>
-        /// <returns></returns>
         public static string Generate(State? state = null)
         {
-            state ??= GetRandomState();
+            if (state == null)
+            {
+                state = GetRandomState();
+            }
 
             int[] generatedNumbers = GenerateNumbers(state.Value);
             return generatedNumbers.ConvertToString();
