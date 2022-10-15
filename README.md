@@ -1,10 +1,14 @@
-# ValitationNuget
+# Validation Nuget
 
 Validação de documentos brasileiros
 
 ## Nota
 
 Os métodos de gerar documentos são disponibilizados somente para auxilio aos desenvolvedores durante o processo de desenvolvimento de suas aplicações.
+
+### Versão 1.2.1
+
+- Alterado para que dependencia seja uma versão minima e não uma versão fixa.
 
 ### Versão 1.2.0
 
