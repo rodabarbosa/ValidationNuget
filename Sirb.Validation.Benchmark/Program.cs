@@ -1,11 +1,12 @@
 ﻿using BenchmarkDotNet.Running;
 
-namespace Sirb.Validation.Benchmark;
-
-internal static class Program
+namespace Sirb.Validation.Benchmark
 {
-    public static void Main(string[] args)
+    internal static class Program
     {
-        BenchmarkRunner.Run<StringBenchmark>();
+        public static void Main(string[] args)
+        {
+            BenchmarkRunner.Run<StringBenchmark>();
+        }
     }
 }

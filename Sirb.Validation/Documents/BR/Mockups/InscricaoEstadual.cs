@@ -1,7 +1,7 @@
-﻿using System;
-using Sirb.Validation.Documents.BR.Enumeration;
+﻿using Sirb.Validation.Documents.BR.Enumeration;
 using Sirb.Validation.Documents.BR.Interfaces;
-using Sirb.Validation.Documents.BR.Mockups.IE;
+using Sirb.Validation.Documents.BR.Mockups.Ie;
+using System.Collections.Generic;
 
 namespace Sirb.Validation.Documents.BR.Mockups
 {
@@ -10,128 +10,44 @@ namespace Sirb.Validation.Documents.BR.Mockups
     /// </summary>
     public static class InscricaoEstadual
     {
+        private static readonly Dictionary<State, IInscricaoEstadualInternal> _generator = new Dictionary<State, IInscricaoEstadualInternal>
+        {
+            { State.AC, new InscricaoEstadualAc() },
+            { State.AL, new InscricaoEstadualAl() },
+            { State.AM, new InscricaoEstadualAm() },
+            { State.AP, new InscricaoEstadualAp() },
+            { State.BA, new InscricaoEstadualBa() },
+            { State.CE, new InscricaoEstadualCe() },
+            { State.DF, new InscricaoEstadualDf() },
+            { State.ES, new InscricaoEstadualEs() },
+            { State.GO, new InscricaoEstadualGO() },
+            { State.MA, new InscricaoEstadualMA() },
+            { State.MG, new InscricaoEstadualMG() },
+            { State.MS, new InscricaoEstadualMS() },
+            { State.MT, new InscricaoEstadualMT() },
+            { State.PA, new InscricaoEstadualPA() },
+            { State.PB, new InscricaoEstadualPB() },
+            { State.PE, new InscricaoEstadualPE() },
+            { State.PI, new InscricaoEstadualPI() },
+            { State.PR, new InscricaoEstadualPR() },
+            { State.RJ, new InscricaoEstadualRJ() },
+            { State.RN, new InscricaoEstadualRn() },
+            { State.RO, new InscricaoEstadualRO() },
+            { State.RR, new InscricaoEstadualRR() },
+            { State.RS, new InscricaoEstadualRS() },
+            { State.SC, new InscricaoEstadualSC() },
+            { State.SE, new InscricaoEstadualSE() },
+            { State.SP, new InscricaoEstadualSP() },
+            { State.TO, new InscricaoEstadualTO() }
+        };
+
         /// <summary>
         /// Gera Número de Inscrição Estadual
         /// </summary>
         /// <param name="state">State</param>
         public static string Generate(State state)
         {
-            IInscricaoEstadualInternal inscricaoEstadual;
-            switch (state)
-            {
-                case State.AC:
-                    inscricaoEstadual = new InscricaoEstadualAc();
-                    break;
-
-                case State.AL:
-                    inscricaoEstadual = new InscricaoEstadualAl();
-                    break;
-
-                case State.AM:
-                    inscricaoEstadual = new InscricaoEstadualAm();
-                    break;
-
-                case State.AP:
-                    inscricaoEstadual = new InscricaoEstadualAp();
-                    break;
-
-                case State.BA:
-                    inscricaoEstadual = new InscricaoEstadualBa();
-                    break;
-
-                case State.CE:
-                    inscricaoEstadual = new InscricaoEstadualCe();
-                    break;
-
-                case State.DF:
-                    inscricaoEstadual = new InscricaoEstadualDf();
-                    break;
-
-                case State.ES:
-                    inscricaoEstadual = new InscricaoEstadualEs();
-                    break;
-
-                case State.GO:
-                    inscricaoEstadual = new InscricaoEstadualGO();
-                    break;
-
-                case State.MA:
-                    inscricaoEstadual = new InscricaoEstadualMA();
-                    break;
-
-                case State.MG:
-                    inscricaoEstadual = new InscricaoEstadualMG();
-                    break;
-
-                case State.MS:
-                    inscricaoEstadual = new InscricaoEstadualMS();
-                    break;
-
-                case State.MT:
-                    inscricaoEstadual = new InscricaoEstadualMT();
-                    break;
-
-                case State.PA:
-                    inscricaoEstadual = new InscricaoEstadualPA();
-                    break;
-
-                case State.PB:
-                    inscricaoEstadual = new InscricaoEstadualPB();
-                    break;
-
-                case State.PE:
-                    inscricaoEstadual = new InscricaoEstadualPE();
-                    break;
-
-                case State.PI:
-                    inscricaoEstadual = new InscricaoEstadualPI();
-                    break;
-
-                case State.PR:
-                    inscricaoEstadual = new InscricaoEstadualPR();
-                    break;
-
-                case State.RJ:
-                    inscricaoEstadual = new InscricaoEstadualRJ();
-                    break;
-
-                case State.RN:
-                    inscricaoEstadual = new InscricaoEstadualRn();
-                    break;
-
-                case State.RO:
-                    inscricaoEstadual = new InscricaoEstadualRO();
-                    break;
-
-                case State.RR:
-                    inscricaoEstadual = new InscricaoEstadualRR();
-                    break;
-
-                case State.RS:
-                    inscricaoEstadual = new InscricaoEstadualRS();
-                    break;
-
-                case State.SC:
-                    inscricaoEstadual = new InscricaoEstadualSC();
-                    break;
-
-                case State.SE:
-                    inscricaoEstadual = new InscricaoEstadualSE();
-                    break;
-
-                case State.SP:
-                    inscricaoEstadual = new InscricaoEstadualSP();
-                    break;
-
-                case State.TO:
-                    inscricaoEstadual = new InscricaoEstadualTO();
-                    break;
-
-                default:
-                    throw new ArgumentException("UF desconhecida.");
-            }
-
-            return inscricaoEstadual.Generate();
+            return _generator[state].Generate();
         }
     }
 }
