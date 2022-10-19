@@ -9,6 +9,9 @@ Os métodos de gerar documentos são disponibilizados somente para auxilio aos d
 ### Versão 1.2.1
 
 - Alterado para que dependencia seja uma versão minima e não uma versão fixa.
+- Métodos foram divididos em menores partes para melhor tratamento de complexidade.
+- Mascara para CPF e CNPJ foi convertido para extensão e tem acesso publico.
+- Mascara para Inscrição Estadual foi convertido para extensão e tem acesso publico.
 
 ### Versão 1.2.0
 

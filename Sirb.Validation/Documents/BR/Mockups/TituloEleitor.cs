@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Sirb.Validation.Extensions;
+using System;
 using System.Collections.Generic;
-using Sirb.Validation.Extensions;
 
 namespace Sirb.Validation.Documents.BR.Mockups
 {
@@ -15,17 +15,17 @@ namespace Sirb.Validation.Documents.BR.Mockups
         /// <returns></returns>
         public static string Generate()
         {
-            int[] generatedNumbers = GenerateNumbers();
+            var generatedNumbers = GenerateNumbers();
             return generatedNumbers.ConvertToString();
         }
 
         private static int[] GenerateNumbers()
         {
-            List<int> generatedNumbers = new List<int>();
-            Random random = new Random();
+            var generatedNumbers = new List<int>();
+            var random = new Random();
 
-            int total = 0;
-            for (int i = 0; i < 8; i++)
+            var total = 0;
+            for (var i = 0; i < 8; i++)
             {
                 generatedNumbers.Add(random.Next(10));
                 total += generatedNumbers[generatedNumbers.Count - 1] * CalculateWeight(i);
@@ -43,16 +43,16 @@ namespace Sirb.Validation.Documents.BR.Mockups
 
         private static void GenerateAndIncludeCalculatedDigits(List<int> generatedNumbers, Random random, int total)
         {
-            bool validDigits = false;
-            int ninethDigit = 0;
-            int tenthDigit = 0;
-            int eleventhDigit = GetDigitValue(total);
-            int twelfth = 0;
+            var validDigits = false;
+            var ninethDigit = 0;
+            var tenthDigit = 0;
+            var eleventhDigit = GetDigitValue(total);
+            var twelfth = 0;
             while (!validDigits)
             {
                 ninethDigit = random.Next(10);
                 tenthDigit = random.Next(10);
-                int stateDigit = int.Parse($"{ninethDigit}{tenthDigit}");
+                var stateDigit = int.Parse($"{ninethDigit}{tenthDigit}");
                 var digitInValidRange = stateDigit >= 1 && stateDigit <= 28;
                 if (!digitInValidRange)
                     continue;
@@ -70,7 +70,7 @@ namespace Sirb.Validation.Documents.BR.Mockups
 
         private static int GetDigitValue(int valueSummation)
         {
-            int remainder = valueSummation % 11;
+            var remainder = valueSummation % 11;
             return remainder > 9 ? 0 : remainder;
         }
     }

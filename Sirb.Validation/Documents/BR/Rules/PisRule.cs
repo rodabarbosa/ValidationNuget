@@ -9,7 +9,7 @@
 
         public static int CalculateLastDigit(int summationValue)
         {
-            int remainder = summationValue % 11;
+            var remainder = summationValue % 11;
             return remainder < 2 ? 0 : 11 - remainder;
         }
     }

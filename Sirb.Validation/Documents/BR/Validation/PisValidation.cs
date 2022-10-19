@@ -1,7 +1,6 @@
-﻿using System;
-using System.Text.RegularExpressions;
-using Sirb.Validation.Documents.BR.Rules;
+﻿using Sirb.Validation.Documents.BR.Rules;
 using Sirb.Validation.Extensions;
+using System.Text.RegularExpressions;
 
 namespace Sirb.Validation.Documents.BR.Validation
 {
@@ -17,19 +16,19 @@ namespace Sirb.Validation.Documents.BR.Validation
         /// <returns></returns>
         public static bool IsValid(string value)
         {
-            string aux = RemoveMask(value);
+            var aux = RemoveMask(value);
             if (string.IsNullOrEmpty(aux) || aux.Length != 11)
                 return false;
 
-            int sum = GetSum(aux);
-            int lastDigit = PisRule.CalculateLastDigit(sum);
+            var sum = GetSum(aux);
+            var lastDigit = PisRule.CalculateLastDigit(sum);
             return value.EndsWith(lastDigit.ToString());
         }
 
         private static int GetSum(string value)
         {
-            int sum = 0;
-            for (int i = 0; i < 10; i++)
+            var sum = 0;
+            for (var i = 0; i < 10; i++)
             {
                 sum += int.Parse(value[i].ToString()) * PisRule.CalculateWeight(i);
             }
@@ -58,25 +57,6 @@ namespace Sirb.Validation.Documents.BR.Validation
                 return default;
 
             return Regex.Replace(RemoveMask(value), @"(\d{3})(\d{5})(\d{2})(\d{1})", "$1.$2.$3/$4");
-        }
-    }
-
-    [Obsolete("Use Pisvalidation class instead.")]
-    public static class Pis
-    {
-        public static bool IsValid(string value)
-        {
-            return PisValidation.IsValid(value);
-        }
-
-        public static string RemoveMask(string value)
-        {
-            return PisValidation.RemoveMask(value);
-        }
-
-        public static string PlaceMask(string value)
-        {
-            return PisValidation.PlaceMask(value);
         }
     }
 }

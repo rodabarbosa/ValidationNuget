@@ -43,6 +43,7 @@ namespace Sirb.Validation.Documents.BR.Mockups.Ie
             var digit = 11 - summationValue % 11;
             if (digit == 10)
                 return 0;
+
             if (digit == 11)
                 return auxDigit;
 

@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Sirb.Validation.Documents.BR.Rules;
+using Sirb.Validation.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using Sirb.Validation.Documents.BR.Rules;
-using Sirb.Validation.Extensions;
 
 namespace Sirb.Validation.Documents.BR.Validation
 {
@@ -18,23 +18,23 @@ namespace Sirb.Validation.Documents.BR.Validation
         /// <returns></returns>
         public static bool IsValid(string value)
         {
-            string onlyNumbersValue = RemoveMask(value);
+            var onlyNumbersValue = value.RemoveMask();
             if (!HasValidParams(onlyNumbersValue))
                 return false;
 
-            int tenthDigit = GetTenthDigit(onlyNumbersValue);
-            int eleventh = GetEleventhDigit(onlyNumbersValue);
-            int[] sums = GetSum(onlyNumbersValue);
+            var tenthDigit = GetTenthDigit(onlyNumbersValue);
+            var eleventh = GetEleventhDigit(onlyNumbersValue);
+            var sums = GetSum(onlyNumbersValue);
 
-            int tenthDigitComparison = GetModulusForDigitComparison(sums[0]);
-            int eleventhDigitComparison = GetModulusForDigitComparison(sums[1]);
+            var tenthDigitComparison = GetModulusForDigitComparison(sums[0]);
+            var eleventhDigitComparison = GetModulusForDigitComparison(sums[1]);
 
             return tenthDigitComparison == tenthDigit && eleventhDigitComparison == eleventh;
         }
 
         private static bool HasValidParams(string value)
         {
-            List<string> invalidNumbers = new List<string>
+            var invalidNumbers = new List<string>
             {
                 "00000000000",
                 "11111111111",
@@ -64,7 +64,7 @@ namespace Sirb.Validation.Documents.BR.Validation
 
         private static int GetModulusForDigitComparison(int summationValue)
         {
-            int value = summationValue * 10 % 11;
+            var value = summationValue * 10 % 11;
             if (value == 10)
                 value = 0;
 
@@ -74,9 +74,9 @@ namespace Sirb.Validation.Documents.BR.Validation
         private static int[] GetSum(string onlyNumbersValue)
         {
             int[] sums = { 0, 0 };
-            for (int i = 0; i < 9; i++)
+            for (var i = 0; i < 9; i++)
             {
-                int value = int.Parse(onlyNumbersValue[i].ToString());
+                var value = int.Parse(onlyNumbersValue[i].ToString());
                 sums[0] += value * CpfRule.CalculateBeforeLastDigitWeight(i);
                 sums[1] += value * CpfRule.CalculateLastDigitWeight(i);
             }
@@ -84,16 +84,6 @@ namespace Sirb.Validation.Documents.BR.Validation
             sums[1] += GetTenthDigit(onlyNumbersValue) * 2;
 
             return sums;
-        }
-
-        /// <summary>
-        /// Remove mascara do CPF
-        /// </summary>
-        /// <param name="value">CPF number</param>
-        /// <returns></returns>
-        public static string RemoveMask(string value)
-        {
-            return value?.OnlyNumbers();
         }
 
         /// <summary>
@@ -106,7 +96,7 @@ namespace Sirb.Validation.Documents.BR.Validation
             if (string.IsNullOrEmpty(value?.Trim()))
                 return default;
 
-            return Regex.Replace(RemoveMask(value), @"(\d{3})(\d{3})(\d{3})(\d{2})", "$1.$2.$3-$4");
+            return Regex.Replace(value.RemoveMask(), @"(\d{3})(\d{3})(\d{3})(\d{2})", "$1.$2.$3-$4");
         }
 
         /// <summary>
@@ -120,7 +110,7 @@ namespace Sirb.Validation.Documents.BR.Validation
             if (!IsValid(value))
                 throw new InvalidOperationException("Invalid number");
 
-            string aux = RemoveMask(value);
+            var aux = value.RemoveMask();
             switch (int.Parse(aux.Substring(8, 1)))
             {
                 case 0: return "RS";
@@ -135,30 +125,6 @@ namespace Sirb.Validation.Documents.BR.Validation
                 case 9: return "PR, SC";
                 default: return "Unknown";
             }
-        }
-    }
-
-    [Obsolete("Use Cpf class instead.")]
-    public static class Cpf
-    {
-        public static bool IsValid(string value)
-        {
-            return CpfValidation.IsValid(value);
-        }
-
-        public static string RemoveMask(string value)
-        {
-            return CpfValidation.RemoveMask(value);
-        }
-
-        public static string PlaceMask(string value)
-        {
-            return CpfValidation.PlaceMask(value);
-        }
-
-        public static string GetIssuingState(string value)
-        {
-            return CpfValidation.GetIssuingState(value);
         }
     }
 }

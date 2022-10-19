@@ -43,6 +43,8 @@ dotnet_style_qualification_for_property = false:silent
 dotnet_style_qualification_for_method = false:silent
 dotnet_style_qualification_for_event = false:silent
 
+[*.yml]
+indent_size = 2
 
 [*.cs]
 # Organize usings

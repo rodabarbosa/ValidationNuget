@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Sirb.Validation.Documents.BR.Rules;
+﻿using Sirb.Validation.Documents.BR.Rules;
 using Sirb.Validation.Extensions;
+using System;
+using System.Collections.Generic;
 
 namespace Sirb.Validation.Documents.BR.Mockups
 {
@@ -18,19 +18,21 @@ namespace Sirb.Validation.Documents.BR.Mockups
         /// <returns></returns>
         public static string Generate()
         {
-            int[] generatedNumbers = GenerateNumbers();
+            var generatedNumbers = GenerateNumbers();
             return generatedNumbers.ConvertToString();
         }
 
         private static int[] GenerateNumbers()
         {
-            List<int> generatedNumbers = new List<int>();
+            var generatedNumbers = new List<int>();
 
-            int total = 0;
-            for (int i = 0; i < 10; i++)
+            var total = 0;
+            for (var i = 0; i < 10; i++)
             {
                 generatedNumbers.Add(_random.Next(10));
-                total += generatedNumbers[generatedNumbers.Count - 1] * PisRule.CalculateWeight(i);
+                var index = generatedNumbers.Count - 1;
+
+                total += generatedNumbers[index] * PisRule.CalculateWeight(i);
             }
 
             generatedNumbers.Add(PisRule.CalculateLastDigit(total));

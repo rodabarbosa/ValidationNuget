@@ -1,8 +1,7 @@
-﻿using System;
+﻿using Sirb.Validation.Documents.BR.Rules;
+using Sirb.Validation.Extensions;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using Sirb.Validation.Documents.BR.Rules;
-using Sirb.Validation.Extensions;
 
 namespace Sirb.Validation.Documents.BR.Validation
 {
@@ -18,22 +17,22 @@ namespace Sirb.Validation.Documents.BR.Validation
         /// <returns></returns>
         public static bool IsValid(string value)
         {
-            string aux = RemoveMask(value);
+            var aux = value.RemoveMask();
             if (!HasValidParams(aux))
                 return false;
 
-            int[] sums = GetSum(aux);
+            var sums = GetSum(aux);
 
-            int beforeLastDigit = CnpjRule.CalculateDigitValue(sums[0]);
-            int lastDigit = CnpjRule.CalculateDigitValue(sums[1]);
+            var beforeLastDigit = CnpjRule.CalculateDigitValue(sums[0]);
+            var lastDigit = CnpjRule.CalculateDigitValue(sums[1]);
 
-            string lastTwoDigits = beforeLastDigit + lastDigit.ToString();
+            var lastTwoDigits = beforeLastDigit + lastDigit.ToString();
             return aux.EndsWith(lastTwoDigits);
         }
 
         private static bool HasValidParams(string value)
         {
-            List<string> invalidNumbers = new List<string>
+            var invalidNumbers = new List<string>
             {
                 "00000000000000",
                 "11111111111111",
@@ -54,7 +53,7 @@ namespace Sirb.Validation.Documents.BR.Validation
         {
             int[] sums = { 0, 0 };
 
-            for (int i = 0; i < 12; i++)
+            for (var i = 0; i < 12; i++)
             {
                 sums[0] += int.Parse(value[i].ToString()) * CnpjRule.CalculateBeforeLastDigitWeight(i);
                 sums[1] += int.Parse(value[i].ToString()) * CnpjRule.CalculateLastDigitWeight(i);
@@ -66,45 +65,15 @@ namespace Sirb.Validation.Documents.BR.Validation
         }
 
         /// <summary>
-        /// Remove mascara do CNPJ
-        /// </summary>
-        /// <param name="value">CNPJ</param>
-        /// <returns></returns>
-        public static string RemoveMask(string value)
-        {
-            return value?.OnlyNumbers();
-        }
-
-        /// <summary>
         /// Adiciona mascara ao CNPJ
         /// </summary>
         /// <param name="value">CNPJ number</param>
         /// <returns></returns>
         public static string PlaceMask(string value)
         {
-            if (string.IsNullOrEmpty(value?.Trim()))
-                return default;
-
-            return Regex.Replace(RemoveMask(value), @"(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})", "$1.$2.$3/$4-$5");
-        }
-    }
-
-    [Obsolete("Use CnpjValidation class instead.")]
-    public static class Cnpj
-    {
-        public static bool IsValid(string value)
-        {
-            return CnpjValidation.IsValid(value);
-        }
-
-        public static string RemoveMask(string value)
-        {
-            return CnpjValidation.RemoveMask(value);
-        }
-
-        public static string PlaceMask(string value)
-        {
-            return CnpjValidation.PlaceMask(value);
+            return string.IsNullOrEmpty(value?.Trim())
+                ? default
+                : Regex.Replace(value.RemoveMask(), @"(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})", "$1.$2.$3/$4-$5");
         }
     }
 }

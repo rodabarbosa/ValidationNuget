@@ -1,7 +1,7 @@
-using System;
-using System.Collections.Generic;
 using Sirb.Validation.Documents.BR.Rules;
 using Sirb.Validation.Extensions;
+using System;
+using System.Collections.Generic;
 
 namespace Sirb.Validation.Documents.BR.Mockups
 {
@@ -18,7 +18,7 @@ namespace Sirb.Validation.Documents.BR.Mockups
         /// <returns></returns>
         public static string Generate()
         {
-            int[] generatedNumbers = GenerateNumbers();
+            var generatedNumbers = GenerateNumbers();
             return generatedNumbers.ConvertToString();
         }
 
@@ -26,16 +26,16 @@ namespace Sirb.Validation.Documents.BR.Mockups
         {
             var listInt = new List<int>();
 
-            int length = 10;
-            for (int i = 0; i < length; i++)
+            var length = 10;
+            for (var i = 0; i < length; i++)
                 listInt.Add(_random.Next(9));
 
             var reverseList = new List<int>();
-            for (int i = length; i > 0; i--)
+            for (var i = length; i > 0; i--)
                 reverseList.Add(listInt[i - 1]);
 
-            int total = RenavanRules.GetSummationValue(reverseList);
-            int calculatedValue = RenavanRules.CalculateastDigit(total);
+            var total = RenavanRules.GetSummationValue(reverseList);
+            var calculatedValue = RenavanRules.CalculateastDigit(total);
             listInt.Add(calculatedValue);
             return listInt.ToArray();
         }

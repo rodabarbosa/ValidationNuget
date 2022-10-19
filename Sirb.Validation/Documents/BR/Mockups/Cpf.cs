@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Sirb.Validation.Documents.BR.Enumeration;
+﻿using Sirb.Validation.Documents.BR.Enumeration;
 using Sirb.Validation.Documents.BR.Rules;
 using Sirb.Validation.Extensions;
+using System;
+using System.Collections.Generic;
 
 namespace Sirb.Validation.Documents.BR.Mockups
 {
@@ -24,7 +24,7 @@ namespace Sirb.Validation.Documents.BR.Mockups
                 state = GetRandomState();
             }
 
-            int[] generatedNumbers = GenerateNumbers(state.Value);
+            var generatedNumbers = GenerateNumbers(state.Value);
             return generatedNumbers.ConvertToString();
         }
 
@@ -35,30 +35,50 @@ namespace Sirb.Validation.Documents.BR.Mockups
 
         private static int[] GenerateNumbers(State state)
         {
-            List<int> generatedNumbers = new List<int>();
+            var generatedNumbers = new List<int>();
 
-            int totalBeforeLastDigit = 0;
-            int totalLastDigit = 0;
-            for (int i = 0; i < 9; i++)
+            var totalBeforeLastDigit = 0;
+            var totalLastDigit = 0;
+            for (var i = 0; i < 9; i++)
             {
                 generatedNumbers.Add(i < 8 ? _random.Next(10) : (int)state);
-                totalBeforeLastDigit += generatedNumbers[generatedNumbers.Count - 1] * CpfRule.CalculateBeforeLastDigitWeight(i);
-                totalLastDigit += generatedNumbers[generatedNumbers.Count - 1] * CpfRule.CalculateLastDigitWeight(i);
+                var index = generatedNumbers.Count - 1;
+
+                totalBeforeLastDigit += generatedNumbers[index] * CpfRule.CalculateBeforeLastDigitWeight(i);
+                totalLastDigit += generatedNumbers[index] * CpfRule.CalculateLastDigitWeight(i);
             }
 
-            generatedNumbers.Add(CalculateDigitValue(totalBeforeLastDigit));
-            totalLastDigit += generatedNumbers[generatedNumbers.Count - 1] * 2;
+            var beforeLastDigit = GetBeforeLastDigit(generatedNumbers, totalBeforeLastDigit);
+            generatedNumbers.Add(beforeLastDigit);
 
-            generatedNumbers.Add(CalculateDigitValue(totalLastDigit));
+            var lastDigit = GetLastDigit(generatedNumbers, totalLastDigit);
+            generatedNumbers.Add(lastDigit);
 
             return generatedNumbers.ToArray();
         }
 
+        private static int GetBeforeLastDigit(List<int> generatedNumbers, int total)
+        {
+            return CalculateDigitValue(total);
+        }
+
         private static int CalculateDigitValue(int valueSummation)
         {
-            int remainder = valueSummation % 11;
-            int subtractionValue = remainder < 2 ? 0 : 11;
+            var remainder = valueSummation % 11;
+            var subtractionValue = remainder < 2 ? 0 : 11;
             return subtractionValue - remainder;
+        }
+
+        private static int GetLastDigit(List<int> generatedNumbers, int total)
+        {
+            var totalLastDigit = total + GetValueToSumForLasDigit(generatedNumbers);
+            return CalculateDigitValue(totalLastDigit);
+        }
+
+        private static int GetValueToSumForLasDigit(List<int> generatedNumbers)
+        {
+            var indexLastDigit = generatedNumbers.Count - 1;
+            return generatedNumbers[indexLastDigit] * 2;
         }
     }
 }

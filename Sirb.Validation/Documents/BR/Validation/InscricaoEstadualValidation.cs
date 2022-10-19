@@ -47,35 +47,35 @@ namespace Sirb.Validation.Documents.BR.Validation
             { State.TO, TocantinsExtension.InscricaoEstadualMaskTo }
         };
 
-        private static readonly Dictionary<State, IInscricaoEstatualValidation> _validation = new Dictionary<State, IInscricaoEstatualValidation>
+        private static readonly Dictionary<State, IInscricaoEstadualValidation> _validation = new Dictionary<State, IInscricaoEstadualValidation>
         {
-            { State.AC, new InscricaoEstatualAcreValidation() },
-            { State.AL, new InscricaoEstatualAlagoasValidation() },
-            { State.AM, new InscricaoEstatualAmazonasValidation() },
-            { State.AP, new InscricaoEstatualAmapaValidation() },
-            { State.BA, new InscricaoEstatualBahiaValidation() },
-            { State.CE, new InscricaoEstatualCearaValidation() },
-            { State.DF, new InscricaoEstatualDistritoFederalValidation() },
-            { State.ES, new InscricaoEstatualEspiritoSantosValidation() },
-            { State.GO, new InscricaoEstatualGoiasValidation() },
-            { State.MA, new InscricaoEstatualMaranhaoValidation() },
-            { State.MG, new InscricaoEstatualMinasGeraisValidation() },
-            { State.MS, new InscricaoEstatualMatoGrossoDoSulValidation() },
-            { State.MT, new InscricaoEstatualMatoGrossoValidation() },
-            { State.PA, new InscricaoEstatualParaValidation() },
-            { State.PB, new InscricaoEstatualPernambucoValidation() },
-            { State.PE, new InscricaoEstatualPernambucoValidation() },
-            { State.PI, new InscricaoEstatualPiauiValidation() },
-            { State.PR, new InscricaoEstatualParanaValidation() },
-            { State.RJ, new InscricaoEstatualRioDeJaneiroValidation() },
-            { State.RN, new InscricaoEstatualRioGRandeDoNorteValidation() },
-            { State.RO, new InscricaoEstatualRondoniaValidation() },
-            { State.RR, new InscricaoEstatualRoraimaValidation() },
-            { State.RS, new InscricaoEstatualRioGrandeDoSulValidation() },
-            { State.SC, new InscricaoEstatualSantaCatarinaValidation() },
-            { State.SE, new InscricaoEstatualSergipeValidation() },
-            { State.SP, new InscricaoEstatualSaoPauloValidation() },
-            { State.TO, new InscricaoEstatualTocantinsValidation() }
+            { State.AC, new InscricaoEstadualAcreValidation() },
+            { State.AL, new InscricaoEstadualAlagoasValidation() },
+            { State.AM, new InscricaoEstadualAmazonasValidation() },
+            { State.AP, new InscricaoEstadualAmapaValidation() },
+            { State.BA, new InscricaoEstadualBahiaValidation() },
+            { State.CE, new InscricaoEstadualCearaValidation() },
+            { State.DF, new InscricaoEstadualDistritoFederalValidation() },
+            { State.ES, new InscricaoEstadualEspiritoSantosValidation() },
+            { State.GO, new InscricaoEstadualGoiasValidation() },
+            { State.MA, new InscricaoEstadualMaranhaoValidation() },
+            { State.MG, new InscricaoEstadualMinasGeraisValidation() },
+            { State.MS, new InscricaoEstadualMatoGrossoDoSulValidation() },
+            { State.MT, new InscricaoEstadualMatoGrossoValidation() },
+            { State.PA, new InscricaoEstadualParaValidation() },
+            { State.PB, new InscricaoEstadualParaibaValidation() },
+            { State.PE, new InscricaoEstadualPernambucoValidation() },
+            { State.PI, new InscricaoEstadualPiauiValidation() },
+            { State.PR, new InscricaoEstadualParanaValidation() },
+            { State.RJ, new InscricaoEstadualRioDeJaneiroValidation() },
+            { State.RN, new InscricaoEstadualRioGrandeDoNorteValidation() },
+            { State.RO, new InscricaoEstadualRondoniaValidation() },
+            { State.RR, new InscricaoEstadualRoraimaValidation() },
+            { State.RS, new InscricaoEstadualRioGrandeDoSulValidation() },
+            { State.SC, new InscricaoEstadualSantaCatarinaValidation() },
+            { State.SE, new InscricaoEstadualSergipeValidation() },
+            { State.SP, new InscricaoEstadualSaoPauloValidation() },
+            { State.TO, new InscricaoEstadualTocantinsValidation() }
         };
 
         /// <summary>
@@ -110,9 +110,7 @@ namespace Sirb.Validation.Documents.BR.Validation
             if (string.IsNullOrEmpty(value))
                 return false;
 
-            var onlyNumberValue = RemoveMask(value);
-
-            return _validation[uf].IsValid(onlyNumberValue);
+            return _validation[uf].IsValid(value);
         }
     }
 }

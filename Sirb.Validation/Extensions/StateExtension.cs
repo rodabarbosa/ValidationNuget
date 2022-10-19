@@ -4,7 +4,7 @@ namespace Sirb.Validation.Extensions
 {
     internal static class StateExtension
     {
-        public static int GetValue(this State value)
+        public static int GetStateValue(this State value)
         {
             switch (value)
             {

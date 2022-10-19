@@ -36,7 +36,7 @@ namespace Sirb.Validation.Documents.BR.Mockups.Ie
                 totalLastDigit += numbers[index] * CalculateLastWeight(i);
             }
 
-            return new int[] { totalBeforeLastDigit, totalLastDigit };
+            return new[] { totalBeforeLastDigit, totalLastDigit };
         }
 
         private int GetBeforeLastDigit(int totalForBeforeLastDigit)

@@ -13,6 +13,11 @@ namespace Sirb.Validation.Extensions
             return Replace(value, @"[^\d]");
         }
 
+        public static string RemoveMask(this string value)
+        {
+            return value?.OnlyNumbers();
+        }
+
         public static string NoNumbers(this string value)
         {
             return Replace(value, @"[\d]");
@@ -23,36 +28,20 @@ namespace Sirb.Validation.Extensions
             return Regex.Replace(value, pattern, string.Empty);
         }
 
-        public static string ToTitleCase(this string value)
+        public static string ToCapitalizeAll(this string value)
         {
             return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value.ToLower());
         }
 
-        public static string ToCapitalizeAll(this string value)
-        {
-            if (string.IsNullOrEmpty(value?.Trim()))
-                return value;
-
-            var result = new StringBuilder(value.Length);
-            result.Append(value[0].ToString().ToUpper());
-            for (var i = 1; i < value.Length; i++)
-            {
-                var letter = value[i].ToString();
-                if (value[i - 1] == ' ')
-                    letter = letter.ToUpper();
-
-                result.Append(letter);
-            }
-
-            return result.ToString();
-        }
-
         public static string ToCapitalize(this string value)
         {
-            if (string.IsNullOrEmpty(value?.Trim()))
+            if (string.IsNullOrEmpty(value))
                 return value;
 
-            return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value);
+            var firstLetter = value.Substring(0, 1).ToUpper();
+            var restOfSentence = value.Substring(1, value.Length - 1).ToLower();
+
+            return firstLetter + restOfSentence;
         }
 
         public static string RemoveLatinCharacters(this string value)
