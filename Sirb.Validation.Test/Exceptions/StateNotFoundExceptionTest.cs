@@ -46,7 +46,8 @@ namespace Sirb.Validation.Test.Exceptions
                 return;
             }
 
-            Assert.Null(() => StateNotFoundException.ThrowIf(condition, message));
+            StateNotFoundException.ThrowIf(condition, message);
+            Assert.True(true);
         }
 
         [Fact]

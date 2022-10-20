@@ -36,7 +36,6 @@ namespace Sirb.Validation.Documents.BR.Validation.Ie
             var sum = 0;
             var startWeight = 4;
             var endWeight = 9;
-            int weight;
             for (var i = 0; i < 11; i++)
             {
                 var valueToSum = i < 3

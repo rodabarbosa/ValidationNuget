@@ -8,15 +8,22 @@ namespace Sirb.Validation.Test.Mockups
     public class InscricaoEstadualAmapaMockupTest
     {
         [Theory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(3)]
+        [InlineData(4)]
+        [InlineData(5)]
+        [InlineData(6)]
+        [InlineData(7)]
+        [InlineData(8)]
+        [InlineData(9)]
         [InlineData(10)]
-        public void Validate(int retry)
+        public void Validate(int index)
         {
-            for (var i = 0; i < retry; i++)
-            {
-                var value = InscricaoEstadual.Generate(State.AP);
-                var isValid = InscricaoEstadualValidation.IsValid(State.AP, value);
-                Assert.True(isValid);
-            }
+            System.Diagnostics.Debug.WriteLine($"Debug Validation {index}");
+            string value = InscricaoEstadual.Generate(State.AP);
+            bool isValid = InscricaoEstadualValidation.IsValid(State.AP, value);
+            Assert.True(isValid);
         }
     }
 }
