@@ -40,26 +40,14 @@ jobs:
         shell: powershell
         run: |
           dotnet tool install dotnet-reportgenerator-globaltool --tool-path .\.sonar\scanner
-      - name: Init Sonar
+      - name: Building and analyzing
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"rodabarbosa_ValidationNuget" /o:"rodabarbosa" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.coverageReportPaths=".\sonarqubecoverage\SonarQube.xml"
-      - name: Building
-        shell: powershell
-        run: |
           dotnet build --configuration Release
-      - name: Testing and coverage
-        shell: powershell
-        run: |
           dotnet test --no-build --collect:"XPlat Code Coverage"
           .\.sonar\scanner\reportgenerator "-reports:*\TestResults\*\coverage.cobertura.xml" "-targetdir:sonarqubecoverage" "-reporttypes:SonarQube"
-      - name: Finalizing sonar run
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        shell: powershell
-        run: |
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"

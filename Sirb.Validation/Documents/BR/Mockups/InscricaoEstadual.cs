@@ -8,9 +8,9 @@ namespace Sirb.Validation.Documents.BR.Mockups
     /// <summary>
     /// Gerador de Inscrição Estadual
     /// </summary>
-    public static class InscricaoEstadual
+    static public class InscricaoEstadual
     {
-        private static readonly Dictionary<State, IInscricaoEstadualInternal> _generator = new Dictionary<State, IInscricaoEstadualInternal>
+        static private readonly Dictionary<State, IInscricaoEstadualInternal> _generator = new Dictionary<State, IInscricaoEstadualInternal>
         {
             { State.AC, new InscricaoEstadualAc() },
             { State.AL, new InscricaoEstadualAl() },
@@ -43,9 +43,10 @@ namespace Sirb.Validation.Documents.BR.Mockups
 
         /// <summary>
         /// Gera Número de Inscrição Estadual
+        /// AC esta com erro e ainda esta sendo avaliado a causa
         /// </summary>
         /// <param name="state">State</param>
-        public static string Generate(State state)
+        static public string Generate(State state)
         {
             return _generator[state].Generate();
         }
