@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net46;net461;net462;net47;net471;net472;net48;net5.0;net6.0;netcoreapp3.1;netstandard2.0;netstandard2.1</TargetFrameworks>
+    <TargetFrameworks>net5.0;net6.0;netcoreapp3.1;netstandard2.0;netstandard2.1;net46;net461;net462;net47;net471;net472;net48;net7.0;net8.0</TargetFrameworks>
     <PackageId>Sirb.Validation</PackageId>
-    <PackageVersion>1.3.0</PackageVersion>
+    <PackageVersion>1.3.1</PackageVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.3.0</Version>
+    <Version>1.3.1</Version>
     <Authors>Rodrigo Araujo Barbosa</Authors>
     <Product>Validação de documentos</Product>
     <Description>Está disponível as seguintes validações:
@@ -20,8 +20,8 @@
     </Description>
     <PackageReleaseNotes>Incluso compatibilidade com .NET 8</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <AssemblyVersion>1.3.0.0</AssemblyVersion>
-    <FileVersion>1.3.0.0</FileVersion>
+    <AssemblyVersion>1.3.1.0</AssemblyVersion>
+    <FileVersion>1.3.1.0</FileVersion>
     <PackageTags>CPF CNPJ PIS TituloEleitor InscricaoEstadual Renavam</PackageTags>
     <PackageLicenseUrl></PackageLicenseUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
