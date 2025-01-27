@@ -6,14 +6,14 @@ namespace Sirb.Validation.Documents.BR.Validation
     /// <summary>
     /// Título de Eleitor
     /// </summary>
-    public static class TituloEleitorValidation
+    static public class TituloEleitorValidation
     {
         /// <summary>
         /// Validador de Título de Eleitor
         /// </summary>
         /// <param name="value">Titulo de Eleitor</param>
         /// <returns></returns>
-        public static bool IsValid(string value)
+        static public bool IsValid(string value)
         {
             var aux = value.RemoveMask();
             if (string.IsNullOrEmpty(aux) || aux.Length != 12)
@@ -27,28 +27,23 @@ namespace Sirb.Validation.Documents.BR.Validation
                    && aux[11].ToString().Equals(digit2.ToString());
         }
 
-        private static int GetFirstDigit(string value)
+        static private int GetFirstDigit(string value)
         {
             var total = 0;
             for (var i = 0; i < 8; i++)
-            {
                 total += int.Parse(value[i].ToString()) * (i + 2);
-            }
 
             var digit = total % 11;
-            if (digit > 9)
-                digit = 0;
-
-            return digit;
+            return digit <= 9
+                ? digit
+                : 0;
         }
 
-        private static int GetSecondDigit(string value)
+        static private int GetSecondDigit(string value)
         {
             var total = 0;
             for (var i = 8; i < 11; i++)
-            {
                 total += int.Parse(value[i].ToString()) * (i - 1);
-            }
 
             var digit = total % 11;
             if (digit > 9)
@@ -57,14 +52,14 @@ namespace Sirb.Validation.Documents.BR.Validation
             return digit;
         }
 
-        private static int GetStateDigit(string value)
+        static private int GetStateDigit(string value)
         {
             return int.Parse($"{value[8]}{value[9]}");
         }
 
-        private static bool IsStateDigitValid(int digit)
+        static private bool IsStateDigitValid(int digit)
         {
-            return digit > 0 && digit < 29;
+            return digit is > 0 and < 29;
         }
 
         /// <summary>
@@ -72,10 +67,10 @@ namespace Sirb.Validation.Documents.BR.Validation
         /// </summary>
         /// <param name="value">Titulo de Eleitor</param>
         /// <returns></returns>
-        public static string PlaceMask(string value)
+        static public string PlaceMask(string value)
         {
             if (string.IsNullOrEmpty(value?.Trim()))
-                return default;
+                return null;
 
             return Regex.Replace(value.RemoveMask(), @"(\d{4})(\d{4})(\d{4})", "$1.$2.$3");
         }

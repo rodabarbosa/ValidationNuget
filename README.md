@@ -6,6 +6,23 @@ Validação de documentos brasileiros
 
 Os métodos de gerar documentos são disponibilizados somente para auxilio aos desenvolvedores durante o processo de desenvolvimento de suas aplicações.
 
+## Versão 1.4.0
+
+- Inclusão de compatibilidade a .NET 9.0
+- Removido compatibilidade com .NET 7
+- Removido compatibilidade com .NET 6
+- Removido compatibilidade com .NET 5
+- Removido compatibilidade com .NET Core 3.1
+- Removido compatibilidade com NetStandard 2.1
+- Removido compatibilidade com NetStandard 2.0
+- Removido compatibilidade com .NET Framework 4.8
+- Removido compatibilidade com .NET Framework 4.7.2
+- Removido compatibilidade com .NET Framework 4.7.1
+- Removido compatibilidade com .NET Framework 4.7
+- Removido compatibilidade com .NET Framework 4.6.2
+- Removido compatibilidade com .NET Framework 4.6.1
+- Removido compatibilidade com .NET Framework 4.6
+
 ## Versões 1.3.1
 
 - Inclusão de compatibilidade a .NET 8.

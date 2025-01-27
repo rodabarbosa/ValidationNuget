@@ -1,24 +1,20 @@
-using Sirb.Validation.Extensions;
-using Xunit;
+namespace Sirb.Validation.Test.Extensions;
 
-namespace Sirb.Validation.Test.Extensions
+public class CearaExtensionTest
 {
-    public class CearaExtensionTest
+    [Theory]
+    [InlineData("060000015", "06000001-5")]
+    public void InscricaoEstadualMask_Valid(string value, string expected)
     {
-        [Theory]
-        [InlineData("060000015", "06000001-5")]
-        public void InscricaoEstadualMask_Valid(string value, string expected)
-        {
-            var maskedValue = value.InscricaoEstadualMaskCe();
-            Assert.Equal(expected, maskedValue);
-        }
+        var maskedValue = value.InscricaoEstadualMaskCe();
+        Assert.Equal(expected, maskedValue);
+    }
 
-        [Theory]
-        [InlineData("060000015", "06000001-5")]
-        public void InscricaoEstadualMask_Invalid(string value, string expected)
-        {
-            var maskedValue = value.InscricaoEstadualMaskDf();
-            Assert.NotEqual(expected, maskedValue);
-        }
+    [Theory]
+    [InlineData("060000015", "06000001-5")]
+    public void InscricaoEstadualMask_Invalid(string value, string expected)
+    {
+        var maskedValue = value.InscricaoEstadualMaskDf();
+        Assert.NotEqual(expected, maskedValue);
     }
 }

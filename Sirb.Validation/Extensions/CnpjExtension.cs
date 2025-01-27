@@ -1,6 +1,6 @@
 using Sirb.Validation.Documents.BR.Validation;
 
-namespace Sirb.Validation.Exceptions
+namespace Sirb.Validation.Extensions
 {
     public static class CnpjExtension
     {

@@ -12,7 +12,8 @@ namespace Sirb.Validation.Documents.BR.Validation.Ie
                 return false;
 
             var weight = value.Length;
-            if (weight < 9 && weight > 10 && !value.StartsWith("20")) return false;
+            if (weight < 9 || !value.StartsWith("20"))
+                return false;
 
             var length = value.Length - 1;
             var sum = 0;

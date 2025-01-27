@@ -1,14 +1,8 @@
-#region
-
 using System;
-using System.Runtime.Serialization;
-
-#endregion
 
 namespace Sirb.Validation.Exceptions
 {
-    [Serializable]
-    public class StateNotFoundException : Exception, ISerializable
+    public class StateNotFoundException(string message, Exception innerException) : Exception(DefineMessage(message), innerException)
     {
         [NonSerialized] private const string DefaultMessage = "State not found";
 
@@ -21,14 +15,6 @@ namespace Sirb.Validation.Exceptions
         }
 
         public StateNotFoundException(Exception innerException) : this(DefaultMessage, innerException)
-        {
-        }
-
-        public StateNotFoundException(string message, Exception innerException) : base(DefineMessage(message), innerException)
-        {
-        }
-
-        public StateNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
 
