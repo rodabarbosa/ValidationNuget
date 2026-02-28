@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Sirb.Validation</PackageId>
-    <PackageVersion>1.4.0</PackageVersion>
+    <PackageVersion>1.5.0</PackageVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.4.0</Version>
+    <Version>1.5.0</Version>
     <Authors>Rodrigo Araujo Barbosa</Authors>
     <Product>Validação de documentos</Product>
     <Description>Está disponível as seguintes validações:
@@ -19,8 +19,8 @@
     </Description>
     <PackageReleaseNotes>Removido suporte a versões anteriores. Compatível apenas com .NET 8, 9 e 10.</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <AssemblyVersion>1.4.0.0</AssemblyVersion>
-    <FileVersion>1.4.0.0</FileVersion>
+    <AssemblyVersion>1.5.0.0</AssemblyVersion>
+    <FileVersion>1.5.0.0</FileVersion>
     <PackageTags>CPF CNPJ PIS TituloEleitor InscricaoEstadual Renavam</PackageTags>
     <PackageLicenseUrl></PackageLicenseUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

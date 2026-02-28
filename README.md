@@ -72,10 +72,14 @@ using Sirb.Validation.Extensions;
 
 ## Histórico de versões
 
-### 1.4.0
+### 1.5.0
 
 - Removido suporte a .NET Framework, .NET Standard, .NET Core 3.1, .NET 5, 6 e 7.
 - Compatível apenas com .NET 8, 9 e 10.
+
+### 1.4.0
+
+- Inclusão de compatibilidade a .NET 9.
 
 ### 1.3.1
 
