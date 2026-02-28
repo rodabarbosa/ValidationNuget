@@ -1,13 +1,12 @@
 using System.Text.RegularExpressions;
 
-namespace Sirb.Validation.Extensions
+namespace Sirb.Validation.Extensions;
+
+public static class RoraimaExtension
 {
-    public static class RoraimaExtension
+    public static string InscricaoEstadualMaskRr(this string value)
     {
-        public static string InscricaoEstadualMaskRr(this string value)
-        {
-            var cleanValue = value?.OnlyNumbers();
-            return string.IsNullOrEmpty(cleanValue) ? default : Regex.Replace(cleanValue, @"(\d{8})(\d{1})", "$1-$2");
-        }
+        var cleanValue = value?.OnlyNumbers();
+        return string.IsNullOrEmpty(cleanValue) ? default : Regex.Replace(cleanValue, @"(\d{8})(\d{1})", "$1-$2");
     }
 }

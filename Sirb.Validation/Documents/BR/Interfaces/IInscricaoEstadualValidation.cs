@@ -1,7 +1,6 @@
-namespace Sirb.Validation.Documents.BR.Interfaces
+namespace Sirb.Validation.Documents.BR.Interfaces;
+
+internal interface IInscricaoEstadualValidation
 {
-    internal interface IInscricaoEstadualValidation
-    {
-        bool IsValid(string value);
-    }
+    bool IsValid(string value);
 }

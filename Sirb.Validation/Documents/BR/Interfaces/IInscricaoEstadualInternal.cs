@@ -1,7 +1,6 @@
-﻿namespace Sirb.Validation.Documents.BR.Interfaces
+﻿namespace Sirb.Validation.Documents.BR.Interfaces;
+
+internal interface IInscricaoEstadualInternal
 {
-    internal interface IInscricaoEstadualInternal
-    {
-        string Generate();
-    }
+    string Generate();
 }

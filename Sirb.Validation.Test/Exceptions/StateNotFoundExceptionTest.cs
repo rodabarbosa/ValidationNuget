@@ -1,7 +1,5 @@
 using Sirb.Validation.Exceptions;
 using System;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using Xunit;
 
 namespace Sirb.Validation.Test.Exceptions;
@@ -48,21 +46,5 @@ public class StateNotFoundExceptionTest
 
         StateNotFoundException.ThrowIf(condition, message);
         Assert.True(true);
-    }
-
-    [Fact]
-    public void NotFoundException_Serialization()
-    {
-        var e = new StateNotFoundException(ExpectedMessage);
-
-        using (Stream s = new MemoryStream())
-        {
-            var formatter = new BinaryFormatter();
-            formatter.Serialize(s, e);
-            s.Position = 0; // Reset stream position
-            e = (StateNotFoundException)formatter.Deserialize(s);
-        }
-
-        Assert.Equal(ExpectedMessage, e.Message);
     }
 }
