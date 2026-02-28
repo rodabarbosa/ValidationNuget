@@ -1,17 +1,16 @@
 using Sirb.Validation.Documents.BR.Validation;
 
-namespace Sirb.Validation.Extensions
-{
-    public static class CpfExtension
-    {
-        public static string PlaceCpfMask(this string value)
-        {
-            return CpfValidation.PlaceMask(value);
-        }
+namespace Sirb.Validation.Exceptions;
 
-        public static bool IsCpfValid(this string value)
-        {
-            return CpfValidation.IsValid(value);
-        }
+public static class CpfExtension
+{
+    public static string PlaceCpfMask(this string value)
+    {
+        return CpfValidation.PlaceMask(value);
+    }
+
+    public static bool IsCpfValid(this string value)
+    {
+        return CpfValidation.IsValid(value);
     }
 }

@@ -1,23 +1,22 @@
 using Sirb.Validation.Documents.BR.Interfaces;
 using Sirb.Validation.Extensions;
 
-namespace Sirb.Validation.Documents.BR.Validation.Ie
+namespace Sirb.Validation.Documents.BR.Validation.Ie;
+
+internal class InscricaoEstadualPiauiValidation : IInscricaoEstadualValidation
 {
-    internal class InscricaoEstadualPiauiValidation : IInscricaoEstadualValidation
+    public bool IsValid(string ieNumber)
     {
-        public bool IsValid(string ieNumber)
-        {
-            var value = ieNumber?.OnlyNumbers();
-            if (value.Length != 9) return false;
+        var value = ieNumber?.OnlyNumbers();
+        if (value.Length != 9) return false;
 
-            var sum = 0;
-            for (var i = 0; i < 8; i++)
-                sum += int.Parse(value[i].ToString()) * (9 - i);
+        var sum = 0;
+        for (var i = 0; i < 8; i++)
+            sum += int.Parse(value[i].ToString()) * (9 - i);
 
-            var digit = 11 - sum % 11;
-            if (digit == 11 || digit == 10) digit = 0;
+        var digit = 11 - sum % 11;
+        if (digit == 11 || digit == 10) digit = 0;
 
-            return value.EndsWith(digit.ToString());
-        }
+        return value.EndsWith(digit.ToString());
     }
 }

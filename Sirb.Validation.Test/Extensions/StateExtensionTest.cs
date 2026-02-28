@@ -1,4 +1,6 @@
 using Sirb.Validation.Documents.BR.Enumeration;
+using Sirb.Validation.Extensions;
+using Xunit;
 
 namespace Sirb.Validation.Test.Extensions;
 

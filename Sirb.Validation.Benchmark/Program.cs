@@ -1,4 +1,6 @@
-﻿namespace Sirb.Validation.Benchmark;
+﻿using BenchmarkDotNet.Running;
+
+namespace Sirb.Validation.Benchmark;
 
 internal static class Program
 {

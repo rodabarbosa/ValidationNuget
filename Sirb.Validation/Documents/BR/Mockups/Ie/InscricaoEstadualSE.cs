@@ -1,28 +1,27 @@
 ﻿using System.Collections.Generic;
 
-namespace Sirb.Validation.Documents.BR.Mockups.Ie
+namespace Sirb.Validation.Documents.BR.Mockups.Ie;
+
+internal class InscricaoEstadualSE : InscricaoEstadualBase
 {
-    internal class InscricaoEstadualSE : InscricaoEstadualBase
+    protected override int[] GenerateNumbers()
     {
-        protected override int[] GenerateNumbers()
+        var generatedNumbers = new List<int>();
+
+        var total = 0;
+        for (var i = 0; i < 8; i++)
         {
-            var generatedNumbers = new List<int>();
-
-            var total = 0;
-            for (var i = 0; i < 8; i++)
-            {
-                generatedNumbers.Add(Random.Next(10));
-                total += generatedNumbers[generatedNumbers.Count - 1] * CalculateWeight(i);
-            }
-
-            generatedNumbers.Add(CalculateLastDigit(total));
-
-            return generatedNumbers.ToArray();
+            generatedNumbers.Add(Random.Next(10));
+            total += generatedNumbers[generatedNumbers.Count - 1] * CalculateWeight(i);
         }
 
-        private int CalculateWeight(int index)
-        {
-            return 9 - index;
-        }
+        generatedNumbers.Add(CalculateLastDigit(total));
+
+        return generatedNumbers.ToArray();
+    }
+
+    private int CalculateWeight(int index)
+    {
+        return 9 - index;
     }
 }

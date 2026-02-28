@@ -1,3 +1,7 @@
+using Sirb.Validation.Exceptions;
+using Sirb.Validation.Extensions;
+using Xunit;
+
 namespace Sirb.Validation.Test.Extensions;
 
 public class CpfExtensionTest

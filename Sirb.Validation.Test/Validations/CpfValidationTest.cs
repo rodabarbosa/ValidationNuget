@@ -1,3 +1,6 @@
+using Sirb.Validation.Documents.BR.Validation;
+using Xunit;
+
 namespace Sirb.Validation.Test.Validations;
 
 public class CpfValidationTest

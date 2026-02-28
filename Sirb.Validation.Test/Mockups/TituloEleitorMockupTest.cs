@@ -1,3 +1,7 @@
+using Sirb.Validation.Documents.BR.Mockups;
+using Sirb.Validation.Extensions;
+using Xunit;
+
 namespace Sirb.Validation.Test.Mockups;
 
 public class TituloEleitorMockupTest

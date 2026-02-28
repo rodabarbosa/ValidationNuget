@@ -1,3 +1,9 @@
+using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Order;
+using Sirb.Validation.Benchmark.TestLib;
+using Sirb.Validation.Documents.BR.Validation;
+using Sirb.Validation.Extensions;
+
 namespace Sirb.Validation.Benchmark;
 
 [MemoryDiagnoser]

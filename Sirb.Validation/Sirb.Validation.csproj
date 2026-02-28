@@ -1,6 +1,5 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
     <PackageId>Sirb.Validation</PackageId>
     <PackageVersion>1.4.0</PackageVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -18,22 +17,7 @@
       Nota:
       * A geração dos documentos é somente para fins de facilitar testes
     </Description>
-    <PackageReleaseNotes>
-      - Incluso compatibilidade com .NET 9
-      - Removido compatibiliadde com .NET 7
-      - Removido compatibiliadde com .NET 6
-      - Removido compatibiliadde com .NET 5
-      - Removido compatibiliadde com .NET Core 3.1
-      - Removido compatibilidade com NetStandard 2.1
-      - Removido compatibilidade com NetStandard 2.0 
-      - Removido compatibiliadde com .NET Framework 4.8
-      - Removido compatibilidade com .NET Framework 4.7.2
-      - Removido compatibilidade com .NET Framework 4.7.1
-      - Removido compatibilidade com .NET Framework 4.7
-      - Removido compatibilidade com .NET Framework 4.6.2
-      - Removido compatibilidade com .NET Framework 4.6.1
-      - Removido compatibilidade com .NET Framework 4.6 
-    </PackageReleaseNotes>
+    <PackageReleaseNotes>Removido suporte a versões anteriores. Compatível apenas com .NET 8, 9 e 10.</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <AssemblyVersion>1.4.0.0</AssemblyVersion>
     <FileVersion>1.4.0.0</FileVersion>
@@ -43,14 +27,9 @@
     <PackageProjectUrl>https://github.com/rodabarbosa/ValidationNuget</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2|AnyCPU'">
-    <DocumentationFile>C:\Projetos\DOTNET\ValidationNuget\Sirb\Sirb\Sirb.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
-    <Optimize>true</Optimize>
-  </PropertyGroup>
+
   <ItemGroup>
-    <PackageReference Include="System.Globalization" Version="[4.3.0,)"/>
+    <PackageReference Include="System.Globalization"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" Pack="true" PackagePath="\"/>

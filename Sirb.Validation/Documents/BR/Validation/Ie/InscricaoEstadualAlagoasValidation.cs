@@ -2,27 +2,26 @@ using Sirb.Validation.Documents.BR.Interfaces;
 using Sirb.Validation.Extensions;
 using System.Collections.Generic;
 
-namespace Sirb.Validation.Documents.BR.Validation.Ie
+namespace Sirb.Validation.Documents.BR.Validation.Ie;
+
+internal class InscricaoEstadualAlagoasValidation : IInscricaoEstadualValidation
 {
-    internal class InscricaoEstadualAlagoasValidation : IInscricaoEstadualValidation
+    public bool IsValid(string ieNumber)
     {
-        public bool IsValid(string ieNumber)
-        {
-            var value = ieNumber?.OnlyNumbers();
-            if (string.IsNullOrEmpty(value) || value.Length != 9 || !value.StartsWith("24")) return false;
+        var value = ieNumber?.OnlyNumbers();
+        if (string.IsNullOrEmpty(value) || value.Length != 9 || !value.StartsWith("24")) return false;
 
-            var thirdDigitAllowed = new List<int> { 0, 3, 5, 7, 8 };
-            var thirdDigit = int.Parse(value[2].ToString());
-            if (!thirdDigitAllowed.Contains(thirdDigit)) return false;
+        var thirdDigitAllowed = new List<int> { 0, 3, 5, 7, 8 };
+        var thirdDigit = int.Parse(value[2].ToString());
+        if (!thirdDigitAllowed.Contains(thirdDigit)) return false;
 
-            var sum = 0;
-            for (var i = 0; i < 8; i++)
-                sum += int.Parse(value[i].ToString()) * (9 - i);
+        var sum = 0;
+        for (var i = 0; i < 8; i++)
+            sum += int.Parse(value[i].ToString()) * (9 - i);
 
-            var digit = sum * 10 % 11;
-            if (digit == 10) digit = 0;
+        var digit = sum * 10 % 11;
+        if (digit == 10) digit = 0;
 
-            return value.EndsWith(digit.ToString());
-        }
+        return value.EndsWith(digit.ToString());
     }
 }

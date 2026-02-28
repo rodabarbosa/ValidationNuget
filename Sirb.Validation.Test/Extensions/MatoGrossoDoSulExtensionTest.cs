@@ -1,3 +1,6 @@
+using Sirb.Validation.Extensions;
+using Xunit;
+
 namespace Sirb.Validation.Test.Extensions;
 
 public class MatoGrossoDoSulExtensionTest

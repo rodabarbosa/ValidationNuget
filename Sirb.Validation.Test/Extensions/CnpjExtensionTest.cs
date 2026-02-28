@@ -1,3 +1,6 @@
+using Sirb.Validation.Exceptions;
+using Xunit;
+
 namespace Sirb.Validation.Test.Extensions;
 
 public class CnpjExtensionTest
