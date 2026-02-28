@@ -31,7 +31,7 @@ Sirb.Validation.Benchmark/        # BenchmarkDotNet performance tests
 - **Language**: All code and XML documentation must be in English.
 - **README.md**: Written in Portuguese (pt-BR) — it is the NuGet package description on nuget.org.
 - **Testing**: xUnit with 100% code coverage target. Every public method must have corresponding tests.
-- **Target Frameworks**: Multi-target from .NET Framework 4.6 through .NET 8.
+- **Target Frameworks**: .NET 8, .NET 9, .NET 10.
 - **License**: MIT.
 
 ## Available Agents

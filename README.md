@@ -66,11 +66,16 @@ using Sirb.Validation.Extensions;
 
 ## Compatibilidade
 
-.NET Framework 4.6+ | .NET Standard 2.0+ | .NET Core 3.1 | .NET 5 – 8
+.NET 8 | .NET 9 | .NET 10
 
 > **Nota:** Os métodos de geração de documentos existem exclusivamente para auxiliar desenvolvedores durante testes. Não utilize valores gerados em produção.
 
 ## Histórico de versões
+
+### 1.4.0
+
+- Removido suporte a .NET Framework, .NET Standard, .NET Core 3.1, .NET 5, 6 e 7.
+- Compatível apenas com .NET 8, 9 e 10.
 
 ### 1.3.1
 

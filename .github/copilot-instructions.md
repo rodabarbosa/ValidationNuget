@@ -14,7 +14,7 @@ This is a .NET NuGet library (`Sirb.Validation`) for validating, formatting, and
 
 ### General
 
-- Target multiple frameworks: .NET Framework 4.6+, .NET Standard 2.0+, .NET Core 3.1, .NET 5–8.
+- Target frameworks: .NET 8, .NET 9, .NET 10.
 - Use extension methods as the public API surface (e.g., `string.IsCpfValid()`).
 - Keep validation logic in dedicated classes under `Documents/BR/Validation/`.
 - Keep document generators under `Documents/BR/Mockups/` — these exist only to assist developers during testing.
