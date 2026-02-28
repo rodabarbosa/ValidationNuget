@@ -16,7 +16,7 @@ internal class InscricaoEstadualMatoGrossoDoSulValidation : IInscricaoEstadualVa
             sum += int.Parse(value[i].ToString()) * (9 - i);
 
         var rest = sum % 11;
-        var digit = rest > 0 && rest < 10 ? 11 - rest : 0;
+        var digit = rest < 2 ? 0 : 11 - rest;
         return value.EndsWith(digit.ToString());
     }
 }

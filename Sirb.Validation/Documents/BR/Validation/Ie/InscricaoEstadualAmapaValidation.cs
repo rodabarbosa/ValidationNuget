@@ -33,7 +33,7 @@ public class InscricaoEstadualAmapaValidation : IInscricaoEstadualValidation
 
     private static int GetDigitVarification(string value)
     {
-        var x = long.Parse(value.Substring(1, 8));
+        var x = long.Parse(value.Substring(0, 8));
         if (x >= 3017001L && x <= 3019022L)
             return 1;
 
@@ -48,7 +48,7 @@ public class InscricaoEstadualAmapaValidation : IInscricaoEstadualValidation
 
     private static int GetStartSumValue(string value)
     {
-        var x = long.Parse(value.Substring(1, 8));
+        var x = long.Parse(value.Substring(0, 8));
         if (x >= 3017001L && x <= 3019022L)
             return 9;
 
@@ -56,7 +56,6 @@ public class InscricaoEstadualAmapaValidation : IInscricaoEstadualValidation
             return 5;
 
         if (x >= 3019023L)
-
             return 0;
 
         return -1;

@@ -65,8 +65,7 @@ public static class Cpf
     private static int CalculateDigitValue(int valueSummation)
     {
         var remainder = valueSummation % 11;
-        var subtractionValue = remainder < 2 ? 0 : 11;
-        return subtractionValue - remainder;
+        return remainder < 2 ? 0 : 11 - remainder;
     }
 
     private static int GetLastDigit(List<int> generatedNumbers, int total)

@@ -38,6 +38,7 @@ internal class InscricaoEstadualPE : InscricaoEstadualBase
     protected override int CalculateLastDigit(int summationValue)
     {
         var remainder = summationValue % 11;
-        return remainder < 2 ? 0 : 11 - remainder;
+        var digit = 11 - remainder;
+        return digit > 9 ? digit - 10 : digit;
     }
 }

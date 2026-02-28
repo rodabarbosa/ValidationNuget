@@ -32,6 +32,6 @@ internal class InscricaoEstadualMS : InscricaoEstadualBase
     protected override int CalculateLastDigit(int summationValue)
     {
         var remainder = summationValue % 11;
-        return remainder > 0 && remainder < 10 ? 11 - remainder : 0;
+        return remainder < 2 ? 0 : 11 - remainder;
     }
 }
