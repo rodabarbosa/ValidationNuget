@@ -9,13 +9,15 @@
 ```text
 Sirb.Validation/                  # Main library (NuGet package)
 ├── Documents/BR/
-│   ├── Enumeration/              # Enums (State)
-│   ├── Interfaces/               # Contracts
+│   ├── Enumeration/              # State enum (27 UFs + DF)
+│   ├── Interfaces/               # Contracts (IInscricaoEstadualValidation, IInscricaoEstadualInternal)
 │   ├── Mockups/                  # Document generators (test-only helpers)
-│   ├── Rules/                    # Validation rules per document
+│   │   └── Ie/                   # Per-state IE generators
+│   ├── Rules/                    # Validation rules (CpfRule, CnpjRule, PisRule, RenavanRules)
 │   └── Validation/               # Validation and masking logic
-├── Exceptions/                   # CPF/CNPJ extensions, custom exceptions
-└── Extensions/                   # String and state extension methods
+│       └── Ie/                   # Per-state IE validations
+├── Exceptions/                   # CPF/CNPJ extensions, StateNotFoundException
+└── Extensions/                   # String, PIS, TituloEleitor, Renavam extensions + per-state IE masks
 
 Sirb.Validation.Test/             # Unit tests (xUnit)
 ├── Extensions/                   # Extension method tests

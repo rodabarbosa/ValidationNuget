@@ -1,6 +1,6 @@
 # Sirb.Validation
 
-Biblioteca .NET para validação, formatação (máscara) e geração de documentos brasileiros.
+Biblioteca .NET para validação, formatação (máscara) e geração de documentos brasileiros, além de utilitários de string.
 
 [![NuGet](https://img.shields.io/nuget/v/Sirb.Validation.svg)](https://www.nuget.org/packages/Sirb.Validation)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
@@ -24,31 +24,81 @@ dotnet add package Sirb.Validation
 
 ## Uso rápido
 
-```csharp
-using Sirb.Validation.Extensions;
-using Sirb.Validation.Exceptions;
+### Validação
 
-// Validação
+```csharp
+using Sirb.Validation.Exceptions;
+using Sirb.Validation.Extensions;
+using Sirb.Validation.Documents.BR.Validation;
+
+// CPF
 bool cpfValido = "123.456.789-09".IsCpfValid();
+
+// CNPJ
 bool cnpjValido = "12.345.678/0001-95".IsCnpjValid();
+
+// PIS
 bool pisValido = "123.45678.90-1".IsPisValid();
-bool tituloValido = "1234567890".IsTituloEleitorValid();
+
+// Título de Eleitor
+bool tituloValido = "12345678901234".IsTituloEleitorValid();
+
+// Renavam
 bool renavamValido = "12345678901".IsRenavamValid();
 
-// Máscara
-string cpfFormatado = "12345678909".PlaceCpfMask();       // "123.456.789-09"
-string cnpjFormatado = "12345678000195".PlaceCnpjMask();  // "12.345.678/0001-95"
-string pisFormatado = "12345678901".PlacePisMask();
+// Inscrição Estadual (requer o enum State para identificar o estado)
+using Sirb.Validation.Documents.BR.Enumeration;
 
-// Geração (somente para testes)
+bool ieValida = InscricaoEstadualValidation.IsValid(State.SP, "123456789.123");
+bool ieValidaRJ = InscricaoEstadualValidation.IsValid(State.RJ, "12.345.67-8");
+```
+
+### Máscara / formatação
+
+```csharp
+using Sirb.Validation.Exceptions;
+using Sirb.Validation.Extensions;
+using Sirb.Validation.Documents.BR.Validation;
+using Sirb.Validation.Documents.BR.Enumeration;
+
+// CPF
+string cpfFormatado = "12345678909".PlaceCpfMask();       // "123.456.789-09"
+
+// CNPJ
+string cnpjFormatado = "12345678000195".PlaceCnpjMask();  // "12.345.678/0001-95"
+
+// PIS
+string pisFormatado = "12345678901".PlacePisMask();       // "123.45678.90-1"
+
+// Título de Eleitor
+string tituloFormatado = "12345678901234".PlaceTituloEleitorMask();
+
+// Inscrição Estadual (requer o enum State)
+string ieFormatada = InscricaoEstadualValidation.PlaceMask(State.SP, "123456789123");
+string ieFormatadaBA = InscricaoEstadualValidation.PlaceMask(State.BA, "123456789");
+
+// Remover máscara
+string ieSemMascara = InscricaoEstadualValidation.RemoveMask("12.345.678-9");
+```
+
+### Geração (somente para testes)
+
+```csharp
 using Sirb.Validation.Documents.BR.Mockups;
+using Sirb.Validation.Documents.BR.Enumeration;
 
 string cpf = Cpf.Generate();
 string cnpj = Cnpj.Generate();
 string pis = Pis.Generate();
 string titulo = TituloEleitor.Generate();
 string renavam = Renavam.Generate();
+
+// Geração de Inscrição Estadual (requer o enum State)
+string ie = InscricaoEstadual.Generate(State.SP);
+string ieBA = InscricaoEstadual.Generate(State.BA);
 ```
+
+> **Nota:** Os métodos de geração de documentos existem exclusivamente para auxiliar desenvolvedores durante testes. Não utilize valores gerados em produção.
 
 ### Utilitários de string
 
@@ -67,8 +117,6 @@ using Sirb.Validation.Extensions;
 ## Compatibilidade
 
 .NET 8 | .NET 9 | .NET 10
-
-> **Nota:** Os métodos de geração de documentos existem exclusivamente para auxiliar desenvolvedores durante testes. Não utilize valores gerados em produção.
 
 ## Histórico de versões
 
@@ -121,4 +169,6 @@ using Sirb.Validation.Extensions;
 
 ## Licença
 
-[MIT](LICENSE)
+[MIT](LICENSE) — Desde 2018.
+
+Repositório: [github.com/rodabarbosa/ValidationNuget](https://github.com/rodabarbosa/ValidationNuget)
