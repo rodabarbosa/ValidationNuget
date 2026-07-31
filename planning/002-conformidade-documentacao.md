@@ -1,6 +1,8 @@
 # Implementation Plan: Conformidade da Documentação ao Padrão da Skill `documentation`
 
-**Status:** COMPLETE ✅
+**Status:** COMPLETE ✅ · **REVISADO** em 31/07/2026 (decisão revertida — ver nota abaixo)
+
+> **Nota de revisão (31/07/2026):** Por **decisão soberana do usuário**, a convenção de diretório de análises cross-artifact passa a ser **`analise/` (singular)**. Isto **REVERTE** a decisão registrada neste plano (que padronizou `analises/` na Wave 5). O diretório canônico é `docs/requirement/analise/`; `analises/` não deve mais ser usado e foi removido (13 arquivos movidos de volta para `analise/` pelo `writer`). O histórico da decisão original é preservado abaixo, com o estado atual e a revisão sinalizados em cada seção.
 
 ## Overview
 
@@ -11,7 +13,7 @@ Adequar toda a documentação do projeto **Sirb.Validation** (~69 arquivos em `/
 | Decisão | Contexto | Opções | Rationale |
 | ------- | -------- | ------ | --------- |
 | **Onda única sequencial** (não paralelizável) | Cada onda altera os mesmos ~69 arquivos; paralelismo causaria conflitos de edição concorrente. | (a) Execução sequencial mono-agente, (b) paralelizar por subconjunto de arquivos | Onda única com `writer` é mais segura — evita merge conflicts. As alterações são puramente aditivas (inserção de frontmatter + ajustes de metadados), sem risco de sobrescrita entre ondas se sequenciadas corretamente. |
-| **Manter `analise/` → renomear para `analises/`** | A skill `documentation` padroniza plural nos nomes de diretório. | (a) Renomear e corrigir 13 links no TOC, (b) manter singular | Renomear alinha ao padrão. Apenas 13 links no `docs/README.md` precisam de atualização — baixo risco. |
+| **Manter `analise/` → renomear para `analises/`** · **REVISADA em 31/07/2026** | Originalmente a skill `documentation` padronizava plural nos nomes de diretório. **REVISÃO (decisão soberana do usuário em 31/07/2026):** a convenção passa a ser **`analise/` (singular)** para análises cross-artifact; `analises/` não deve mais ser usado. | (a) Renomear e corrigir 13 links no TOC, (b) manter singular | Executado em 27/07/2026: `analise/` → `analises/` (alinhado à skill). **Revertido em 31/07/2026** por determinação do usuário: canônico = `analise/` (singular); 13 arquivos movidos de volta; `analises/` removido; links corrigidos para `analise/`. |
 | **Criar `tec/` subdiretório para tec-req-* | A skill `documentation` exige separação req/tec em subdiretórios. | (a) Mover para `requirement/tec/` e corrigir 13 links, (b) manter flat em `requirement/` | Mover alinha ao padrão. Impacto restrito a `docs/README.md` (13 links). |
 | **Criar `extras/`, `diagrams/`, `vision/` vazios** | Diretórios obrigatórios pela skill mesmo se N/A agora. | (a) Criar com `.gitkeep`, (b) criar só se houver conteúdo | Criar agora evita nova onda de conformidade futura. Marcadores N/A na TOC. |
 
@@ -220,9 +222,10 @@ Além disso:
 
 **Sub-tarefas:**
 
-1. **Renomear `analise/` para `analises/`:**
-   - `mv docs/requirement/analise docs/requirement/analises`
-   - Atualizar 13 caminhos em `docs/README.md` (`.requirement/analise/` → `.requirement/analises/`)
+1. **Renomear `analise/` para `analises/`:** *(REVISADO em 31/07/2026 — decisão revertida pelo usuário)*
+   - `mv docs/requirement/analise docs/requirement/analises` *(executado em 27/07/2026)*
+   - Atualizar 13 caminhos em `docs/README.md` (`.requirement/analise/` → `.requirement/analises/`) *(executado em 27/07/2026)*
+   - **31/07/2026 (REVISÃO):** decisão revertida por determinação do usuário — o diretório canônico é **`docs/requirement/analise/` (singular)**; os 13 arquivos de análise foram movidos de volta (`analises/` → `analise/`) e o diretório `analises/` foi removido; links em `docs/` corrigidos de `analises/` → `analise/`.
 
 2. **Criar subdiretório `tec/` e mover tec-req-*:**
    - `mkdir docs/requirement/tec`
@@ -233,8 +236,9 @@ Além disso:
 
 **Critérios de aceite:**
 
-- [x] Diretório `docs/requirement/analises/` existe com 13 arquivos de análise
-- [x] Diretório `docs/requirement/analise/` não existe mais
+- [x] Diretório `docs/requirement/analises/` existe com 13 arquivos de análise *(executado 27/07/2026)*
+- [x] Diretório `docs/requirement/analise/` não existe mais *(executado 27/07/2026)*
+- **[REVISÃO 31/07/2026]** — critérios invertidos por decisão do usuário: `docs/requirement/analise/` (singular) é o canônico com os 13 arquivos; `analises/` não deve mais existir.
 - [x] Diretório `docs/requirement/tec/` existe com 13 arquivos tec-req-*
 - [x] Nenhum arquivo `tec-req-*.md` permanece em `docs/requirement/` (raiz)
 - [x] 26 links em `docs/README.md` atualizados (13 analise, 13 tec-req)
@@ -242,8 +246,9 @@ Além disso:
 
 **Verificação:**
 
-- [ ] `ls docs/requirement/analise/` retorna "No such file or directory"
-- [ ] `ls docs/requirement/analises/` retorna 13 arquivos
+- [ ] `ls docs/requirement/analise/` retorna "No such file or directory" *(executado 27/07/2026)*
+- [ ] `ls docs/requirement/analises/` retorna 13 arquivos *(executado 27/07/2026)*
+- **[REVISÃO 31/07/2026]** — verificação invertida: `ls docs/requirement/analise/` deve retornar os 13 arquivos; `ls docs/requirement/analises/` deve falhar ("No such file or directory").
 - [ ] `ls docs/requirement/tec/` retorna 13 arquivos
 - [ ] `ls docs/requirement/tec-req-*.md` retorna vazio (ou erro)
 - [ ] Todos os links em `docs/README.md` apontam para caminhos válidos
@@ -271,7 +276,8 @@ Além disso:
 **Critérios de aceite:**
 
 - [x] `docs/README.md` reflete a estrutura final de diretórios
-- [x] Convenção de Prefixos atualizada com `analises/` e `tec/`
+- [x] Convenção de Prefixos atualizada com `analises/` e `tec/` *(executado 27/07/2026)*
+- **[REVISÃO 31/07/2026]** — Convenção de Prefixos deve refletir **`analise/` (singular)** e `tec/`.
 - [x] Novos diretórios (`extras/`, `diagrams/`, `vision/`) mencionados
 - [x] Data de última atualização reflete a data de conclusão
 
@@ -297,7 +303,8 @@ Além disso:
 - [x] Wave 2 executada: `## Metadados` refletem frontmatter; nota padrão adicionada
 - [x] Wave 3 executada: 26 arquivos sem `writer` no campo Autor
 - [x] Wave 4 executada: `domain.version` sincronizado com histórico
-- [x] Wave 5 executada: `analise/` → `analises/`, `tec/` criado, 26 links atualizados
+- [x] Wave 5 executada: `analise/` → `analises/`, `tec/` criado, 26 links atualizados *(executado 27/07/2026)*
+- **[REVISÃO 31/07/2026]** — revertido por decisão do usuário: canônico = `analise/` (singular); `analises/` removido; links atualizados para `analise/`.
 - [x] Wave 6 executada: `docs/README.md` finalizado
 - [x] Build dos links: todos os caminhos relativos em `docs/README.md` válidos
 - [x] Nenhum arquivo perdeu conteúdo (diff contra git)
@@ -353,7 +360,8 @@ Wave 0 (dirs vazios) → Wave 1 (frontmatter) → Wave 2 (metadados) → Wave 3 
 
 ### Removed
 
-- `docs/requirement/analise/` (diretório renomeado para `analises/`)
+- `docs/requirement/analise/` (diretório renomeado para `analises/` em 27/07/2026)
+- **[REVISÃO 31/07/2026]** — `docs/requirement/analises/` foi removido; os 13 arquivos voltaram para `docs/requirement/analise/` (canônico singular, por decisão do usuário)
 
 ## Open Questions (⏳ PENDENTE)
 
@@ -363,7 +371,7 @@ Wave 0 (dirs vazios) → Wave 1 (frontmatter) → Wave 2 (metadados) → Wave 3 
 
 3. **⏳ `system-risk-matrix.md` — Código do documento:** O metadado atual não tem `Código do documento`. Sugestão: usar `system-risk-matrix` como artifact_id.
 
-4. **⏳ Impacto da movimentação de arquivos no versionamento git:** A renomeação de `analise/` para `analises/` e a movimentação de tec-req-* para `tec/` devem ser feitas com `git mv` para preservar o histórico.
+4. **⏳ Impacto da movimentação de arquivos no versionamento git:** A renomeação de `analise/` para `analises/` (27/07/2026) e a movimentação de tec-req-* para `tec/` devem ser feitas com `git mv` para preservar o histórico. **[REVISÃO 31/07/2026]** — a movimentação reversa `analises/` → `analise/` também usa `git mv` (executada pelo `writer` em paralelo).
 
 ## Instruções de Execução para o `writer`
 
@@ -452,7 +460,7 @@ domain:
 type: analise
 title: "Análise Cross-Artifact — req-XXXX"
 description: "Análise de consistência entre req-XXXX, tec-req-XXXX e artefatos relacionados"
-resource: "./requirement/analises/analise-req-XXXX.md"
+resource: "./requirement/analise/analise-req-XXXX.md"
 tags: [analise, cross-artifact, consistencia]
 generated:
   by: "Opencode — writer"
@@ -623,7 +631,8 @@ domain:
 - [x] **Wave 3** — Corrigir campo Autor (26 arquivos)
 - [x] **Wave 4** — Sincronizar `domain.version` com histórico
 - [x] **Wave 5** — Alinhamento estrutural de diretórios
-  - [x] Renomear `analise/` → `analises/`
+  - [x] Renomear `analise/` → `analises/` *(executado 27/07/2026)*
+  - **[REVISÃO 31/07/2026]** — revertido por decisão do usuário: `analises/` → `analise/` (canônico singular)
   - [x] Criar `tec/` e mover 13 tec-req-*
   - [x] Atualizar 26 links no TOC
 - [x] **Wave 6** — Atualizar `docs/README.md` (TOC final)

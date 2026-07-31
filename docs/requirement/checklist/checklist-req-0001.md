@@ -1,7 +1,7 @@
 ---
 type: checklist
 title: "Quality Checklist — req-0001"
-description: "Checklist de qualidade do requisito req-0001 (CPF — Validação e Máscara)."
+description: "Checklist de qualidade do requisito req-0001 (CPF — Validação)."
 resource: "./requirement/checklist/checklist-req-0001.md"
 tags: [checklist, qualidade, revisao]
 generated:
@@ -11,24 +11,24 @@ status: approved
 domain:
   artifact_id: "checklist-req-0001"
   title_pt: "Quality Checklist — req-0001"
-  version: "1.0.0"
+  version: "1.1.0"
   author: "Rodrigo Araujo Barbosa"
   created: "27/07/2026"
-  updated: "27/07/2026"
+  updated: "31/07/2026"
   language: pt-BR
 ---
 
-# Quality Checklist — req-0001 (CPF — Validação e Máscara)
+# Quality Checklist — req-0001 (CPF — Validação)
 
 ## Metadados
 
 > **Nota:** Esta seção é uma reflexão do frontmatter YAML (bloco `---` no topo do arquivo) para leitura humana. O frontmatter é a fonte primária; qualquer divergência entre os dois deve ser resolvida atualizando o frontmatter primeiro.
 
 - **Código do documento:** `checklist-req-0001`
-- **Requisito analisado:** `req-0001` / `tec-req-0001` — CPF — Validação e Máscara
+- **Requisito analisado:** `req-0001` / `tec-req-0001` — CPF — Validação
 - **Data do checklist:** 27/07/2026
 - **Autor:** Rodrigo Araujo Barbosa
-- **Versão deste documento:** 1.0.0
+- **Versão deste documento:** 1.1.0
 - **Status do checklist:** Concluído
 - **Veredito final:** APROVADO
 
@@ -40,9 +40,9 @@ domain:
 | - | ----------- | --------- | --------------- | -------------- |
 | 1.1 | Frases curtas, voz ativa | Pass | Todo o documento usa voz ativa | — |
 | 1.2 | Ausência de jargão técnico no req | Pass | req-0001 em linguagem de negócio | — |
-| 1.3 | Termos definidos no glossário | Pass | Escopo define o que é CPF, máscara, validação | — |
+| 1.3 | Termos definidos no glossário | Pass | Escopo define o que é CPF, validação, normalização | — |
 | 1.4 | Nenhum termo vago | Pass | Todos os cenários têm métricas e critérios | — |
-| 1.5 | Título e H1 alinhados | Pass | Título "CPF — Validação e Máscara" reflete conteúdo | — |
+| 1.5 | Título e H1 alinhados | Pass | Título "CPF — Validação" reflete conteúdo | — |
 
 **Total da dimensão 1:** Pass 5 · Fail 0 · N/A 0
 
@@ -51,9 +51,9 @@ domain:
 | # | Verificação | Resultado | Evidência/Seção | Ação corretiva |
 | - | ----------- | --------- | --------------- | -------------- |
 | 2.1 | Seção "Por quê" presente, específica, mensurável | Pass | Problema (retrabalho em integrações), impacto, público, critério p95 < 1ms | — |
-| 2.2 | Escopo delimitado (in/out) | Pass | In: validação, máscara, estado emissor. Out: consulta externa, situação cadastral | — |
-| 2.3 | RFs e RNs numeradas, sem gaps | Pass | RF-001 a RF-006, RN-001 a RN-006, sem saltos | — |
-| 2.4 | Gherkin com cenários negativos | Pass | 10 cenários incluindo CPF repetido, curto, nulo, vazio | — |
+| 2.2 | Escopo delimitado (in/out) | Pass | In: validação, estado emissor, normalização. Out: máscara (req-0014), consulta externa, situação cadastral | — |
+| 2.3 | RFs e RNs numeradas, sem gaps | Pass | RF-001 a RF-004, RN-001 a RN-004, sem saltos | — |
+| 2.4 | Gherkin com cenários negativos | Pass | 8 cenários incluindo CPF repetido, curto, nulo, vazio | — |
 | 2.5 | NFRs mensuráveis | Pass | p95 < 1ms, > 100k/s, cobertura 100% | — |
 
 **Total da dimensão 2:** Pass 5 · Fail 0 · N/A 0
@@ -77,7 +77,7 @@ domain:
 | 4.1 | Links funcionam | Pass | Todos os artefatos referenciados existem | — |
 | 4.2 | Sem placeholders "TBD" | Pass | Nenhum placeholder órfão | — |
 | 4.3 | XXXX consistente | Pass | Todos os artefatos usam 0001 | — |
-| 4.4 | Versão referenciada | Pass | req-0001 v1.0.0, tec-req-0001 v1.0.0 | — |
+| 4.4 | Versão referenciada | Pass | req-0001 v1.1.0, tec-req-0001 v1.1.0 | — |
 | 4.5 | Artefatos relacionados bidirecional | Pass | Lista impactantes e impactados | — |
 
 **Total da dimensão 4:** Pass 5 · Fail 0 · N/A 0
@@ -100,11 +100,11 @@ domain:
 
 | # | Verificação | Resultado | Evidência/Seção | Ação corretiva |
 | - | ----------- | --------- | --------------- | -------------- |
-| 6.1 | Mesmo XXXX e versão | Pass | req e tec usam 0001 e v1.0.0 | — |
-| 6.2 | RFs/RNs idênticas | Pass | RF-001 a RF-006, RN-001 a RN-006 idênticas | — |
+| 6.1 | Mesmo XXXX e versão | Pass | req e tec usam 0001 e v1.1.0 | — |
+| 6.2 | RFs/RNs idênticas | Pass | RF-001 a RF-004, RN-001 a RN-004 idênticas | — |
 | 6.3 | Entidades/endpoints no did/api | N/A | Sem dados persistentes | — |
-| 6.4 | APF reflete requisito | Pass | 12 PF calculados sobre 4 funções públicas | — |
-| 6.5 | Risco local bate com global | Pass | RSK-001/002/003 consistentes | — |
+| 6.4 | APF reflete requisito | Pass | 6 PF calculados sobre 2 funções públicas | — |
+| 6.5 | Risco local bate com global | Pass | RSK-001/003 consistentes | — |
 
 **Total da dimensão 6:** Pass 4 · Fail 0 · N/A 1
 
@@ -124,8 +124,8 @@ domain:
 
 | # | Verificação | Resultado | Evidência/Seção | Ação corretiva |
 | - | ----------- | --------- | --------------- | -------------- |
-| 8.1 | Versão SemVer | Pass | v1.0.0 consistente | — |
-| 8.2 | Histórico atualizado | Pass | 1 entrada de criação | — |
+| 8.1 | Versão SemVer | Pass | v1.1.0 consistente | — |
+| 8.2 | Histórico atualizado | Pass | 2 entradas (criação + revisão de escopo) | — |
 | 8.3 | Clarification sem pendentes bloqueantes | Pass | 0 pendentes que impactem aceite/escopo | — |
 | 8.4 | Links funcionando | Pass | Referências válidas | — |
 | 8.5 | Idioma pt-BR consistente | Pass | Todo o documento em pt-BR | — |
@@ -165,6 +165,7 @@ domain:
 | Data | Autor | Versão | Alteração |
 | ---- | ----- | ------ | --------- |
 | 27/07/2026 | Rodrigo Araujo Barbosa | 1.0.0 | Criação do documento |
+| 31/07/2026 | Rodrigo Araujo Barbosa | 1.1.0 | Checklist atualizado para o escopo de validação pura (remoção de máscara — req-0001 v1.1.0) |
 
 ## Clarification Log
 

@@ -1,4 +1,4 @@
-using Sirb.Validation.Documents.BR.Validation;
+using Sirb.Validation.Extensions;
 using Xunit;
 
 namespace Sirb.Validation.Test.Extensions;

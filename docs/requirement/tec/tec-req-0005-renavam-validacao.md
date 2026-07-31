@@ -11,10 +11,10 @@ status: approved
 domain:
   artifact_id: "tec-req-0005"
   title_pt: "Renavam — Validação — Especificação Técnica"
-  version: "1.0.0"
+  version: "1.1.0"
   author: "Rodrigo Araujo Barbosa"
   created: "27/07/2026"
-  updated: "27/07/2026"
+  updated: "31/07/2026"
   language: pt-BR
 ---
 
@@ -27,9 +27,9 @@ domain:
 - **Código do documento:** `tec-req-0005`
 - **Título:** Renavam — Validação — Especificação Técnica
 - **Data de criação:** 27/07/2026
-- **Última atualização:** 27/07/2026
+- **Última atualização:** 31/07/2026
 - **Autor:** Rodrigo Araujo Barbosa
-- **Versão:** 1.0.0
+- **Versão:** 1.1.0
 - **Status:** Aprovado
 
 ## 1. Resumo
@@ -41,7 +41,7 @@ Validar Renavam (9 ou 11 dígitos, módulo 11 com pesos 2..9). Renavam **não po
 ### Camadas
 ```
 Validation:
-  ├── RenavamValidation.cs — IsValid, RemoveMask (OnlyNumbers)
+  ├── RenavamValidation.cs — IsValid, OnlyNumbers (normalização de entrada)
   └── RenavamExtension.cs — IsRenavamValid(this string) → bool
 
 Rules:
@@ -49,7 +49,7 @@ Rules:
 ```
 
 ### Algoritmo
-1. RemoveMask
+1. OnlyNumbers (normalização de entrada)
 2. Tamanho 9 ou 11? senão false
 3. Normalizar para 11 (left-pad com '0')
 4. Remover último dígito, reverter string: WorkValue
@@ -61,7 +61,7 @@ Rules:
 
 ```mermaid
 flowchart TD
-    A[Entrada Renavam] --> B[RemoveMask]
+    A[Entrada Renavam] --> B[OnlyNumbers]
     B --> C{Tamanho 9 ou 11?}
     C -->|Não| D[return false]
     C -->|Sim| E[PadLeft 11 zeros]
@@ -93,3 +93,4 @@ bool i = "".IsRenavamValid();              // false
 | Data | Autor | Versão | Alteração |
 | ---- | ----- | ------ | --------- |
 | 27/07/2026 | Rodrigo Araujo Barbosa | 1.0.0 | Criação |
+| 31/07/2026 | Rodrigo Araujo Barbosa | 1.1.0 | Alinhamento da nomenclatura de normalização (RemoveMask → OnlyNumbers); sem mudança de escopo |

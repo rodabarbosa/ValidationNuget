@@ -11,10 +11,10 @@ status: approved
 domain:
   artifact_id: "apf-req-0005"
   title_pt: "APF — req-0005"
-  version: "1.0.0"
+  version: "1.1.0"
   author: "Rodrigo Araujo Barbosa"
   created: "27/07/2026"
-  updated: "27/07/2026"
+  updated: "31/07/2026"
   language: pt-BR
 ---
 
@@ -34,3 +34,4 @@ domain:
 | Data | Autor | Versão | Alteração |
 | ---- | ----- | ------ | --------- |
 | 27/07/2026 | Rodrigo Araujo Barbosa | 1.0.0 | Criação |
+| 31/07/2026 | Rodrigo Araujo Barbosa | 1.1.0 | Bump de versão para alinhamento da família (3 PF inalterado; Renavam já era validação pura) |

@@ -81,7 +81,7 @@ Funcionalidade: Geração de CPF para testes
 
 | ID | Risco | P | I | Score | Nível |
 | -- | ----- | - | - | ----- | ----- |
-| RSK-015 | CPF gerado inválido (algoritmo de geração divergente do de validação) | 2 | 4 | 8 | Alto |
+| RSK-015 | CPF gerado inválido (algoritmo de geração divergente do de validação) | 2 | 4 | 8 | Médio |
 
 ## Rastreabilidade
 
@@ -93,5 +93,6 @@ Funcionalidade: Geração de CPF para testes
 | Data | Autor | Versão | Alteração |
 | ---- | ----- | ------ | --------- |
 | 27/07/2026 | Rodrigo Araujo Barbosa | 1.0.0 | Criação |
+| 31/07/2026 | Rodrigo Araujo Barbosa | 1.1.0 | Realinhamento do nível da fatia local à legenda da matriz global: RSK-015 (score 8) Médio |
 
 ## Clarification Log (8/8) — OK

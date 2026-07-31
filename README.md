@@ -4,6 +4,7 @@ Biblioteca .NET para validação, formatação (máscara) e geração de documen
 
 [![NuGet](https://img.shields.io/nuget/v/Sirb.Validation.svg)](https://www.nuget.org/packages/Sirb.Validation)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Quality gate status](https://sonarcloud.io/api/project_badges/measure?project=rodabarbosa_ValidationNuget&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=rodabarbosa_ValidationNuget)
 
 ## Documentos suportados
 
@@ -11,6 +12,7 @@ Biblioteca .NET para validação, formatação (máscara) e geração de documen
 | ------------------------------------- | :-------: | :-----: | :-----: |
 | CPF                                   |     ✔     |    ✔    |    ✔    |
 | CNPJ                                  |     ✔     |    ✔    |    ✔    |
+| CNPJ Alfanumérico (IN RFB 2.229/2024) |     ✔     |    ✔    |    ✔    |
 | PIS                                   |     ✔     |    ✔    |    ✔    |
 | Título de Eleitor                     |     ✔     |    ✔    |    ✔    |
 | Inscrição Estadual (todos os estados) |     ✔     |    ✔    |    ✔    |
@@ -36,6 +38,9 @@ bool cpfValido = "123.456.789-09".IsCpfValid();
 
 // CNPJ
 bool cnpjValido = "12.345.678/0001-95".IsCnpjValid();
+
+// CNPJ Alfanumérico (IN RFB 2.229/2024)
+bool cnpjAlfanumericoValido = "12ABC34501DE35".IsCnpjAlfanumericoValid();
 
 // PIS
 bool pisValido = "123.45678.90-1".IsPisValid();
@@ -67,6 +72,9 @@ string cpfFormatado = "12345678909".PlaceCpfMask();       // "123.456.789-09"
 // CNPJ
 string cnpjFormatado = "12345678000195".PlaceCnpjMask();  // "12.345.678/0001-95"
 
+// CNPJ Alfanumérico
+string cnpjAlfaFormatado = "12ABC34501DE35".PlaceCnpjAlfanumericoMask();  // "12.ABC.345/01DE-35"
+
 // PIS
 string pisFormatado = "12345678901".PlacePisMask();       // "123.45678.90-1"
 
@@ -89,6 +97,7 @@ using Sirb.Validation.Documents.BR.Enumeration;
 
 string cpf = Cpf.Generate();
 string cnpj = Cnpj.Generate();
+string cnpjAlfa = CnpjAlfanumerico.Generate();  // CNPJ Alfanumérico (IN RFB 2.229/2024)
 string pis = Pis.Generate();
 string titulo = TituloEleitor.Generate();
 string renavam = Renavam.Generate();
@@ -119,6 +128,12 @@ using Sirb.Validation.Extensions;
 .NET 8 | .NET 9 | .NET 10
 
 ## Histórico de versões
+
+### 1.6.0
+
+- Inclusão de validação, máscara e geração de CNPJ Alfanumérico (novo formato RFB IN 2.229/2024).
+- Novos métodos: `IsCnpjAlfanumericoValid()`, `PlaceCnpjAlfanumericoMask()`, `CnpjAlfanumerico.Generate()`.
+- Retrocompatível com CNPJ numérico.
 
 ### 1.5.0
 

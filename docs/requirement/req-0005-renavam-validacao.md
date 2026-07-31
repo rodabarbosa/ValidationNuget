@@ -11,10 +11,10 @@ status: approved
 domain:
   artifact_id: "req-0005"
   title_pt: "Renavam — Validação"
-  version: "1.0.0"
+  version: "1.1.0"
   author: "Rodrigo Araujo Barbosa"
   created: "27/07/2026"
-  updated: "27/07/2026"
+  updated: "31/07/2026"
   language: pt-BR
 ---
 
@@ -27,9 +27,9 @@ domain:
 - **Código do documento:** `req-0005`
 - **Título:** Renavam — Validação
 - **Data de criação:** 27/07/2026
-- **Última atualização:** 27/07/2026
+- **Última atualização:** 31/07/2026
 - **Autor:** Rodrigo Araujo Barbosa
-- **Versão:** 1.0.0
+- **Versão:** 1.1.0
 - **Status:** Aprovado
 
 ## Intenção
@@ -77,7 +77,7 @@ Funcionalidade: Validação de Renavam
 
 | ID | Risco | P | I | Score | Nível |
 | -- | ----- | - | - | ----- | ----- |
-| RSK-010 | Algoritmo incorreto | 2 | 4 | 8 | Alto |
+| RSK-010 | Algoritmo incorreto | 2 | 4 | 8 | Médio |
 | RSK-011 | Normalização 9→11 dígitos incorreta | 1 | 3 | 3 | Baixo |
 
 ## Histórico
@@ -85,6 +85,8 @@ Funcionalidade: Validação de Renavam
 | Data | Autor | Versão | Alteração |
 | ---- | ----- | ------ | --------- |
 | 27/07/2026 | Rodrigo Araujo Barbosa | 1.0.0 | Criação |
+| 31/07/2026 | Rodrigo Araujo Barbosa | 1.1.0 | Bump de versão para alinhamento da família (sem mudança de escopo; Renavam já era validação pura) |
+| 31/07/2026 | Rodrigo Araujo Barbosa | 1.1.0 | Realinhamento do nível da fatia local à legenda da matriz global: RSK-010 (score 8) Médio |
 
 ## Clarification Log (8/8)
 

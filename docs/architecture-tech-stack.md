@@ -6,15 +6,15 @@ resource: "./architecture-tech-stack.md"
 tags: [arquitetura, tecnologia, dotnet]
 generated:
   by: "Opencode — writer"
-  timestamp: "2026-07-26"
+  timestamp: "2026-07-31"
 status: approved
 domain:
   artifact_id: "architecture-tech-stack"
   title_pt: "Arquitetura e Stack Tecnológico"
-  version: "1.0.0"
+  version: "1.2.0"
   author: "Rodrigo Araujo Barbosa"
   created: "26/07/2026"
-  updated: "26/07/2026"
+  updated: "31/07/2026"
   language: pt-BR
 ---
 
@@ -30,19 +30,19 @@ domain:
 - **Código do documento:** `architecture-tech-stack`
 - **Título:** Arquitetura e Stack Tecnológico — Sirb.Validation
 - **Data de criação:** 26/07/2026
-- **Última atualização:** 26/07/2026
+- **Última atualização:** 31/07/2026
 - **Autor:** Rodrigo Araujo Barbosa
-- **Versão:** 1.0.0
+- **Versão:** 1.2.0
 - **Status:** Aprovado
 
 ## 1. Visão Geral do Sistema
 
-**Sirb.Validation** é uma biblioteca .NET (NuGet package) **stateless, puramente computacional**, para validação, formatação (máscara) e geração de documentos brasileiros (CPF, CNPJ, PIS, Título de Eleitor, Inscrição Estadual de todos os 27 estados + DF, Renavam) e utilitários de string.
+**Sirb.Validation** é uma biblioteca .NET (NuGet package) **stateless, puramente computacional**, para validação, formatação (máscara) e geração de documentos brasileiros (CPF, CNPJ **numérico e alfanumérico (IN 2.229/2024)**, PIS, Título de Eleitor, Inscrição Estadual de todos os 27 estados + DF, Renavam) e utilitários de string.
 
 - **Tipo:** Class Library (NuGet)
 - **Público-alvo:** Desenvolvedores .NET construindo aplicações que processam documentos brasileiros
 - **Modelo de execução:** In-process, síncrono, sem I/O, sem estado, thread-safe
-- **Filosofia:** Zero dependências externas (exceto `System.Globalization` do BCL), allocation-free no hot path, 100% testado, documentado via XML docs
+- **Filosofia:** Zero dependências externas (apenas BCL), allocation-free no hot path, 100% testado, documentado via XML docs
 
 ## 2. Componentes e Responsabilidades
 
@@ -64,6 +64,7 @@ domain:
 | **Runtime** | .NET | 8.0, 9.0, 10.0 (multi-target) | LTS atuais + preview; suporte a `Span<char>`, `stackalloc`, `Nullable` context |
 | **Build** | MSBuild / `dotnet CLI` | SDK 8.0+ | Build nativo, multi-targeting nativo |
 | **Package Manager** | NuGet | 6.x | Padrão .NET |
+| **Dependências** | Nenhuma (apenas BCL) | - | `System.Globalization` removido (já incluso no BCL) |
 | **Test Framework** | xUnit | 2.6+ | Padrão .NET, paralelismo, theory/inline data |
 | **Test Runner** | `dotnet test` + `xunit.runner.visualstudio` | - | CI/CD nativo |
 | **Coverage** | coverlet.collector | 6.0+ | Cobertura de linha/branch, integração com SonarCloud/Codecov |
@@ -98,8 +99,9 @@ flowchart LR
     subgraph SirbValidation[Sirb.Validation (NuGet)]
         direction TB
         Ext[Extensions API\n(string.IsCpfValid(),\nPlaceCpfMask(), etc.)]
-        Val[Validation Layer\n(CpfValidation, CnpjValidation,\nInscricaoEstadualValidation)]
-        Rules[Rules Layer\n(CpfRule, CnpjRule, PisRule,\nRenavanRules, IE por estado)]
+        ExtAlpha[Extensions API\n(IsCnpjAlfanumericoValid(),\nPlaceCnpjAlfanumericoMask())]
+        Val[Validation Layer\n(CpfValidation, CnpjValidation,\nInscricaoEstadualValidation,\nCnpjAlfanumericoValidation)]
+        Rules[Rules Layer\n(CpfRule, CnpjRule, PisRule,\nRenavanRules, CnpjAlfanumericoRule,\nIE por estado)]
         Enum[State Enum\n(27 UFs + DF)]
         Mock[Mockups (internal)\nCpf.Generate(), etc.]
     end
@@ -111,7 +113,9 @@ flowchart LR
     end
 
     AppCode -->|using Sirb.Validation.Extensions| Ext
+    AppCode -->|using Sirb.Validation.Extensions| ExtAlpha
     Ext --> Val
+    ExtAlpha --> Val
     Val --> Rules
     Val --> Enum
     Val -.->|internal| Mock
@@ -277,7 +281,7 @@ jobs:
 |-------|-----------|
 | **Injeção (OWASP A03)** | Validação estrita via regex + algoritmos matemáticos determinísticos. Entrada sanitizada por `RemoveMask()` (apenas dígitos). |
 | **Dados sensíveis em logs** | Biblioteca não loga. **Documentação (README, XML docs) alerta**: "Não logar CPF/CNPJ brutos. Use `PlaceMask()` ou `RemoveMask()` antes." |
-| **Dependências vulneráveis** | `System.Globalization` é BCL. `Dependabot` + `dotnet list package --vulnerable` em CI. Zero dependências de terceiros. |
+| **Dependências vulneráveis** | Zero dependências de terceiros. `Dependabot` + `dotnet list package --vulnerable` em CI. |
 | **Denial of Service (ReDoS)** | Regexes são simples (`\d{3}\.?\d{3}\.?\d{3}-?\d{2}`), sem backtracking catastrófico. Entrada limitada a 14-15 chars (docs brasileiros). |
 | **Segredos no pacote** | `dotnet pack` exclui `.git`, `.github`, `docs/`, `*.md` (exceto README). `InternalsVisibleTo` apenas para teste. |
 | **Supply Chain** | Build reproduzível (`Deterministic=true`), SourceLink habilitado, assinatura de pacote (opcional, `SignPackage`). |
@@ -294,10 +298,18 @@ jobs:
 | ADR-004 | Mockups internos visíveis apenas para testes | Aceito | 26/07/2026 | `docs/architecture/adrs/ADR-004-internal-mockups.md` |
 | ADR-005 | BenchmarkDotNet em CI com gate de regressão | Aceito | 26/07/2026 | `docs/architecture/adrs/ADR-005-benchmark-gate.md` |
 
-## 11. Histórico de Alterações
+## 11. Limitações Conhecidas e Evolução Futura
+
+| Área | Descrição | Status |
+|------|-----------|--------|
+| **CNPJ Alfanumérico (Novo Formato RFB / IN 2.229/2024)** | Suporte implementado via **req-0019**: validação (módulo 11 + ASCII-48), máscara (`XX.XXX.XXX/XXXX-XX`), geração para testes (`CnpjAlfanumerico.Generate()`), API pública (`IsCnpjAlfanumericoValid()`, `PlaceCnpjAlfanumericoMask()`). Retrocompatível com CNPJ numérico legado (14 dígitos). | **Implementado** (req-0019, v1.2.0) |
+
+## 12. Histórico de Alterações
 
 | Data | Autor | Versão | Alteração |
 | ---- | ----- | ------ | --------- |
+| 31/07/2026 | Rodrigo Araujo Barbosa | 1.2.0 | Implementado CNPJ Alfanumérico (req-0019): Rules/CnpjAlfanumericoRule.cs, Validation/CnpjAlfanumericoValidation.cs, Extensions/CnpjAlfanumericoExtension.cs, Mockups/CnpjAlfanumerico.cs; C4 atualizado; limitação resolvida |
+| 31/07/2026 | Rodrigo Araujo Barbosa | 1.1.0 | Removida dependência `System.Globalization` (desnecessária, já no BCL); build agora com 0 warnings; adicionada seção de limitações conhecidas (CNPJ alfanumérico) |
 | 26/07/2026 | Rodrigo Araujo Barbosa | 1.0.0 | Criação do documento base (arquitetura, stack, integrações, observabilidade, segurança, ADRs) |
 
 ## 12. Esclarecimentos
