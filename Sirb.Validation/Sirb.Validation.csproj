@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Sirb.Validation</PackageId>
-    <PackageVersion>1.5.0</PackageVersion>
+    <PackageVersion>1.5.1</PackageVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.5.0</Version>
+    <Version>1.5.1</Version>
     <Authors>Rodrigo Araujo Barbosa</Authors>
     <Product>Validação de documentos</Product>
     <Description>Está disponível as seguintes validações:
@@ -28,7 +28,7 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
-  
+
   <ItemGroup>
     <None Include="..\README.md" Pack="true" PackagePath="\"/>
   </ItemGroup>

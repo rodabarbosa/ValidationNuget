@@ -20,8 +20,8 @@ internal class InscricaoEstadualPernambucoValidation : IInscricaoEstadualValidat
         }
 
         var rest = sum % 11;
-        var aux = 11 - rest;
-        if (aux > 9) aux -= 10;
+        var aux = 0;
+        if (rest > 1) aux = 11 - rest;
 
         var str = aux.ToString();
         var strDigit1 = str.Substring(str.Length - 1);
@@ -38,8 +38,8 @@ internal class InscricaoEstadualPernambucoValidation : IInscricaoEstadualValidat
         }
 
         rest = sum % 11;
-        aux = 11 - rest;
-        if (aux > 9) aux -= 10;
+        aux = 0;
+        if (rest > 1) aux = 11 - rest;
         str = aux.ToString();
         var strDigit2 = str.Substring(str.Length - 1);
         valueAux2 = valueAux.Substring(0, 8) + strDigit2;
