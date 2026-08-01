@@ -8,17 +8,26 @@ public class InscricaoEstadualValidationPeTest
 {
     private readonly State _state = State.PE;
 
-    [Theory]
+    [Theory(DisplayName = "Inscrição Estadual de Pernambuco deve ser válida")]
     [InlineData("037460110")]
+    [InlineData("0321418-40")]
+    [InlineData("18.1.001.0000004-9")]
+    [InlineData("0017789-21")]
+    [InlineData("0017790-65")]
+    [InlineData("0017791-46")]
     public void Validate_Valid(string value)
     {
         var isValid = InscricaoEstadualValidation.IsValid(_state, value);
         Assert.True(isValid);
     }
 
-    [Theory]
-    [InlineData("18.1.001.0000001-0")]
-    [InlineData("18100100000010")]
+    [Theory(DisplayName = "Inscrição Estadual de Pernambuco não deve ser válida")]
+    [InlineData("047460110")]
+    [InlineData("0421418-40")]
+    [InlineData("19.1.001.0000004-9")]
+    [InlineData("0117789-21")]
+    [InlineData("0217790-65")]
+    [InlineData("0417791-46")]
     public void Validate_Invalid(string value)
     {
         var isValid = InscricaoEstadualValidation.IsValid(_state, value);
