@@ -6,7 +6,7 @@ namespace Sirb.Validation.Test.Mockups;
 
 public class CpfMockupTest
 {
-    [Fact]
+    [Fact(DisplayName = "Cpf.Generate should produce a value that passes validation")]
     public void GenerateAndValidate()
     {
         var value = Cpf.Generate();

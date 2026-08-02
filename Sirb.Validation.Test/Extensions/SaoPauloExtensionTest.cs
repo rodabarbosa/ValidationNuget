@@ -5,7 +5,7 @@ namespace Sirb.Validation.Test.Extensions;
 
 public class SaoPauloExtensionTest
 {
-    [Theory]
+    [Theory(DisplayName = "InscricaoEstadualMask should return correct masked value for valid São Paulo IE")]
     [InlineData("P011004243000", "P-01100424.3/000")]
     [InlineData("110042490114", "110.042.490.114")]
     public void InscricaoEstadualMask_Valid(string value, string expected)
@@ -14,7 +14,7 @@ public class SaoPauloExtensionTest
         Assert.Equal(expected, maskedValue);
     }
 
-    [Theory]
+    [Theory(DisplayName = "InscricaoEstadualMask should return null for empty input")]
     [InlineData("")]
     [InlineData(null)]
     public void InscricaoEstadualMask_Empty(string value)
@@ -23,7 +23,7 @@ public class SaoPauloExtensionTest
         Assert.Null(maskedValue);
     }
 
-    [Theory]
+    [Theory(DisplayName = "InscricaoEstadualMask should not return the same value for invalid São Paulo IE")]
     [InlineData("P011004243", "P-01100424.3")]
     [InlineData("110042490114", "110.042.490.114")]
     public void InscricaoEstadualMask_Invalid(string value, string expected)

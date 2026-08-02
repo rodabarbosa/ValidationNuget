@@ -7,11 +7,12 @@ namespace Sirb.Validation.Test.Mockups;
 
 public class InscricaoEstadualPernambucoMockupTest
 {
-    [Fact]
+    private readonly State _state = State.PE;
+    [Fact(DisplayName = "Generate should work as expected for Validate")]
     public void Validate()
     {
-        var value = InscricaoEstadual.Generate(State.PE);
-        var isValid = InscricaoEstadualValidation.IsValid(State.PE, value);
+        var value = InscricaoEstadual.Generate(_state);
+        var isValid = InscricaoEstadualValidation.IsValid(_state, value);
         Assert.True(isValid);
     }
 }

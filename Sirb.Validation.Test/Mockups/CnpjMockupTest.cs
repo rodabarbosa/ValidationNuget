@@ -6,7 +6,7 @@ namespace Sirb.Validation.Test.Mockups;
 
 public class CnpjMockupTest
 {
-    [Fact]
+    [Fact(DisplayName = "Cnpj.Generate should produce a value that passes validation")]
     public void GenerateAndValidate()
     {
         var value = Cnpj.Generate();

@@ -5,7 +5,7 @@ namespace Sirb.Validation.Test.Validations;
 
 public class PisValidationTest
 {
-    [Theory]
+    [Theory(DisplayName = "IsValid should return true for valid PIS")]
     [InlineData("56303289843")]
     [InlineData("80589607730")]
     public void Validate_Valid(string value)
@@ -14,7 +14,7 @@ public class PisValidationTest
         Assert.True(isValid);
     }
 
-    [Theory]
+    [Theory(DisplayName = "IsValid should return false for invalid PIS")]
     [InlineData("80589607700")]
     [InlineData("27593988377")]
     public void Validate_Invalid(string value)

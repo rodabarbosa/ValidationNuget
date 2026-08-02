@@ -7,7 +7,7 @@ namespace Sirb.Validation.Test.Mockups;
 
 public class InscricaoEstadualAcreMockupTest
 {
-    [Theory]
+    [Theory(DisplayName = "InscricaoEstadual.Generate should produce a valid Acre IE")]
     [InlineData("01.579.571/939-47")]
     [InlineData("")]
     public void Validate(string value)

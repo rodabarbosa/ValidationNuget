@@ -5,7 +5,7 @@ namespace Sirb.Validation.Test.Extensions;
 
 public class RoraimaExtensionTest
 {
-    [Theory]
+    [Theory(DisplayName = "InscricaoEstadualMask should return correct masked value for valid Roraima IE")]
     [InlineData("240066281", "24006628-1")]
     public void InscricaoEstadualMask_Valid(string value, string expected)
     {
@@ -13,7 +13,7 @@ public class RoraimaExtensionTest
         Assert.Equal(expected, maskedValue);
     }
 
-    [Theory]
+    [Theory(DisplayName = "InscricaoEstadualMask should not return the same value for invalid Roraima IE")]
     [InlineData("240066281", "24006628-1")]
     public void InscricaoEstadualMask_Invalid(string value, string expected)
     {

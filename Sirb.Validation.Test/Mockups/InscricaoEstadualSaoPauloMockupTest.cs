@@ -7,7 +7,7 @@ namespace Sirb.Validation.Test.Mockups;
 
 public class InscricaoEstadualSaoPauloMockupTest
 {
-    [Theory]
+    [Theory(DisplayName = "InscricaoEstadual.Generate should produce a valid São Paulo IE")]
     [InlineData(5)]
     public void Validate(int retry)
     {
@@ -19,7 +19,7 @@ public class InscricaoEstadualSaoPauloMockupTest
         }
     }
 
-    [Theory]
+    [Theory(DisplayName = "InscricaoEstadual.Generate should produce a valid São Paulo IE with P prefix")]
     [InlineData("P-01100424.3/002")]
     public void ValidateWithP(string value)
     {

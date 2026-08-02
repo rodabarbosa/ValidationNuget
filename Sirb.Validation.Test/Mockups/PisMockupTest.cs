@@ -6,7 +6,7 @@ namespace Sirb.Validation.Test.Mockups;
 
 public class PisMockupTest
 {
-    [Fact]
+    [Fact(DisplayName = "Pis.Generate should produce a value that passes validation")]
     public void GenerateAndValidate()
     {
         var value = Pis.Generate();

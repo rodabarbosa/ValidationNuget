@@ -8,7 +8,7 @@ namespace Sirb.Validation.Test.Validations;
 
 public class CnpjAlfanumericoValidationTests
 {
-    [Theory]
+    [Theory(DisplayName = "IsValid should return true for valid alphanumeric CNPJ")]
     [InlineData("12.ABC.345/01DE-35")]
     [InlineData("12ABC34501DE35")]
     public void IsValid_ValidAlfanumericoCnpj_ReturnsTrue(string value)
@@ -17,7 +17,7 @@ public class CnpjAlfanumericoValidationTests
         Assert.True(isValid);
     }
 
-    [Theory]
+    [Theory(DisplayName = "IsValid should return false for invalid alphanumeric CNPJ")]
     [InlineData("12ABC34501DE00")] // Wrong check digits
     [InlineData("AAAAAAAAAAAAAA")] // Repeated sequence
     [InlineData("12ABC34501DE")]   // Too short (12 chars)
@@ -31,7 +31,7 @@ public class CnpjAlfanumericoValidationTests
         Assert.False(isValid);
     }
 
-    [Theory]
+    [Theory(DisplayName = "IsValid should return true for valid legacy numeric CNPJ")]
     [InlineData("12.345.678/0001-95")]
     [InlineData("12345678000195")]
     [InlineData("00.000.000/0001-91")]
@@ -41,7 +41,7 @@ public class CnpjAlfanumericoValidationTests
         Assert.True(isValid);
     }
 
-    [Theory]
+    [Theory(DisplayName = "IsValid should return false for repeated numeric legacy CNPJ")]
     [InlineData("00.000.000/0000-00")]
     [InlineData("11111111111111")]
     [InlineData("99.999.999/9999-99")]
@@ -51,14 +51,14 @@ public class CnpjAlfanumericoValidationTests
         Assert.False(isValid);
     }
 
-    [Fact]
+    [Fact(DisplayName = "IsValid should return false for null input")]
     public void IsValid_NullInput_ReturnsFalse()
     {
         var isValid = CnpjAlfanumericoValidation.IsValid(null);
         Assert.False(isValid);
     }
 
-    [Theory]
+    [Theory(DisplayName = "PlaceMask should format valid alphanumeric CNPJ correctly")]
     [InlineData("12ABC34501DE35", "12.ABC.345/01DE-35")]
     [InlineData("12345678000195", "12.345.678/0001-95")]
     [InlineData("ABCDEFGHIJKL12", "AB.CDE.FGH/IJKL-12")]
@@ -68,7 +68,7 @@ public class CnpjAlfanumericoValidationTests
         Assert.Equal(expected, masked);
     }
 
-    [Theory]
+    [Theory(DisplayName = "PlaceMask should return null for null or empty input")]
     [InlineData("", null)]
     [InlineData(null, null)]
     public void PlaceMask_NullOrEmpty_ReturnsNull(string input, string expected)
@@ -77,7 +77,7 @@ public class CnpjAlfanumericoValidationTests
         Assert.Equal(expected, masked);
     }
 
-    [Theory]
+    [Theory(DisplayName = "RemoveMask should return the correct unmasked value")]
     [InlineData("12.ABC.345/01DE-35", "12ABC34501DE35")]
     [InlineData("12.345.678/0001-95", "12345678000195")]
     [InlineData("AB.CDE.FGH/IJKL-12", "ABCDEFGHIJKL12")]
@@ -87,14 +87,14 @@ public class CnpjAlfanumericoValidationTests
         Assert.Equal(expected, unmasked);
     }
 
-    [Fact]
+    [Fact(DisplayName = "RemoveMask should return empty string for null input")]
     public void RemoveMask_NullInput_ReturnsEmptyString()
     {
         var unmasked = CnpjAlfanumericoValidation.RemoveMask(null);
         Assert.Equal(string.Empty, unmasked);
     }
 
-    [Theory]
+    [Theory(DisplayName = "IsCnpjAlfanumericoValid should return true for valid alphanumeric CNPJ")]
     [InlineData("12.ABC.345/01DE-35")]
     [InlineData("12ABC34501DE35")]
     [InlineData("12.345.678/0001-95")]
@@ -105,7 +105,7 @@ public class CnpjAlfanumericoValidationTests
         Assert.True(isValid);
     }
 
-    [Theory]
+    [Theory(DisplayName = "IsCnpjAlfanumericoValid should return false for invalid alphanumeric CNPJ")]
     [InlineData("12ABC34501DE00")]
     [InlineData("AAAAAAAAAAAAAA")]
     [InlineData("")]
@@ -116,7 +116,7 @@ public class CnpjAlfanumericoValidationTests
         Assert.False(isValid);
     }
 
-    [Theory]
+    [Theory(DisplayName = "PlaceCnpjAlfanumericoMask should format valid alphanumeric CNPJ correctly")]
     [InlineData("12ABC34501DE35", "12.ABC.345/01DE-35")]
     [InlineData("12345678000195", "12.345.678/0001-95")]
     public void PlaceCnpjAlfanumericoMask_ExtensionMethod_ReturnsMasked(string input, string expected)
@@ -125,7 +125,7 @@ public class CnpjAlfanumericoValidationTests
         Assert.Equal(expected, masked);
     }
 
-    [Theory]
+    [Theory(DisplayName = "RemoveCnpjAlfanumericoMask should return the correct unmasked value")]
     [InlineData("12.ABC.345/01DE-35", "12ABC34501DE35")]
     [InlineData("12.345.678/0001-95", "12345678000195")]
     public void RemoveCnpjAlfanumericoMask_ExtensionMethod_ReturnsUnmasked(string input, string expected)
@@ -134,7 +134,7 @@ public class CnpjAlfanumericoValidationTests
         Assert.Equal(expected, unmasked);
     }
 
-    [Fact]
+    [Fact(DisplayName = "Generate should produce a valid alphanumeric CNPJ that passes validation")]
     public void Generate_ProducesValidAlfanumericoCnpj()
     {
         // Generate multiple CNPJs to verify they're all valid
@@ -146,7 +146,7 @@ public class CnpjAlfanumericoValidationTests
         }
     }
 
-    [Fact]
+    [Fact(DisplayName = "GenerateWithMask should produce a valid masked alphanumeric CNPJ")]
     public void GenerateWithMask_ProducesValidMaskedCnpj()
     {
         var cnpj = CnpjAlfanumerico.GenerateWithMask();
@@ -157,7 +157,7 @@ public class CnpjAlfanumericoValidationTests
         Assert.Contains('-', cnpj);
     }
 
-    [Theory]
+    [Theory(DisplayName = "IsValid should accept alphanumeric characters in valid positions")]
     [InlineData("ABCDEFGHIJKL12")]
     [InlineData("0123456789AB12")]
     [InlineData("ZYXWVUTSRQPO12")]

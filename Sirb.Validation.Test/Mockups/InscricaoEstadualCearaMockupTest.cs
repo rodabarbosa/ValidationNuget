@@ -7,7 +7,7 @@ namespace Sirb.Validation.Test.Mockups;
 
 public class InscricaoEstadualCearaMockupTest
 {
-    [Fact]
+    [Fact(DisplayName = "InscricaoEstadual.Generate should produce a valid Ceará IE")]
     public void Validate()
     {
         var value = InscricaoEstadual.Generate(State.CE);

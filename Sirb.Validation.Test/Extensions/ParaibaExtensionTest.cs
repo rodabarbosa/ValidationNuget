@@ -5,7 +5,7 @@ namespace Sirb.Validation.Test.Extensions;
 
 public class ParaibaExtensionTest
 {
-    [Theory]
+    [Theory(DisplayName = "InscricaoEstadualMask should return correct masked value for valid Paraíba IE")]
     [InlineData("123456789", "12345678-9")]
     public void InscricaoEstadualMask_Valid(string value, string expected)
     {
@@ -13,7 +13,7 @@ public class ParaibaExtensionTest
         Assert.Equal(expected, maskedValue);
     }
 
-    [Theory]
+    [Theory(DisplayName = "InscricaoEstadualMask should not return the same value for invalid Paraíba IE")]
     [InlineData("123456789", "12345678-9")]
     public void InscricaoEstadualMask_Invalid(string value, string expected)
     {

@@ -6,7 +6,7 @@ namespace Sirb.Validation.Test.Extensions;
 
 public class StateExtensionTest
 {
-    [Theory]
+    [Theory(DisplayName = "GetStateValue should return the correct numeric code for valid states")]
     [InlineData(State.CE, 3)]
     [InlineData(State.MA, 3)]
     [InlineData(State.PI, 3)]

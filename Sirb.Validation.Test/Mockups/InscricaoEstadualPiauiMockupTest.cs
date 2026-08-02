@@ -7,7 +7,7 @@ namespace Sirb.Validation.Test.Mockups;
 
 public class InscricaoEstadualPiauiMockupTest
 {
-    [Fact]
+    [Fact(DisplayName = "InscricaoEstadual.Generate should produce a valid Piauí IE")]
     public void Validate()
     {
         var value = InscricaoEstadual.Generate(State.PI);

@@ -5,7 +5,7 @@ namespace Sirb.Validation.Test.Extensions;
 
 public class RioGrandeDoSulExtensionTest
 {
-    [Theory]
+    [Theory(DisplayName = "InscricaoEstadualMask should return correct masked value for valid Rio Grande do Sul IE")]
     [InlineData("2243658792", "224/3658792")]
     public void InscricaoEstadualMask_Valid(string value, string expected)
     {
@@ -13,7 +13,7 @@ public class RioGrandeDoSulExtensionTest
         Assert.Equal(expected, maskedValue);
     }
 
-    [Theory]
+    [Theory(DisplayName = "InscricaoEstadualMask should not return the same value for invalid Rio Grande do Sul IE")]
     [InlineData("2243658792", "224/3658792")]
     public void InscricaoEstadualMask_Invalid(string value, string expected)
     {

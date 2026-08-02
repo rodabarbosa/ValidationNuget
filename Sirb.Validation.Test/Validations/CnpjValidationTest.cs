@@ -5,7 +5,7 @@ namespace Sirb.Validation.Test.Validations;
 
 public class CnpjValidationTest
 {
-    [Theory]
+    [Theory(DisplayName = "IsValid should return true for valid CNPJ")]
     [InlineData("49.616.903/0001-90")]
     [InlineData("72.923.755/0001-79")]
     public void Validate_Valid(string value)
@@ -14,7 +14,7 @@ public class CnpjValidationTest
         Assert.True(isValid);
     }
 
-    [Theory]
+    [Theory(DisplayName = "IsValid should return false for invalid CNPJ")]
     [InlineData("49.616.903/0001-00")]
     [InlineData("72.923.755/0001-70")]
     [InlineData("00.000.000/0000-00")]

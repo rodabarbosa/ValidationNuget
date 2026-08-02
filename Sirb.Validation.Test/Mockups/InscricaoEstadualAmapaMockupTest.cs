@@ -7,7 +7,7 @@ namespace Sirb.Validation.Test.Mockups;
 
 public class InscricaoEstadualAmapaMockupTest
 {
-    [Theory]
+    [Theory(DisplayName = "InscricaoEstadual.Generate should produce a valid Amapá IE")]
     [InlineData(1)]
     [InlineData(2)]
     [InlineData(3)]

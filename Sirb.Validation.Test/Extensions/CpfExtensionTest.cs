@@ -6,7 +6,7 @@ namespace Sirb.Validation.Test.Extensions;
 
 public class CpfExtensionTest
 {
-    [Theory]
+    [Theory(DisplayName = "IsCpfValid should return true for a valid CPF")]
     [InlineData("71547083018")]
     public void Validate(string value)
     {
@@ -14,7 +14,7 @@ public class CpfExtensionTest
         Assert.True(isValid);
     }
 
-    [Theory]
+    [Theory(DisplayName = "PlaceCpfMask should format a CPF correctly")]
     [InlineData("71547083018")]
     public void PlaceMask(string value)
     {
@@ -22,7 +22,7 @@ public class CpfExtensionTest
         Assert.Matches(@"(\d{3}).(\d{3}).(\d{3})-(\d{2})", valueMasked);
     }
 
-    [Theory]
+    [Theory(DisplayName = "RemoveMask should remove formatting characters from CPF")]
     [InlineData("715.470.830-18")]
     public void RemoveMask(string value)
     {

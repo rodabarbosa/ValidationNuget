@@ -5,7 +5,7 @@ namespace Sirb.Validation.Test.Extensions;
 
 public class PisExtensionTest
 {
-    [Theory]
+    [Theory(DisplayName = "IsPisValid should return true for a valid PIS")]
     [InlineData("56303289843")]
     [InlineData("80589607730")]
     public void Validate_Valid(string value)
@@ -14,7 +14,7 @@ public class PisExtensionTest
         Assert.True(isValid);
     }
 
-    [Theory]
+    [Theory(DisplayName = "IsPisValid should return false for an invalid PIS")]
     [InlineData("80589607700")]
     [InlineData("27593988377")]
     public void Validate_Invalid(string value)
@@ -23,7 +23,7 @@ public class PisExtensionTest
         Assert.False(isValid);
     }
 
-    [Theory]
+    [Theory(DisplayName = "PlacePisMask should format a PIS correctly")]
     [InlineData("53768723133")]
     public void PlaceMask(string value)
     {

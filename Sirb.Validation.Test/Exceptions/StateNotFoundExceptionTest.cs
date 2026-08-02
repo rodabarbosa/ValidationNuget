@@ -8,14 +8,14 @@ public class StateNotFoundExceptionTest
 {
     private const string ExpectedMessage = "State not found";
 
-    [Fact]
+    [Fact(DisplayName = "StateNotFoundException constructor should create a non-null instance")]
     public void NotFoundException_Should_Be_Created()
     {
         var exception = new StateNotFoundException();
         Assert.NotNull(exception);
     }
 
-    [Fact]
+    [Fact(DisplayName = "StateNotFoundException should preserve inner exception passed to constructor")]
     public void NotFoundException_Should_Have_Correct_Inner_Exception()
     {
         var expectedInnerException = new Exception();
@@ -24,7 +24,7 @@ public class StateNotFoundExceptionTest
         Assert.Equal(expectedInnerException, exception.InnerException);
     }
 
-    [Fact]
+    [Fact(DisplayName = "StateNotFoundException should set the message passed to constructor")]
     public void NotFoundException_Should_Have_Correct_Message()
     {
         var exception = new StateNotFoundException(ExpectedMessage);
@@ -32,7 +32,7 @@ public class StateNotFoundExceptionTest
         Assert.Equal(ExpectedMessage, exception.Message);
     }
 
-    [Theory]
+    [Theory(DisplayName = "StateNotFoundException.ThrowIf should throw when condition is true")]
     [InlineData(true, "Exception message")]
     [InlineData(false, "Exception message")]
     [InlineData(true, "")]

@@ -5,7 +5,7 @@ namespace Sirb.Validation.Test.Extensions;
 
 public class PernambucoExtensionTest
 {
-    [Theory]
+    [Theory(DisplayName = "InscricaoEstadualMask should return correct masked value for valid Pernambuco IE")]
     [InlineData("032141840", "0321418-40")]
     public void InscricaoEstadualMask_Valid(string value, string expected)
     {
@@ -13,7 +13,7 @@ public class PernambucoExtensionTest
         Assert.Equal(expected, maskedValue);
     }
 
-    [Theory]
+    [Theory(DisplayName = "InscricaoEstadualMask should not return the same value for invalid Pernambuco IE")]
     [InlineData("032141840", "0321418-40")]
     public void InscricaoEstadualMask_Invalid(string value, string expected)
     {

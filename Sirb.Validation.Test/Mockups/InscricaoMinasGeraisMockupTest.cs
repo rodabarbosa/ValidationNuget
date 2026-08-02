@@ -7,7 +7,7 @@ namespace Sirb.Validation.Test.Mockups;
 
 public class InscricaoMinasGeraisMockupTest
 {
-    [Fact]
+    [Fact(DisplayName = "InscricaoEstadual.Generate should produce a valid Minas Gerais IE")]
     public void Validate()
     {
         var value = InscricaoEstadual.Generate(State.MG);

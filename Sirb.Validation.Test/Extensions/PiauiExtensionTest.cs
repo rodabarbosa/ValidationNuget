@@ -5,7 +5,7 @@ namespace Sirb.Validation.Test.Extensions;
 
 public class PiauiExtensionTest
 {
-    [Theory]
+    [Theory(DisplayName = "InscricaoEstadualMask should return correct masked value for valid Piauí IE")]
     [InlineData("012345679", "012345679")]
     public void InscricaoEstadualMask_Valid(string value, string expected)
     {
@@ -13,7 +13,7 @@ public class PiauiExtensionTest
         Assert.Equal(expected, maskedValue);
     }
 
-    [Theory]
+    [Theory(DisplayName = "InscricaoEstadualMask should not return the same value for invalid Piauí IE")]
     [InlineData("012345679", "012345679")]
     public void InscricaoEstadualMask_Invalid(string value, string expected)
     {

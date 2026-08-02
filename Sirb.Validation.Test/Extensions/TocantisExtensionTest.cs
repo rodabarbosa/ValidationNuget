@@ -5,7 +5,7 @@ namespace Sirb.Validation.Test.Extensions;
 
 public class TocantisExtensionTest
 {
-    [Theory]
+    [Theory(DisplayName = "InscricaoEstadualMask should return correct masked value for valid Tocantins IE")]
     [InlineData("123456789", "12.345.678-9")]
     public void InscricaoEstadualMask_Valid(string value, string expected)
     {
@@ -13,7 +13,7 @@ public class TocantisExtensionTest
         Assert.Equal(expected, maskedValue);
     }
 
-    [Theory]
+    [Theory(DisplayName = "InscricaoEstadualMask should not return the same value for invalid Tocantins IE")]
     [InlineData("12345663", "123456-63")]
     public void InscricaoEstadualMask_Invalid(string value, string expected)
     {

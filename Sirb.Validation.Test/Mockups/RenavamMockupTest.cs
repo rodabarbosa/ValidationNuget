@@ -6,7 +6,7 @@ namespace Sirb.Validation.Test.Mockups;
 
 public class RenavamMockupTest
 {
-    [Fact]
+    [Fact(DisplayName = "Renavam.Generate should produce a value that passes validation")]
     public void GenerateAndValidate()
     {
         var value = Renavam.Generate();

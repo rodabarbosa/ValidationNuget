@@ -5,7 +5,7 @@ namespace Sirb.Validation.Test.Extensions;
 
 public class ParanaExtensionTest
 {
-    [Theory]
+    [Theory(DisplayName = "InscricaoEstadualMask should return correct masked value for valid Paraná IE")]
     [InlineData("0000000000", "00000000-00")]
     [InlineData("2844513847", "28445138-47")]
     [InlineData("3606810252", "36068102-52")]
@@ -23,7 +23,7 @@ public class ParanaExtensionTest
         Assert.Equal(expected, maskedValue);
     }
 
-    [Theory]
+    [Theory(DisplayName = "InscricaoEstadualMask should not return the same value for invalid Paraná IE")]
     [InlineData("0000000000", "00000000-00")]
     public void InscricaoEstadualMask_Invalid(string value, string expected)
     {

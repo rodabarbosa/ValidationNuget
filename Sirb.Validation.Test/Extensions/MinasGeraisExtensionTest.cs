@@ -5,7 +5,7 @@ namespace Sirb.Validation.Test.Extensions;
 
 public class MinasGeraisExtensionTest
 {
-    [Theory]
+    [Theory(DisplayName = "InscricaoEstadualMask should return correct masked value for valid Minas Gerais IE")]
     [InlineData("0000000000000", "000.000.000/0000")]
     public void InscricaoEstadualMask_Valid(string value, string expected)
     {
@@ -13,7 +13,7 @@ public class MinasGeraisExtensionTest
         Assert.Equal(expected, maskedValue);
     }
 
-    [Theory]
+    [Theory(DisplayName = "InscricaoEstadualMask should not return the same value for invalid Minas Gerais IE")]
     [InlineData("0000000000000", "000.000.000/0000")]
     public void InscricaoEstadualMask_Invalid(string value, string expected)
     {

@@ -5,7 +5,7 @@ namespace Sirb.Validation.Test.Extensions;
 
 public class CearaExtensionTest
 {
-    [Theory]
+    [Theory(DisplayName = "InscricaoEstadualMask should return correct masked value for valid Ceará IE")]
     [InlineData("060000015", "06000001-5")]
     public void InscricaoEstadualMask_Valid(string value, string expected)
     {
@@ -13,7 +13,7 @@ public class CearaExtensionTest
         Assert.Equal(expected, maskedValue);
     }
 
-    [Theory]
+    [Theory(DisplayName = "InscricaoEstadualMask should not return the same value for invalid Ceará IE")]
     [InlineData("060000015", "06000001-5")]
     public void InscricaoEstadualMask_Invalid(string value, string expected)
     {

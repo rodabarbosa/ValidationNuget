@@ -5,7 +5,7 @@ namespace Sirb.Validation.Test.Extensions;
 
 public class RenavamExtensionTest
 {
-    [Theory]
+    [Theory(DisplayName = "IsRenavamValid should return true for a valid Renavam")]
     [InlineData("97091043703")]
     [InlineData("197073212")]
     [InlineData("00639884962")]
