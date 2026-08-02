@@ -89,8 +89,7 @@ internal class InscricaoEstadualAcreValidation : IInscricaoEstadualValidation
 
     private static bool IsDigitsValid(int digit1, int digit2, string value)
     {
-        var digits = digit1 + digit2;
-        var dv = digits.ToString();
+        var dv = $"{digit1}{digit2}";
         return value.EndsWith(dv);
     }
 
@@ -103,12 +102,12 @@ internal class InscricaoEstadualAcreValidation : IInscricaoEstadualValidation
         return weight * valueInt;
     }
 
-    private static bool IsInvalidSetup(string value)
-    {
-        var validLength = IsLengthValid(value);
-        var validStartingDigits = IsStartDigitsValid(value);
-        return !validLength && !validStartingDigits;
-    }
+     private static bool IsInvalidSetup(string value)
+        {
+            var validLength = IsLengthValid(value);
+            var validStartingDigits = IsStartDigitsValid(value);
+            return !validLength || !validStartingDigits;
+        }
 
     private static bool IsLengthValid(string value)
     {
