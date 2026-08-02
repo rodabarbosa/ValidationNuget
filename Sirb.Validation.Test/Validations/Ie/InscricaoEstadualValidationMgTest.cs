@@ -9,11 +9,11 @@ public class InscricaoEstadualValidationMgTest
     private readonly State _state = State.MG;
 
     [Theory(DisplayName = "Inscrição Estadual de Minas Gerais deve ser válida")]
-    [InlineData("062.000.000/0001")]
-    [InlineData("062.000.000/0002")]
-    [InlineData("062.000.000/0003")]
-    [InlineData("062.000.000/0004")]
-    [InlineData("062.000.000/0005")]
+    [InlineData("194.766.814/4421")]
+    [InlineData("647.894.133/7913")]
+    [InlineData("455.441.745/7263")]
+    [InlineData("197.416.968/6528")]
+    [InlineData("414.251.297/1233")]
     public void Validate_Valid(string value)
     {
         var isValid = InscricaoEstadualValidation.IsValid(_state, value);

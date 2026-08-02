@@ -9,11 +9,11 @@ public class InscricaoEstadualValidationAcTest
     private readonly State _state = State.AC;
 
     [Theory(DisplayName = "Inscrição Estadual de Acre deve ser válida")]
-    [InlineData("01.004.823/001-12")]
-    [InlineData("01.004.823/002-01")]
-    [InlineData("01.004.823/003-84")]
-    [InlineData("01.004.823/004-65")]
-    [InlineData("01.004.823/005-46")]
+    [InlineData("0170867080440")]
+    [InlineData("01.552.196/872-97")]
+    [InlineData("0159253469240")]
+    [InlineData("0135732148188")]
+    [InlineData("01.373.094/678-08")]
     public void Validate_Valid(string value)
     {
         var isValid = InscricaoEstadualValidation.IsValid(_state, value);

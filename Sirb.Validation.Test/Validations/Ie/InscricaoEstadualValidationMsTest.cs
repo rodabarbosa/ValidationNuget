@@ -9,11 +9,11 @@ public class InscricaoEstadualValidationMsTest
     private readonly State _state = State.MS;
 
     [Theory(DisplayName = "Inscrição Estadual de Mato Grosso do Sul deve ser válida")]
-    [InlineData("28000001-8")]
-    [InlineData("28000002-6")]
-    [InlineData("28000003-4")]
-    [InlineData("28000004-2")]
-    [InlineData("28000005-0")]
+    [InlineData("28950183-0")]
+    [InlineData("28989677-0")]
+    [InlineData("28897986-9")]
+    [InlineData("28310299-3")]
+    [InlineData("28771368-7")]
     public void Validate_Valid(string value)
     {
         var isValid = InscricaoEstadualValidation.IsValid(_state, value);

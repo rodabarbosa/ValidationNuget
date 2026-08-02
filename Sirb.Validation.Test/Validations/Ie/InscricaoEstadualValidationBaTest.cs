@@ -11,9 +11,11 @@ public class InscricaoEstadualValidationBaTest
     [Theory(DisplayName = "Inscrição Estadual de Bahia deve ser válida")]
     [InlineData("123456-63")]
     [InlineData("612345-57")]
-    [InlineData("1000003-0")]
-    [InlineData("1000004-8")]
-    [InlineData("1000005-6")]
+    [InlineData("3751607-78")]
+    [InlineData("2439484-15")]
+    [InlineData("5562310-44")]
+    [InlineData("4984379-56")]
+    [InlineData("2552624-31")]
     public void Validate_Valid(string value)
     {
         var isValid = InscricaoEstadualValidation.IsValid(_state, value);

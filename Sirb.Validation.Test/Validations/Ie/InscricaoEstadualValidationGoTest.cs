@@ -9,11 +9,11 @@ public class InscricaoEstadualValidationGoTest
     private readonly State _state = State.GO;
 
     [Theory(DisplayName = "Inscrição Estadual de Goiás deve ser válida")]
-    [InlineData("10.123.456-7")]
-    [InlineData("10.123.457-5")]
-    [InlineData("10.123.458-3")]
-    [InlineData("10.123.459-1")]
-    [InlineData("10.123.460-5")]
+    [InlineData("11.979.744-5")]
+    [InlineData("10.017.031-5")]
+    [InlineData("10.326.201-6")]
+    [InlineData("10.764.206-9")]
+    [InlineData("10.584.311-3")]
     public void Validate_Valid(string value)
     {
         var isValid = InscricaoEstadualValidation.IsValid(_state, value);

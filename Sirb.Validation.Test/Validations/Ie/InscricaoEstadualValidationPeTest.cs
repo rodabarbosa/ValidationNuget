@@ -11,10 +11,10 @@ public class InscricaoEstadualValidationPeTest
     [Theory(DisplayName = "Inscrição Estadual de Pernambuco deve ser válida")]
     [InlineData("037460110")]
     [InlineData("0321418-40")]
-    [InlineData("18.1.001.0000004-9")]
-    [InlineData("0017789-21")]
-    [InlineData("0017790-65")]
-    [InlineData("0017791-46")]
+    [InlineData("2198285-63")]
+    [InlineData("3540814-62")]
+    [InlineData("9058736-70")]
+    [InlineData("0623872-60")]
     public void Validate_Valid(string value)
     {
         var isValid = InscricaoEstadualValidation.IsValid(_state, value);

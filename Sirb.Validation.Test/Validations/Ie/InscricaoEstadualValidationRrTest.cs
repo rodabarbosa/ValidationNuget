@@ -9,11 +9,11 @@ public class InscricaoEstadualValidationRrTest
     private readonly State _state = State.RR;
 
     [Theory(DisplayName = "Inscrição Estadual de Roraima deve ser válida")]
-    [InlineData("24006651-0")]
-    [InlineData("24006652-8")]
-    [InlineData("24006653-6")]
-    [InlineData("24006654-4")]
-    [InlineData("24006655-2")]
+    [InlineData("24991146-7")]
+    [InlineData("24851586-4")]
+    [InlineData("24919662-0")]
+    [InlineData("24362472-7")]
+    [InlineData("24798137-1")]
     public void Validate_Valid(string value)
     {
         var isValid = InscricaoEstadualValidation.IsValid(_state, value);

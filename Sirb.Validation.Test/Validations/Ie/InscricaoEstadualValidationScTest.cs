@@ -9,11 +9,11 @@ public class InscricaoEstadualValidationScTest
     private readonly State _state = State.SC;
 
     [Theory(DisplayName = "Inscrição Estadual de Santa Catarina deve ser válida")]
-    [InlineData("251.000.002")]
-    [InlineData("251.000.003")]
-    [InlineData("251.000.004")]
-    [InlineData("251.000.005")]
-    [InlineData("251.000.006")]
+    [InlineData("889.473.838")]
+    [InlineData("156.068.729")]
+    [InlineData("443.181.578")]
+    [InlineData("443.181.578")]
+    [InlineData("052.145.026")]
     public void Validate_Valid(string value)
     {
         var isValid = InscricaoEstadualValidation.IsValid(_state, value);

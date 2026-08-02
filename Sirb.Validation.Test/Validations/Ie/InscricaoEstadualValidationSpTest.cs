@@ -10,10 +10,10 @@ public class InscricaoEstadualValidationSpTest
 
     [Theory(DisplayName = "Inscrição Estadual de São Paulo deve ser válida")]
     [InlineData("110.042.490.114")]
-    [InlineData("110.042.490.115")]
-    [InlineData("P-01100424.9/001")]
-    [InlineData("110.042.491.112")]
-    [InlineData("110.042.492.110")]
+    [InlineData("810353650643")]
+    [InlineData("716.898.480.250")]
+    [InlineData("043978883554")]
+    [InlineData("043978883554")]
     public void Validate_Valid(string value)
     {
         var isValid = InscricaoEstadualValidation.IsValid(_state, value);

@@ -10,10 +10,10 @@ public class InscricaoEstadualValidationPrTest
 
     [Theory(DisplayName = "Inscrição Estadual de Paraná deve ser válida")]
     [InlineData("123.45678-50")]
-    [InlineData("123.45679-31")]
-    [InlineData("123.45680-75")]
-    [InlineData("123.45681-56")]
-    [InlineData("123.45682-37")]
+    [InlineData("050.62455-24")]
+    [InlineData("051.40396-74")]
+    [InlineData("074.39961-43")]
+    [InlineData("342.07673-49")]
     public void Validate_Valid(string value)
     {
         var isValid = InscricaoEstadualValidation.IsValid(_state, value);

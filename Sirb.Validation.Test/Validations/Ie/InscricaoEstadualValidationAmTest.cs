@@ -9,11 +9,11 @@ public class InscricaoEstadualValidationAmTest
     private readonly State _state = State.AM;
 
     [Theory(DisplayName = "Inscrição Estadual de Amazonas deve ser válida")]
-    [InlineData("04.100.001-9")]
-    [InlineData("04.100.002-7")]
-    [InlineData("04.100.003-5")]
-    [InlineData("04.100.004-3")]
-    [InlineData("04.100.005-1")]
+    [InlineData("48.266.330-8")]
+    [InlineData("47.723.617-0")]
+    [InlineData("98.115.901-0")]
+    [InlineData("62.425.797-5")]
+    [InlineData("77.050.041-2")]
     public void Validate_Valid(string value)
     {
         var isValid = InscricaoEstadualValidation.IsValid(_state, value);
@@ -22,7 +22,7 @@ public class InscricaoEstadualValidationAmTest
 
     [Theory(DisplayName = "Inscrição Estadual de Amazonas não deve ser válida")]
     [InlineData("05.100.001-9")]
-    [InlineData("06.100.002-7")]
+    [InlineData("06.100.002-8")]
     [InlineData("07.100.003-5")]
     [InlineData("08.100.004-3")]
     [InlineData("09.100.005-1")]

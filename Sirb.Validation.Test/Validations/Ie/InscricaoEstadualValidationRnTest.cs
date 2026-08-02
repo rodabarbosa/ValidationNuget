@@ -9,11 +9,11 @@ public class InscricaoEstadualValidationRnTest
     private readonly State _state = State.RN;
 
     [Theory(DisplayName = "Inscrição Estadual de Rio Grande do Norte deve ser válida")]
-    [InlineData("20.088.251-6")]
-    [InlineData("20.088.252-4")]
-    [InlineData("20.088.253-2")]
-    [InlineData("20.088.254-0")]
-    [InlineData("20.088.255-9")]
+    [InlineData("20.851.536-4")]
+    [InlineData("20.189.644-3")]
+    [InlineData("20.456.046-2")]
+    [InlineData("20.631.565-1")]
+    [InlineData("20.636.248-0")]
     public void Validate_Valid(string value)
     {
         var isValid = InscricaoEstadualValidation.IsValid(_state, value);
