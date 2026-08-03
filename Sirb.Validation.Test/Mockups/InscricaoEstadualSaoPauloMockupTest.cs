@@ -8,7 +8,7 @@ namespace Sirb.Validation.Test.Mockups;
 public class InscricaoEstadualSaoPauloMockupTest
 {
     [Theory(DisplayName = "InscricaoEstadual.Generate should produce a valid São Paulo IE")]
-    [InlineData(5)]
+    [InlineData(2000)]
     public void Validate(int retry)
     {
         for (var i = 0; i < retry; i++)

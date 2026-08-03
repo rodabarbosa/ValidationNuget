@@ -1,7 +1,6 @@
 using Sirb.Validation.Documents.BR.Mockups;
 using Sirb.Validation.Documents.BR.Validation;
 using Sirb.Validation.Extensions;
-using System.Linq;
 using Xunit;
 
 namespace Sirb.Validation.Test.Validations;
@@ -25,6 +24,8 @@ public class CnpjAlfanumericoValidationTests
     [InlineData("12ABC34501DE356")] // Too long (15 chars)
     [InlineData("12AB@34501DE35")]  // Invalid character @
     [InlineData("12abc34501DE35")]  // Lowercase letters (not allowed)
+    [InlineData("ABCDEFGHIJKLZ1")]  // value[12] is not a digit
+    [InlineData("ABCDEFGHIJKL1A")]  // value[13] is not a digit (value[12] is digit)
     public void IsValid_InvalidAlfanumericoCnpj_ReturnsFalse(string value)
     {
         var isValid = CnpjAlfanumericoValidation.IsValid(value);
@@ -68,9 +69,10 @@ public class CnpjAlfanumericoValidationTests
         Assert.Equal(expected, masked);
     }
 
-    [Theory(DisplayName = "PlaceMask should return null for null or empty input")]
+    [Theory(DisplayName = "PlaceMask should return null for null, empty, or whitespace input")]
     [InlineData("", null)]
     [InlineData(null, null)]
+    [InlineData("   ", null)]
     public void PlaceMask_NullOrEmpty_ReturnsNull(string input, string expected)
     {
         var masked = CnpjAlfanumericoValidation.PlaceMask(input);
@@ -144,6 +146,14 @@ public class CnpjAlfanumericoValidationTests
             var isValid = CnpjAlfanumericoValidation.IsValid(cnpj);
             Assert.True(isValid, $"Generated CNPJ {cnpj} should be valid");
         }
+    }
+
+    [Fact(DisplayName = "IntArrayExtensions.ConvertToString should use fallback for values outside 0-9 and 17-42")]
+    public void IntArrayExtensions_ConvertToString_ValueOutOfRange_ReturnsZeroChar()
+    {
+        // Value 15 is not a digit (0-9) or uppercase letter (17-42) — hits the else fallback branch
+        var result = Sirb.Validation.Documents.BR.Mockups.IntArrayExtensions.ConvertToString(new[] { 15 });
+        Assert.Equal("0", result);
     }
 
     [Fact(DisplayName = "GenerateWithMask should produce a valid masked alphanumeric CNPJ")]

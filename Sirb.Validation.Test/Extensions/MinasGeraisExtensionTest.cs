@@ -13,6 +13,15 @@ public class MinasGeraisExtensionTest
         Assert.Equal(expected, maskedValue);
     }
 
+    [Theory(DisplayName = "InscricaoEstadualMask should return null for empty input")]
+    [InlineData("")]
+    [InlineData(null)]
+    public void InscricaoEstadualMask_Empty(string value)
+    {
+        var maskedValue = value.InscricaoEstadualMaskMg();
+        Assert.Null(maskedValue);
+    }
+
     [Theory(DisplayName = "InscricaoEstadualMask should not return the same value for invalid Minas Gerais IE")]
     [InlineData("0000000000000", "000.000.000/0000")]
     public void InscricaoEstadualMask_Invalid(string value, string expected)

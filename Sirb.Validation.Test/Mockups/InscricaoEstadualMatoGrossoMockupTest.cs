@@ -14,4 +14,16 @@ public class InscricaoEstadualMatoGrossoMockupTest
         var isValid = InscricaoEstadualValidation.IsValid(State.MT, value);
         Assert.True(isValid);
     }
+
+    [Fact(DisplayName = "InscricaoEstadual.Generate should produce valid Mato Grosso IE in 2000 iterations")]
+    public void Validate_Loop_2000Iterations()
+    {
+        for (var i = 0; i < 2000; i++)
+        {
+            var value = InscricaoEstadual.Generate(State.MT);
+            var isValid = InscricaoEstadualValidation.IsValid(State.MT, value);
+            Assert.True(isValid, $"Generated IE '{value}' should be valid (iteration {i})");
+        }
+    }
+
 }

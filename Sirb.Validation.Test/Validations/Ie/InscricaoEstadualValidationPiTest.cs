@@ -26,6 +26,7 @@ public class InscricaoEstadualValidationPiTest
     [InlineData("312345695")]
     [InlineData("412345709")]
     [InlineData("512345717")]
+    [InlineData("1234567")]
     public void Validate_Invalid(string value)
     {
         var isValid = InscricaoEstadualValidation.IsValid(_state, value);

@@ -14,6 +14,7 @@ public class InscricaoEstadualValidationAmTest
     [InlineData("98.115.901-0")]
     [InlineData("62.425.797-5")]
     [InlineData("77.050.041-2")]
+    [InlineData("000000000")]
     public void Validate_Valid(string value)
     {
         var isValid = InscricaoEstadualValidation.IsValid(_state, value);
@@ -26,6 +27,7 @@ public class InscricaoEstadualValidationAmTest
     [InlineData("07.100.003-5")]
     [InlineData("08.100.004-3")]
     [InlineData("09.100.005-1")]
+    [InlineData("4826633")]
     public void Validate_Invalid(string value)
     {
         var isValid = InscricaoEstadualValidation.IsValid(_state, value);

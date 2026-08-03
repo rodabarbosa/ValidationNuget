@@ -13,6 +13,15 @@ public class SantaCatarinaExtensionTest
         Assert.Equal(expected, maskedValue);
     }
 
+    [Theory(DisplayName = "InscricaoEstadualMask should return null for empty input")]
+    [InlineData("")]
+    [InlineData(null)]
+    public void InscricaoEstadualMask_Empty(string value)
+    {
+        var maskedValue = value.InscricaoEstadualMaskSc();
+        Assert.Null(maskedValue);
+    }
+
     [Theory(DisplayName = "InscricaoEstadualMask should not return the same value for invalid Santa Catarina IE")]
     [InlineData("251040852", "251.040.852")]
     public void InscricaoEstadualMask_Invalid(string value, string expected)

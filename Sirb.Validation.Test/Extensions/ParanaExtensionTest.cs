@@ -23,6 +23,15 @@ public class ParanaExtensionTest
         Assert.Equal(expected, maskedValue);
     }
 
+    [Theory(DisplayName = "InscricaoEstadualMask should return null for empty input")]
+    [InlineData("")]
+    [InlineData(null)]
+    public void InscricaoEstadualMask_Empty(string value)
+    {
+        var maskedValue = value.InscricaoEstadualMaskPr();
+        Assert.Null(maskedValue);
+    }
+
     [Theory(DisplayName = "InscricaoEstadualMask should not return the same value for invalid Paraná IE")]
     [InlineData("0000000000", "00000000-00")]
     public void InscricaoEstadualMask_Invalid(string value, string expected)

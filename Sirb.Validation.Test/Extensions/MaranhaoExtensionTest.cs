@@ -13,6 +13,15 @@ public class MaranhaoExtensionTest
         Assert.Equal(expected, maskedValue);
     }
 
+    [Theory(DisplayName = "InscricaoEstadualMask should return null for empty input")]
+    [InlineData("")]
+    [InlineData(null)]
+    public void InscricaoEstadualMask_Empty(string value)
+    {
+        var maskedValue = value.InscricaoEstadualMaskMa();
+        Assert.Null(maskedValue);
+    }
+
     [Theory(DisplayName = "InscricaoEstadualMask should not return the same value for invalid Maranhão IE")]
     [InlineData("0600030790481", "06.000.307/904-81")]
     public void InscricaoEstadualMask_Invalid(string value, string expected)

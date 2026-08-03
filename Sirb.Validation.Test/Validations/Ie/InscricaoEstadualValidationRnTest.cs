@@ -26,6 +26,7 @@ public class InscricaoEstadualValidationRnTest
     [InlineData("50.088.253-2")]
     [InlineData("60.088.254-0")]
     [InlineData("70.088.255-9")]
+    [InlineData("20.851.53")]
     public void Validate_Invalid(string value)
     {
         var isValid = InscricaoEstadualValidation.IsValid(_state, value);

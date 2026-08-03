@@ -13,6 +13,15 @@ public class PiauiExtensionTest
         Assert.Equal(expected, maskedValue);
     }
 
+    [Theory(DisplayName = "InscricaoEstadualMask should return null for empty input")]
+    [InlineData("")]
+    [InlineData(null)]
+    public void InscricaoEstadualMask_Empty(string value)
+    {
+        var maskedValue = value.InscricaoEstadualMaskPi();
+        Assert.Null(maskedValue);
+    }
+
     [Theory(DisplayName = "InscricaoEstadualMask should not return the same value for invalid Piauí IE")]
     [InlineData("012345679", "012345679")]
     public void InscricaoEstadualMask_Invalid(string value, string expected)

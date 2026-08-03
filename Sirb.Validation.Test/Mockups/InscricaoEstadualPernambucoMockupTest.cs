@@ -15,4 +15,16 @@ public class InscricaoEstadualPernambucoMockupTest
         var isValid = InscricaoEstadualValidation.IsValid(_state, value);
         Assert.True(isValid);
     }
+
+    [Fact(DisplayName = "InscricaoEstadual.Generate should produce valid Pernambuco IE in 2000 iterations")]
+    public void Validate_Loop_2000Iterations()
+    {
+        for (var i = 0; i < 2000; i++)
+        {
+            var value = InscricaoEstadual.Generate(State.PE);
+            var isValid = InscricaoEstadualValidation.IsValid(State.PE, value);
+            Assert.True(isValid, $"Generated IE '{value}' should be valid (iteration {i})");
+        }
+    }
+
 }

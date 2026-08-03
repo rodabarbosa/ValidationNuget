@@ -31,4 +31,15 @@ public class InscricaoEstadualValidationApTest
         var isValid = InscricaoEstadualValidation.IsValid(_state, value);
         Assert.False(isValid);
     }
+
+    [Theory(DisplayName = "Amapá IE range-specific check digit branches")]
+    [InlineData("030000002", false)]
+    [InlineData("030001000", true)]
+    [InlineData("030170011", true)]
+    [InlineData("030190231", true)]
+    public void Validate_AmapaRangeBranches(string value, bool expected)
+    {
+        var isValid = InscricaoEstadualValidation.IsValid(_state, value);
+        Assert.Equal(expected, isValid);
+    }
 }

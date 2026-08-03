@@ -297,6 +297,7 @@ jobs:
 | ADR-003 | API pública via Extension Methods | Aceito | 26/07/2026 | `docs/architecture/adrs/ADR-003-extension-methods-api.md` |
 | ADR-004 | Mockups internos visíveis apenas para testes | Aceito | 26/07/2026 | `docs/architecture/adrs/ADR-004-internal-mockups.md` |
 | ADR-005 | BenchmarkDotNet em CI com gate de regressão | Aceito | 26/07/2026 | `docs/architecture/adrs/ADR-005-benchmark-gate.md` |
+| ADR-006 | Correção de 6 bugs em código-fonte para 100% de cobertura (RN, TO, PE, PI, SP, CPF) | Aceito | 02/08/2026 | `docs/architecture/adrs/ADR-006-fix-source-bugs-100-coverage.md` |
 
 ## 11. Limitações Conhecidas e Evolução Futura
 
@@ -321,3 +322,4 @@ jobs:
 | 26/07/2026 | Como versionar a API pública? | SemVer via Conventional Commits. Breaking change = MAJOR. | Resolvido | Criação | Define PROC-02, ARCH-02. |
 | 26/07/2026 | Benchmarks devem rodar em todo PR? | Sim. Gate de regressão > 10% falha o build. ADR-005. | Resolvido | Criação | Define PERF-07, PERF-08. |
 | 26/07/2026 | A biblioteca deve implementar logging próprio? | Não. Observabilidade é responsabilidade do consumidor. ARCH-03. | Resolvido | Criação | Define ARCH-03, SEC-05. |
+| 02/08/2026 | Branches mortos e null checks em IE validations + CpfValidation impedem 100% de cobertura? | Sim. ADR-006 aprova a correção de 6 bugs em código-fonte (RN, TO, PE, PI, SP, CPF) para atingir 100% L e 100% B. Zero breaking change na API pública. | Resolvido | ADR-006 | Libera Wave 7 (Tasks 31–36) do plano 004-100-coverage-tests.md. |

@@ -13,6 +13,15 @@ public class MatoGrossoExtensionTest
         Assert.Equal(expected, maskedValue);
     }
 
+    [Theory(DisplayName = "InscricaoEstadualMask should return null for empty input")]
+    [InlineData("")]
+    [InlineData(null)]
+    public void InscricaoEstadualMask_Empty(string value)
+    {
+        var maskedValue = value.InscricaoEstadualMaskMt();
+        Assert.Null(maskedValue);
+    }
+
     [Theory(DisplayName = "InscricaoEstadualMask should not return the same value for invalid Mato Grosso IE")]
     [InlineData("00130000019", "0013000001-9")]
     public void InscricaoEstadualMask_Invalid(string value, string expected)

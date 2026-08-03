@@ -7,7 +7,7 @@ namespace Sirb.Validation.Test.Mockups;
 public class TituloEleitorMockupTest
 {
     [Theory(DisplayName = "TituloEleitor.Generate should produce a value that passes validation")]
-    [InlineData(10)]
+    [InlineData(500)]
     public void GenerateAndValidate(int retry)
     {
         for (var i = 0; i < retry; i++)

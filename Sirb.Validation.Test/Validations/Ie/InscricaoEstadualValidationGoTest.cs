@@ -27,9 +27,22 @@ public class InscricaoEstadualValidationGoTest
     [InlineData("50.123.458-3")]
     [InlineData("60.123.459-1")]
     [InlineData("70.123.460-5")]
+    [InlineData("110944023")]
+    [InlineData("1100482300")]
     public void Validate_Invalid(string value)
     {
         var isValid = InscricaoEstadualValidation.IsValid(_state, value);
         Assert.False(isValid);
+    }
+
+    [Theory(DisplayName = "Inscrição Estadual de Goiás deve ser válida para rest==1 branches")]
+    [InlineData("101031051")]
+    [InlineData("100000070")]
+    [InlineData("100000010")]
+    [InlineData("110944020")]
+    public void Validate_Valid_GoiasRestOneBranches(string value)
+    {
+        var isValid = InscricaoEstadualValidation.IsValid(_state, value);
+        Assert.True(isValid);
     }
 }

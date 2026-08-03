@@ -13,6 +13,15 @@ public class EspiritoSantoExtensionTest
         Assert.Equal(expected, maskedValue);
     }
 
+    [Theory(DisplayName = "InscricaoEstadualMask should return null for empty input")]
+    [InlineData("")]
+    [InlineData(null)]
+    public void InscricaoEstadualMask_Empty(string value)
+    {
+        var maskedValue = value.InscricaoEstadualMaskEs();
+        Assert.Null(maskedValue);
+    }
+
     [Theory(DisplayName = "InscricaoEstadualMask should not return the same value for invalid Espírito Santo IE")]
     [InlineData("0011111122233", "00.111111.222-33")]
     public void InscricaoEstadualMask_Invalid(string value, string expected)

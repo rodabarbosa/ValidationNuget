@@ -45,4 +45,11 @@ public class StringExtensionTest
         var newValue = value.RemoveLatinCharacters();
         Assert.Equal(expected, newValue);
     }
+
+    [Fact(DisplayName = "RemoveMask should return null for null input")]
+    public void RemoveMask_Null_ReturnsNull()
+    {
+        var result = ((string)null).RemoveMask();
+        Assert.Null(result);
+    }
 }

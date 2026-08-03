@@ -14,4 +14,16 @@ public class InscricaoEstadualSantaCatarinaMockupTest
         var isValid = InscricaoEstadualValidation.IsValid(State.SC, value);
         Assert.True(isValid);
     }
+
+    [Fact(DisplayName = "InscricaoEstadual.Generate should produce valid Santa Catarina IE in 2000 iterations")]
+    public void Validate_Loop_2000Iterations()
+    {
+        for (var i = 0; i < 2000; i++)
+        {
+            var value = InscricaoEstadual.Generate(State.SC);
+            var isValid = InscricaoEstadualValidation.IsValid(State.SC, value);
+            Assert.True(isValid, $"Generated IE '{value}' should be valid (iteration {i})");
+        }
+    }
+
 }

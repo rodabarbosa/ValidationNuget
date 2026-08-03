@@ -26,6 +26,7 @@ public class InscricaoEstadualValidationMaTest
     [InlineData("420000055")]
     [InlineData("520000062")]
     [InlineData("620000070")]
+    [InlineData("99999999")]
     public void Validate_Invalid(string value)
     {
         var isValid = InscricaoEstadualValidation.IsValid(_state, value);

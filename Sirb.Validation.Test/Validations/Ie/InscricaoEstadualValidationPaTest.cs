@@ -26,6 +26,7 @@ public class InscricaoEstadualValidationPaTest
     [InlineData("45-000003-0")]
     [InlineData("55-000004-9")]
     [InlineData("65-000005-7")]
+    [InlineData("99999999")]
     public void Validate_Invalid(string value)
     {
         var isValid = InscricaoEstadualValidation.IsValid(_state, value);

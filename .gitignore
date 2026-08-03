@@ -333,5 +333,11 @@ ASALocalRun/
 
 .github/
 .opencode/
+.ruff_cache/
 .vscode/
 temp/
+**/TestResults/
+CoverageReport/
+CoverageReport*/
+CoverletCoverage/
+CoverletCoverage*/

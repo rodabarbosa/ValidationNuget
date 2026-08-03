@@ -13,6 +13,15 @@ public class RioGrandeDoSulExtensionTest
         Assert.Equal(expected, maskedValue);
     }
 
+    [Theory(DisplayName = "InscricaoEstadualMask should return null for empty input")]
+    [InlineData("")]
+    [InlineData(null)]
+    public void InscricaoEstadualMask_Empty(string value)
+    {
+        var maskedValue = value.InscricaoEstadualMaskRs();
+        Assert.Null(maskedValue);
+    }
+
     [Theory(DisplayName = "InscricaoEstadualMask should not return the same value for invalid Rio Grande do Sul IE")]
     [InlineData("2243658792", "224/3658792")]
     public void InscricaoEstadualMask_Invalid(string value, string expected)

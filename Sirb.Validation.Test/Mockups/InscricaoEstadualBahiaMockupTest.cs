@@ -14,4 +14,16 @@ public class InscricaoEstadualBahiaMockupTest
         var isValid = InscricaoEstadualValidation.IsValid(State.BA, value);
         Assert.True(isValid);
     }
+
+    [Fact(DisplayName = "InscricaoEstadual.Generate should produce valid Bahia IE in 2000 iterations")]
+    public void Validate_Loop_2000Iterations()
+    {
+        for (var i = 0; i < 2000; i++)
+        {
+            var value = InscricaoEstadual.Generate(State.BA);
+            var isValid = InscricaoEstadualValidation.IsValid(State.BA, value);
+            Assert.True(isValid, $"Generated IE '{value}' should be valid (iteration {i})");
+        }
+    }
+
 }
