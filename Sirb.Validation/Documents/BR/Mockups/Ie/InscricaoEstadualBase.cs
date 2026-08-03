@@ -1,18 +1,11 @@
 ﻿using Sirb.Validation.Documents.BR.Interfaces;
 using Sirb.Validation.Extensions;
-using System;
+using System.Security.Cryptography;
 
 namespace Sirb.Validation.Documents.BR.Mockups.Ie;
 
 internal abstract class InscricaoEstadualBase : IInscricaoEstadualInternal
 {
-    protected Random Random;
-
-    protected InscricaoEstadualBase()
-    {
-        Random = new Random();
-    }
-
     public string Generate()
     {
         var generatedNumbers = GenerateNumbers();
@@ -20,6 +13,8 @@ internal abstract class InscricaoEstadualBase : IInscricaoEstadualInternal
     }
 
     protected abstract int[] GenerateNumbers();
+
+    protected static int GetRandomInt(int max) => RandomNumberGenerator.GetInt32(0, max);
 
     protected virtual int CalculateLastDigit(int summationValue)
     {

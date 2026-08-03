@@ -11,14 +11,14 @@ internal class InscricaoEstadualSP : InscricaoEstadualBase
         var totalNinethDigit = 0;
         for (var i = 0; i < 8; i++)
         {
-            generatedNumbers.Add(Random.Next(10));
+            generatedNumbers.Add(GetRandomInt(10));
             totalNinethDigit += generatedNumbers[generatedNumbers.Count - 1] * CalculateBeforeLastWeight(i);
         }
 
         generatedNumbers.Add(CalculateLastDigit(totalNinethDigit));
 
         for (var i = 0; i < 2; i++)
-            generatedNumbers.Add(Random.Next(10));
+            generatedNumbers.Add(GetRandomInt(10));
 
         var totalLastDigit = CalculateSummationLastDigit(generatedNumbers);
 
@@ -27,7 +27,7 @@ internal class InscricaoEstadualSP : InscricaoEstadualBase
         return generatedNumbers.ToArray();
     }
 
-    private int CalculateBeforeLastWeight(int index)
+    private static int CalculateBeforeLastWeight(int index)
     {
         if (index == 0)
             return 1;
@@ -35,7 +35,7 @@ internal class InscricaoEstadualSP : InscricaoEstadualBase
         return (index > 6 ? 3 : 2) + index;
     }
 
-    private int CalculateSummationLastDigit(List<int> partialGeneratedNumbers)
+    private static int CalculateSummationLastDigit(List<int> partialGeneratedNumbers)
     {
         var total = 0;
         for (var i = 11; i >= 1; i--)
@@ -44,7 +44,7 @@ internal class InscricaoEstadualSP : InscricaoEstadualBase
         return total;
     }
 
-    private int CalculateLastDigitWeight(int index)
+    private static int CalculateLastDigitWeight(int index)
     {
         var value = index <= 2 ? 2 : 11;
         return value - index + 2;

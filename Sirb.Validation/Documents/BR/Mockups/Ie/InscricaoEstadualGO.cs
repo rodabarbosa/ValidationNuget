@@ -1,5 +1,4 @@
 ﻿using Sirb.Validation.Extensions;
-using System;
 using System.Collections.Generic;
 
 namespace Sirb.Validation.Documents.BR.Mockups.Ie;
@@ -10,10 +9,10 @@ internal class InscricaoEstadualGO : InscricaoEstadualBase
     {
         var generatedNumbers = new List<int> { 1 };
 
-        var total = 9 + GenerateSecondDigit(generatedNumbers, Random);
+        var total = 9 + GenerateSecondDigit(generatedNumbers);
         for (var i = 0; i < 6; i++)
         {
-            generatedNumbers.Add(Random.Next(10));
+            generatedNumbers.Add(GetRandomInt(10));
             total += generatedNumbers[generatedNumbers.Count - 1] * CaculateWeight(i);
         }
 
@@ -22,9 +21,9 @@ internal class InscricaoEstadualGO : InscricaoEstadualBase
         return generatedNumbers.ToArray();
     }
 
-    private static int GenerateSecondDigit(List<int> value, Random random)
+    private static int GenerateSecondDigit(List<int> value)
     {
-        switch (random.Next(3))
+        switch (GetRandomInt(3))
         {
             case 0:
                 value.Add(0);

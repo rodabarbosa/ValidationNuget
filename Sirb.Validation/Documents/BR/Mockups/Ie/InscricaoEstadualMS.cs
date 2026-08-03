@@ -12,7 +12,7 @@ internal class InscricaoEstadualMS : InscricaoEstadualBase
         for (var i = 0; i < 8; i++)
         {
             if (i > 1)
-                generatedNumbers.Add(Random.Next(10));
+                generatedNumbers.Add(GetRandomInt(10));
             else
                 generatedNumbers.Add(i == 1 ? 8 : 2);
 
@@ -24,7 +24,7 @@ internal class InscricaoEstadualMS : InscricaoEstadualBase
         return generatedNumbers.ToArray();
     }
 
-    private int CalculateWeight(int index)
+    private static int CalculateWeight(int index)
     {
         return 9 - index;
     }

@@ -1,4 +1,4 @@
-using Sirb.Validation.Documents.BR.Interfaces;
+﻿using Sirb.Validation.Documents.BR.Interfaces;
 using Sirb.Validation.Extensions;
 using System.Collections.Generic;
 
@@ -6,9 +6,9 @@ namespace Sirb.Validation.Documents.BR.Validation.Ie;
 
 internal class InscricaoEstadualBahiaValidation : IInscricaoEstadualValidation
 {
-    public bool IsValid(string ieNumber)
+    public bool IsValid(string value)
     {
-        var value = ieNumber?.OnlyNumbers();
+        value = value?.OnlyNumbers() ?? string.Empty;
         if (string.IsNullOrEmpty(value) || !HasValidLength(value))
             return false;
 

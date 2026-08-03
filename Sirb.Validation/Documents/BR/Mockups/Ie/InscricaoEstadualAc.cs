@@ -1,4 +1,3 @@
-﻿using System;
 using System.Collections.Generic;
 
 namespace Sirb.Validation.Documents.BR.Mockups.Ie;
@@ -9,7 +8,7 @@ internal sealed class InscricaoEstadualAc : InscricaoEstadualBase
     {
         var generatedNumbers = new List<int> { 0, 1 };
 
-        var totalForLasDigits = GetTotalForLastDigits(generatedNumbers, Random);
+        var totalForLasDigits = GetTotalForLastDigits(generatedNumbers);
 
         var beforeLastDigit = GetBeforeLastDigit(totalForLasDigits[0]);
         generatedNumbers.Add(beforeLastDigit);
@@ -22,14 +21,14 @@ internal sealed class InscricaoEstadualAc : InscricaoEstadualBase
         return generatedNumbers.ToArray();
     }
 
-    private static int[] GetTotalForLastDigits(IList<int> numbers, Random rnd)
+    private static int[] GetTotalForLastDigits(IList<int> numbers)
     {
         var totalBeforeLastDigit = 3;
         var totalLastDigit = 4;
 
         for (var i = 0; i < 9; i++)
         {
-            numbers.Add(rnd.Next(10));
+            numbers.Add(GetRandomInt(10));
 
             var index = numbers.Count - 1;
             totalBeforeLastDigit += numbers[index] * CalculateBeforeLastWeight(i);

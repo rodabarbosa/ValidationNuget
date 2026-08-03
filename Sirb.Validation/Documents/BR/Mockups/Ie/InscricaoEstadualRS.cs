@@ -11,7 +11,7 @@ internal class InscricaoEstadualRS : InscricaoEstadualBase
         var total = 0;
         for (var i = 0; i < 9; i++)
         {
-            generatedNumbers.Add(Random.Next(10));
+            generatedNumbers.Add(GetRandomInt(10));
             total += generatedNumbers[generatedNumbers.Count - 1] * CalculateWeight(i);
         }
 
@@ -20,7 +20,7 @@ internal class InscricaoEstadualRS : InscricaoEstadualBase
         return generatedNumbers.ToArray();
     }
 
-    private int CalculateWeight(int index)
+    private static int CalculateWeight(int index)
     {
         return (index == 0 ? 2 : 10) - index;
     }

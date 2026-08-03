@@ -2,7 +2,6 @@ using Sirb.Validation.Documents.BR.Enumeration;
 using Sirb.Validation.Documents.BR.Mockups;
 using Sirb.Validation.Documents.BR.Mockups.Ie;
 using Sirb.Validation.Documents.BR.Validation;
-using System;
 using System.Reflection;
 using Xunit;
 
@@ -45,9 +44,8 @@ public class InscricaoEstadualBahiaMockupTest
     public void GetModuloValue_ViaReflection(int[] values, int length, int expected)
     {
         var method = typeof(InscricaoEstadualBa).GetMethod("GetModuloValue",
-            BindingFlags.NonPublic | BindingFlags.Instance);
-        var instance = Activator.CreateInstance(typeof(InscricaoEstadualBa), true);
-        var result = method!.Invoke(instance, new object[] { values, length });
+            BindingFlags.NonPublic | BindingFlags.Static);
+        var result = method!.Invoke(null, new object[] { values, length });
         Assert.Equal(expected, result);
     }
 
@@ -68,9 +66,8 @@ public class InscricaoEstadualBahiaMockupTest
     public void GetDigitValue_ViaReflection(int summantionValue, int moduleValue, int expected)
     {
         var method = typeof(InscricaoEstadualBa).GetMethod("GetDigitValue",
-            BindingFlags.NonPublic | BindingFlags.Instance);
-        var instance = Activator.CreateInstance(typeof(InscricaoEstadualBa), true);
-        var result = method!.Invoke(instance, new object[] { summantionValue, moduleValue });
+            BindingFlags.NonPublic | BindingFlags.Static);
+        var result = method!.Invoke(null, new object[] { summantionValue, moduleValue });
         Assert.Equal(expected, result);
     }
 
@@ -82,9 +79,8 @@ public class InscricaoEstadualBahiaMockupTest
     public void CalculateBeforeLastWeight_ViaReflection(int index, int length, int expected)
     {
         var method = typeof(InscricaoEstadualBa).GetMethod("CalculateBeforeLastWeight",
-            BindingFlags.NonPublic | BindingFlags.Instance);
-        var instance = Activator.CreateInstance(typeof(InscricaoEstadualBa), true);
-        var result = method!.Invoke(instance, new object[] { index, length });
+            BindingFlags.NonPublic | BindingFlags.Static);
+        var result = method!.Invoke(null, new object[] { index, length });
         Assert.Equal(expected, result);
     }
 
@@ -96,9 +92,8 @@ public class InscricaoEstadualBahiaMockupTest
     public void CalculateLastWeight_ViaReflection(int index, int length, int expected)
     {
         var method = typeof(InscricaoEstadualBa).GetMethod("CalculateLastWeight",
-            BindingFlags.NonPublic | BindingFlags.Instance);
-        var instance = Activator.CreateInstance(typeof(InscricaoEstadualBa), true);
-        var result = method!.Invoke(instance, new object[] { index, length });
+            BindingFlags.NonPublic | BindingFlags.Static);
+        var result = method!.Invoke(null, new object[] { index, length });
         Assert.Equal(expected, result);
     }
 }

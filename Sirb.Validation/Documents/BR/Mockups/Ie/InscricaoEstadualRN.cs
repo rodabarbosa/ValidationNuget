@@ -1,4 +1,3 @@
-﻿using System;
 using System.Collections.Generic;
 
 namespace Sirb.Validation.Documents.BR.Mockups.Ie;
@@ -9,12 +8,12 @@ internal sealed class InscricaoEstadualRn : InscricaoEstadualBase
     {
         var generatedNumbers = new List<int> { 2, 0 };
 
-        var length = GetRandomLength(Random);
+        var length = GetRandomLength();
         var value = length + 1;
         var total = TotalBase(length);
         for (var i = 0; i < length; i++)
         {
-            generatedNumbers.Add(Random.Next(10));
+            generatedNumbers.Add(GetRandomInt(10));
 
             total += generatedNumbers[generatedNumbers.Count - 1] * CalculateWeight(value, i);
         }
@@ -24,12 +23,12 @@ internal sealed class InscricaoEstadualRn : InscricaoEstadualBase
         return generatedNumbers.ToArray();
     }
 
-    private int GetRandomLength(Random random)
+    private static int GetRandomLength()
     {
-        return random.Next(2) == 0 ? 6 : 7;
+        return GetRandomInt(2) == 0 ? 6 : 7;
     }
 
-    private int TotalBase(int length)
+    private static int TotalBase(int length)
     {
         return length == 6 ? 18 : 20;
     }

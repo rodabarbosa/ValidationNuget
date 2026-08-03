@@ -1,8 +1,8 @@
 ﻿using Sirb.Validation.Documents.BR.Rules;
 using Sirb.Validation.Extensions;
-using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System;
 
 namespace Sirb.Validation.Documents.BR.Validation;
 
@@ -96,7 +96,7 @@ public static class CpfValidation
         if (string.IsNullOrEmpty(value?.Trim()))
             return default;
 
-        return Regex.Replace(value.RemoveMask(), @"(\d{3})(\d{3})(\d{3})(\d{2})", "$1.$2.$3-$4");
+        return Regex.Replace(value.RemoveMask(), @"(\d{3})(\d{3})(\d{3})(\d{2})", "$1.$2.$3-$4", RegexOptions.None, TimeSpan.FromMilliseconds(100));
     }
 
     /// <summary>

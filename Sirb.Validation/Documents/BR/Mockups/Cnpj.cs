@@ -1,7 +1,7 @@
 ﻿using Sirb.Validation.Documents.BR.Rules;
 using Sirb.Validation.Extensions;
-using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 
 namespace Sirb.Validation.Documents.BR.Mockups;
 
@@ -10,7 +10,6 @@ namespace Sirb.Validation.Documents.BR.Mockups;
 /// </summary>
 public static class Cnpj
 {
-    private static readonly Random _random = new Random();
 
     /// <summary>
     /// Gera número CNPJ
@@ -31,7 +30,7 @@ public static class Cnpj
 
         for (var i = 0; i < 12; i++)
         {
-            generatedNambers.Add(_random.Next(10));
+            generatedNambers.Add(RandomNumberGenerator.GetInt32(0, 10));
             var index = generatedNambers.Count - 1;
 
             totalTBeforeLastDigit += generatedNambers[index] * CnpjRule.CalculateBeforeLastDigitWeight(i);

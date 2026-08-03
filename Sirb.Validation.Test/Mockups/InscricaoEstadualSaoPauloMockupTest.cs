@@ -2,7 +2,6 @@ using Sirb.Validation.Documents.BR.Enumeration;
 using Sirb.Validation.Documents.BR.Mockups;
 using Sirb.Validation.Documents.BR.Mockups.Ie;
 using Sirb.Validation.Documents.BR.Validation;
-using System;
 using System.Reflection;
 using Xunit;
 
@@ -46,9 +45,8 @@ public class InscricaoEstadualSaoPauloMockupTest
     public void CalculateBeforeLastWeight_ViaReflection(int index, int expected)
     {
         var method = typeof(InscricaoEstadualSP).GetMethod("CalculateBeforeLastWeight",
-            BindingFlags.NonPublic | BindingFlags.Instance);
-        var instance = Activator.CreateInstance(typeof(InscricaoEstadualSP), true);
-        var result = method!.Invoke(instance, new object[] { index });
+            BindingFlags.NonPublic | BindingFlags.Static);
+        var result = method!.Invoke(null, new object[] { index });
         Assert.Equal(expected, result);
     }
 
@@ -65,9 +63,8 @@ public class InscricaoEstadualSaoPauloMockupTest
     public void CalculateLastDigitWeight_ViaReflection(int index, int expected)
     {
         var method = typeof(InscricaoEstadualSP).GetMethod("CalculateLastDigitWeight",
-            BindingFlags.NonPublic | BindingFlags.Instance);
-        var instance = Activator.CreateInstance(typeof(InscricaoEstadualSP), true);
-        var result = method!.Invoke(instance, new object[] { index });
+            BindingFlags.NonPublic | BindingFlags.Static);
+        var result = method!.Invoke(null, new object[] { index });
         Assert.Equal(expected, result);
     }
 }

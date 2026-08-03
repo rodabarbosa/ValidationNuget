@@ -12,7 +12,7 @@ internal sealed class InscricaoEstadualDf : InscricaoEstadualBase
         var totalLastDigit = 0;
         for (var i = 0; i < 11; i++)
         {
-            generatedNumbers.Add(Random.Next(10));
+            generatedNumbers.Add(GetRandomInt(10));
             totalBeforeLastDigit += generatedNumbers[generatedNumbers.Count - 1] * CalculateBeforeLastWeight(i);
             totalLastDigit += generatedNumbers[generatedNumbers.Count - 1] * CalculateLastWeight(i);
         }
@@ -25,13 +25,13 @@ internal sealed class InscricaoEstadualDf : InscricaoEstadualBase
         return generatedNumbers.ToArray();
     }
 
-    private int CalculateBeforeLastWeight(int index)
+    private static int CalculateBeforeLastWeight(int index)
     {
         var value = index < 3 ? 4 : 12;
         return value - index;
     }
 
-    private int CalculateLastWeight(int index)
+    private static int CalculateLastWeight(int index)
     {
         var value = index < 4 ? 5 : 13;
         return value - index;

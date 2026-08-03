@@ -1,8 +1,8 @@
 ﻿using Sirb.Validation.Documents.BR.Enumeration;
 using Sirb.Validation.Documents.BR.Rules;
 using Sirb.Validation.Extensions;
-using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 
 namespace Sirb.Validation.Documents.BR.Mockups;
 
@@ -11,8 +11,6 @@ namespace Sirb.Validation.Documents.BR.Mockups;
 /// </summary>
 public static class Cpf
 {
-    private static readonly Random _random = new Random();
-
     /// <summary>
     /// Gera número CPF
     /// </summary>
@@ -30,7 +28,7 @@ public static class Cpf
 
     private static State GetRandomState()
     {
-        return (State)_random.Next(10);
+        return (State)RandomNumberGenerator.GetInt32(0, 10);
     }
 
     private static int[] GenerateNumbers(State state)
@@ -41,14 +39,14 @@ public static class Cpf
         var totalLastDigit = 0;
         for (var i = 0; i < 9; i++)
         {
-            generatedNumbers.Add(i < 8 ? _random.Next(10) : (int)state);
+            generatedNumbers.Add(i < 8 ? RandomNumberGenerator.GetInt32(0, 10) : (int)state);
             var index = generatedNumbers.Count - 1;
 
             totalBeforeLastDigit += generatedNumbers[index] * CpfRule.CalculateBeforeLastDigitWeight(i);
             totalLastDigit += generatedNumbers[index] * CpfRule.CalculateLastDigitWeight(i);
         }
 
-        var beforeLastDigit = GetBeforeLastDigit(generatedNumbers, totalBeforeLastDigit);
+        var beforeLastDigit = GetBeforeLastDigit(totalBeforeLastDigit);
         generatedNumbers.Add(beforeLastDigit);
 
         var lastDigit = GetLastDigit(generatedNumbers, totalLastDigit);
@@ -57,7 +55,7 @@ public static class Cpf
         return generatedNumbers.ToArray();
     }
 
-    private static int GetBeforeLastDigit(List<int> generatedNumbers, int total)
+    private static int GetBeforeLastDigit(int total)
     {
         return CalculateDigitValue(total);
     }

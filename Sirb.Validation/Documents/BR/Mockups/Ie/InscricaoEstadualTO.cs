@@ -1,4 +1,3 @@
-﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,11 +12,11 @@ internal class InscricaoEstadualTO : InscricaoEstadualBase
         var total = 0;
         for (var i = 0; i < 8; i++)
         {
-            generatedNumbers.Add(Random.Next(10));
+            generatedNumbers.Add(GetRandomInt(10));
             total += generatedNumbers[generatedNumbers.Count - 1] * (9 - i);
 
             if (i == 1)
-                IncludeBusinessNumberValidation(Random, generatedNumbers);
+                IncludeBusinessNumberValidation(generatedNumbers);
         }
 
         generatedNumbers.Add(CalculateLastDigit(total));
@@ -25,15 +24,15 @@ internal class InscricaoEstadualTO : InscricaoEstadualBase
         return generatedNumbers.ToArray();
     }
 
-    private void IncludeBusinessNumberValidation(Random random, List<int> partialGeneratedNumbers)
+    private void IncludeBusinessNumberValidation(List<int> partialGeneratedNumbers)
     {
-        if (random.Next(10) != 9)
+        if (GetRandomInt(10) != 9)
         {
             int[] allowedDigits = { 1, 2, 3 };
 
-            var value = random.Next(4);
+            var value = GetRandomInt(4);
             while (!allowedDigits.Contains(value))
-                value = Random.Next(4);
+                value = GetRandomInt(4);
 
             partialGeneratedNumbers.Add(0);
             partialGeneratedNumbers.Add(value);

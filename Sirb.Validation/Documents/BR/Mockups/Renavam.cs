@@ -1,6 +1,6 @@
 using Sirb.Validation.Documents.BR.Rules;
 using Sirb.Validation.Extensions;
-using System;
+using System.Security.Cryptography;
 using System.Collections.Generic;
 
 namespace Sirb.Validation.Documents.BR.Mockups;
@@ -10,7 +10,6 @@ namespace Sirb.Validation.Documents.BR.Mockups;
 /// </summary>
 public static class Renavam
 {
-    private static readonly Random _random = new Random();
 
     /// <summary>
     /// Gera número Renavam
@@ -28,7 +27,7 @@ public static class Renavam
 
         var length = 10;
         for (var i = 0; i < length; i++)
-            listInt.Add(_random.Next(9));
+            listInt.Add(RandomNumberGenerator.GetInt32(0, 9));
 
         var reverseList = new List<int>();
         for (var i = length; i > 0; i--)

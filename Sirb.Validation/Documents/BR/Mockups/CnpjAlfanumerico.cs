@@ -1,6 +1,6 @@
 using Sirb.Validation.Documents.BR.Rules;
 using Sirb.Validation.Extensions;
-using System;
+using System.Security.Cryptography;
 using System.Collections.Generic;
 
 namespace Sirb.Validation.Documents.BR.Mockups;
@@ -11,7 +11,7 @@ namespace Sirb.Validation.Documents.BR.Mockups;
 /// </summary>
 public static class CnpjAlfanumerico
 {
-    private static readonly Random _random = new();
+    
     private const string AlphanumericChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     /// <summary>
@@ -46,7 +46,7 @@ public static class CnpjAlfanumerico
             // Generate random alphanumeric value (0-42)
             // 0-9 = digits, 10-42 = letters (A=10+17=27? Wait, ASCII-48: 'A'=65-48=17)
             // Actually we need to generate characters directly and convert
-            char randomChar = AlphanumericChars[_random.Next(AlphanumericChars.Length)];
+            char randomChar = AlphanumericChars[RandomNumberGenerator.GetInt32(0, AlphanumericChars.Length)];
             int charValue = CnpjAlfanumericoRule.CharToAsciiValue(randomChar);
 
             generatedValues.Add(charValue);

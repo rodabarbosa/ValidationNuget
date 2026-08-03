@@ -12,7 +12,7 @@ internal class InscricaoEstadualPE : InscricaoEstadualBase
         var totalLastDigit = 0;
         for (var i = 0; i < 7; i++)
         {
-            generatedNumbers.Add(Random.Next(10));
+            generatedNumbers.Add(GetRandomInt(10));
             totalBeforeLastDigit += generatedNumbers[generatedNumbers.Count - 1] * CalculateBeforeLastWeight(i);
             totalLastDigit += generatedNumbers[generatedNumbers.Count - 1] * CalculateLastWeight(i);
         }
@@ -25,12 +25,12 @@ internal class InscricaoEstadualPE : InscricaoEstadualBase
         return generatedNumbers.ToArray();
     }
 
-    private int CalculateBeforeLastWeight(int index)
+    private static int CalculateBeforeLastWeight(int index)
     {
         return 8 - index;
     }
 
-    private int CalculateLastWeight(int index)
+    private static int CalculateLastWeight(int index)
     {
         return 9 - index;
     }

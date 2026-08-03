@@ -1,8 +1,8 @@
-using Sirb.Validation.Documents.BR.Enumeration;
+﻿using Sirb.Validation.Documents.BR.Enumeration;
 using Sirb.Validation.Documents.BR.Mockups;
 using Sirb.Validation.Documents.BR.Validation;
-using System;
 using Xunit;
+using System;
 
 namespace Sirb.Validation.Test.Validations;
 

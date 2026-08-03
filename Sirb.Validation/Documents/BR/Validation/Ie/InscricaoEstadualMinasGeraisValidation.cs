@@ -1,4 +1,4 @@
-using Sirb.Validation.Documents.BR.Interfaces;
+﻿using Sirb.Validation.Documents.BR.Interfaces;
 using Sirb.Validation.Extensions;
 using System.Text;
 
@@ -6,9 +6,9 @@ namespace Sirb.Validation.Documents.BR.Validation.Ie;
 
 internal class InscricaoEstadualMinasGeraisValidation : IInscricaoEstadualValidation
 {
-    public bool IsValid(string ieNumber)
+    public bool IsValid(string value)
     {
-        var value = ieNumber?.OnlyNumbers();
+        value = value?.OnlyNumbers() ?? string.Empty;
         if (string.IsNullOrEmpty(value) || !IsLengthValid(value))
             return false;
 
@@ -24,6 +24,8 @@ internal class InscricaoEstadualMinasGeraisValidation : IInscricaoEstadualValida
         return value.Length == 13;
     }
 
+    #region GetFirstDigit overloads
+
     private static int GetFirstDigit(string value)
     {
         var sb = BuildValueToString(value);
@@ -33,12 +35,34 @@ internal class InscricaoEstadualMinasGeraisValidation : IInscricaoEstadualValida
         return GetFirstDigit(sum);
     }
 
+    private static int GetFirstDigit(int sum)
+    {
+        var sumAux = sum;
+        while (sumAux % 10 != 0)
+            sumAux++;
+
+        return sumAux - sum;
+    }
+
+    #endregion
+
+    #region GetSecondDigit overloads
+
     private static int GetSecondDigit(string value, int digit1)
     {
         var sumForSecondDigit = DoSumForSecondDigit(value, digit1);
 
         return GetSecondDigit(sumForSecondDigit);
     }
+
+    private static int GetSecondDigit(int sum)
+    {
+        var digit2 = 11 - sum % 11;
+        if (sum % 11 == 0 || sum % 11 == 1) digit2 = 0;
+        return digit2;
+    }
+
+    #endregion
 
     private static StringBuilder BuildValueToString(string value)
     {
@@ -93,15 +117,6 @@ internal class InscricaoEstadualMinasGeraisValidation : IInscricaoEstadualValida
         return index % 2 == 0 ? 1 : 2;
     }
 
-    private static int GetFirstDigit(int sum)
-    {
-        var sumAux = sum;
-        while (sumAux % 10 != 0)
-            sumAux++;
-
-        return sumAux - sum;
-    }
-
     private static int DoSumForSecondDigit(string value, int digit1)
     {
         var sum = digit1 * 2;
@@ -125,13 +140,6 @@ internal class InscricaoEstadualMinasGeraisValidation : IInscricaoEstadualValida
         originalWeight--;
 
         return int.Parse(value) * weight;
-    }
-
-    private static int GetSecondDigit(int sum)
-    {
-        var digit2 = 11 - sum % 11;
-        if (sum % 11 == 0 || sum % 11 == 1) digit2 = 0;
-        return digit2;
     }
 
     private static bool IsDigitsValid(string value, int digit1, int digit2)

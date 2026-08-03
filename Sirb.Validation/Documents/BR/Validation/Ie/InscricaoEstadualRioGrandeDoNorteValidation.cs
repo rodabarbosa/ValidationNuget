@@ -1,18 +1,24 @@
-using Sirb.Validation.Documents.BR.Interfaces;
+﻿using Sirb.Validation.Documents.BR.Interfaces;
 using Sirb.Validation.Extensions;
 
 namespace Sirb.Validation.Documents.BR.Validation.Ie;
 
 internal class InscricaoEstadualRioGrandeDoNorteValidation : IInscricaoEstadualValidation
 {
-    public bool IsValid(string ieNumber)
+    public bool IsValid(string value)
     {
-        var value = ieNumber?.OnlyNumbers();
+        if (string.IsNullOrEmpty(value))
+            return false;
+
+        value = value.OnlyNumbers();
         if (string.IsNullOrEmpty(value))
             return false;
 
         var weight = value.Length;
-        if ((weight < 9 || weight > 10) && !value.StartsWith("20")) return false;
+        if (weight != 9 && weight != 10)
+        {
+            if (!value.StartsWith("20")) return false;
+        }
 
         var length = value.Length - 1;
         var sum = 0;

@@ -1,7 +1,8 @@
-using Sirb.Validation.Documents.BR.Rules;
+﻿using Sirb.Validation.Documents.BR.Rules;
 using Sirb.Validation.Extensions;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System;
 
 namespace Sirb.Validation.Documents.BR.Validation;
 
@@ -12,7 +13,7 @@ namespace Sirb.Validation.Documents.BR.Validation;
 /// </summary>
 public static class CnpjAlfanumericoValidation
 {
-    private static readonly Regex CnpjMaskRegex = new(@"[./-]", RegexOptions.Compiled);
+    private static readonly Regex CnpjMaskRegex = new(@"[./-]", RegexOptions.Compiled, TimeSpan.FromMilliseconds(100));
 
     /// <summary>
     /// Validates an alphanumeric CNPJ (14 characters: 12 alphanumeric + 2 numeric check digits).
@@ -45,7 +46,7 @@ public static class CnpjAlfanumericoValidation
     {
         return string.IsNullOrEmpty(value?.Trim())
             ? default
-            : Regex.Replace(RemoveCnpjMask(value), @"(.{2})(.{3})(.{3})(.{4})(.{2})", "$1.$2.$3/$4-$5");
+            : Regex.Replace(RemoveCnpjMask(value), @"(.{2})(.{3})(.{3})(.{4})(.{2})", "$1.$2.$3/$4-$5", RegexOptions.None, TimeSpan.FromMilliseconds(100));
     }
 
     /// <summary>

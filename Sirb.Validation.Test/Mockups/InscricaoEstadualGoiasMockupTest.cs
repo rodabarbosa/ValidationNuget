@@ -2,7 +2,6 @@ using Sirb.Validation.Documents.BR.Enumeration;
 using Sirb.Validation.Documents.BR.Mockups;
 using Sirb.Validation.Documents.BR.Mockups.Ie;
 using Sirb.Validation.Documents.BR.Validation;
-using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Xunit;
@@ -44,18 +43,21 @@ public class InscricaoEstadualGoiasMockupTest
         Assert.Equal(expected, result);
     }
 
-    [Theory(DisplayName = "GenerateSecondDigit covers all switch cases via reflection")]
-    [InlineData(1, 0, 0)]
-    [InlineData(5, 1, 8)]
-    [InlineData(0, 5, 40)]
-    public void GenerateSecondDigit_ViaReflection(int randomNextValue, int expectedAddedDigit, int expectedReturnValue)
+    [Fact(DisplayName = "GenerateSecondDigit covers all switch cases via reflection")]
+    public void GenerateSecondDigit_ViaReflection()
     {
         var method = typeof(InscricaoEstadualGO).GetMethod("GenerateSecondDigit",
             BindingFlags.NonPublic | BindingFlags.Static);
-        var list = new List<int>();
-        var random = new Random(randomNextValue);
-        var result = method!.Invoke(null, new object[] { list, random });
-        Assert.Equal(expectedReturnValue, result);
-        Assert.Equal(expectedAddedDigit, list[list.Count - 1]);
+        var results = new HashSet<(int returnValue, int addedDigit)>();
+        for (var i = 0; i < 1000; i++)
+        {
+            var list = new List<int>();
+            var result = (int)method!.Invoke(null, new object[] { list });
+            results.Add((result, list[^1]));
+        }
+
+        Assert.Contains((0, 0), results);
+        Assert.Contains((8, 1), results);
+        Assert.Contains((40, 5), results);
     }
 }

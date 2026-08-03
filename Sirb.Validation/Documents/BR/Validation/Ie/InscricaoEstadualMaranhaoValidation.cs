@@ -1,4 +1,4 @@
-using Sirb.Validation.Documents.BR.Interfaces;
+﻿using Sirb.Validation.Documents.BR.Interfaces;
 using Sirb.Validation.Extensions;
 
 namespace Sirb.Validation.Documents.BR.Validation.Ie;
@@ -6,9 +6,9 @@ namespace Sirb.Validation.Documents.BR.Validation.Ie;
 internal class InscricaoEstadualMaranhaoValidation : IInscricaoEstadualValidation
 
 {
-    public bool IsValid(string ieNumber)
+    public bool IsValid(string value)
     {
-        var value = ieNumber?.OnlyNumbers();
+        value = value?.OnlyNumbers() ?? string.Empty;
         if (string.IsNullOrEmpty(value))
             return false;
 

@@ -1,13 +1,14 @@
-using Sirb.Validation.Documents.BR.Interfaces;
+﻿using Sirb.Validation.Documents.BR.Interfaces;
 using Sirb.Validation.Extensions;
 
 namespace Sirb.Validation.Documents.BR.Validation.Ie;
 
 internal class InscricaoEstadualPernambucoValidation : IInscricaoEstadualValidation
 {
-    public bool IsValid(string ieNumber)
+    public bool IsValid(string value)
     {
-        var value = ieNumber?.OnlyNumbers();
+        if (string.IsNullOrEmpty(value)) return false;
+        value = value.OnlyNumbers();
         if (string.IsNullOrEmpty(value)) return false;
         var valueAux = value.PadRight(14, '0');
         var sum = 0;

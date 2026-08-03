@@ -1,6 +1,7 @@
 ﻿using Sirb.Validation.Documents.BR.Rules;
 using Sirb.Validation.Extensions;
 using System.Text.RegularExpressions;
+using System;
 
 namespace Sirb.Validation.Documents.BR.Validation;
 
@@ -56,6 +57,6 @@ public static class PisValidation
         if (string.IsNullOrEmpty(value?.Trim()))
             return default;
 
-        return Regex.Replace(RemoveMask(value), @"(\d{3})(\d{5})(\d{2})(\d{1})", "$1.$2.$3/$4");
+        return Regex.Replace(RemoveMask(value), @"(\d{3})(\d{5})(\d{2})(\d{1})", "$1.$2.$3/$4", RegexOptions.None, TimeSpan.FromMilliseconds(100));
     }
 }

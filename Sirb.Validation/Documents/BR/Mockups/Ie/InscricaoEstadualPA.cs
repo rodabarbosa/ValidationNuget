@@ -11,7 +11,7 @@ internal class InscricaoEstadualPA : InscricaoEstadualBase
         var total = 49;
         for (var i = 0; i < 6; i++)
         {
-            generatedNumbers.Add(Random.Next(10));
+            generatedNumbers.Add(GetRandomInt(10));
             total += generatedNumbers[generatedNumbers.Count - 1] * CalculateWeight(i);
         }
 

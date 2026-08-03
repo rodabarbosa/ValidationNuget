@@ -1,6 +1,6 @@
 ﻿using Sirb.Validation.Documents.BR.Rules;
 using Sirb.Validation.Extensions;
-using System;
+using System.Security.Cryptography;
 using System.Collections.Generic;
 
 namespace Sirb.Validation.Documents.BR.Mockups;
@@ -10,7 +10,6 @@ namespace Sirb.Validation.Documents.BR.Mockups;
 /// </summary>
 public static class Pis
 {
-    private static readonly Random _random = new Random();
 
     /// <summary>
     /// Gera número PIS
@@ -29,7 +28,7 @@ public static class Pis
         var total = 0;
         for (var i = 0; i < 10; i++)
         {
-            generatedNumbers.Add(_random.Next(10));
+            generatedNumbers.Add(RandomNumberGenerator.GetInt32(0, 10));
             var index = generatedNumbers.Count - 1;
 
             total += generatedNumbers[index] * PisRule.CalculateWeight(i);

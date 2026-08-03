@@ -11,7 +11,7 @@ internal sealed class InscricaoEstadualEs : InscricaoEstadualBase
         var total = 0;
         for (var i = 0; i < 8; i++)
         {
-            generatedNumbers.Add(Random.Next(10));
+            generatedNumbers.Add(GetRandomInt(10));
             total += generatedNumbers[generatedNumbers.Count - 1] * CalcultateWeight(i);
         }
 

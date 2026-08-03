@@ -1,4 +1,3 @@
-﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,12 +9,12 @@ internal sealed class InscricaoEstadualBa : InscricaoEstadualBase
     {
         var generatedNumbers = new List<int>();
 
-        var length = GetRandomLength(Random);
+        var length = GetRandomLength();
         var totalLastDigit = 0;
         var totalBeforeLastDigit = 0;
         for (var i = 0; i < length - 2; i++)
         {
-            generatedNumbers.Add(Random.Next(10));
+            generatedNumbers.Add(GetRandomInt(10));
             totalLastDigit += generatedNumbers[generatedNumbers.Count - 1] * CalculateBeforeLastWeight(i, length);
             totalBeforeLastDigit += generatedNumbers[generatedNumbers.Count - 1] * CalculateLastWeight(i, length);
         }
@@ -30,31 +29,31 @@ internal sealed class InscricaoEstadualBa : InscricaoEstadualBase
         return generatedNumbers.ToArray();
     }
 
-    private int GetRandomLength(Random random)
+    private static int GetRandomLength()
     {
-        return random.Next(2) == 1 ? 9 : 8;
+        return GetRandomInt(2) == 1 ? 9 : 8;
     }
 
-    private int CalculateBeforeLastWeight(int index, int length)
+    private static int CalculateBeforeLastWeight(int index, int length)
     {
         var value = length == 8 ? 7 : 8;
         return CalculateWeight(value, index);
     }
 
-    private int CalculateLastWeight(int index, int length)
+    private static int CalculateLastWeight(int index, int length)
     {
         var value = length == 8 ? 8 : 9;
         return CalculateWeight(value, index);
     }
 
-    private int GetModuloValue(int[] values, int length)
+    private static int GetModuloValue(int[] values, int length)
     {
         int[] validationDigits = { 6, 7, 9 };
         var digitIndex = length == 9 ? 1 : 0;
         return validationDigits.Contains(values[digitIndex]) ? 11 : 10;
     }
 
-    private int GetDigitValue(int summantionValue, int moduleValue)
+    private static int GetDigitValue(int summantionValue, int moduleValue)
     {
         var remainder = summantionValue % moduleValue;
         return remainder == 0 || (moduleValue == 11 && remainder == 1) ? 0 : moduleValue - remainder;

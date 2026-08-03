@@ -1,4 +1,3 @@
-﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,13 +7,13 @@ internal sealed class InscricaoEstadualAl : InscricaoEstadualBase
 {
     protected override int[] GenerateNumbers()
     {
-        var generatedNumbers = new List<int> { 2, 4, GetValidThirdDigit(Random) };
+        var generatedNumbers = new List<int> { 2, 4, GetValidThirdDigit() };
 
         var total = 50 + generatedNumbers[generatedNumbers.Count - 1] * 7;
 
         for (var i = 0; i < 5; i++)
         {
-            generatedNumbers.Add(Random.Next(10));
+            generatedNumbers.Add(GetRandomInt(10));
 
             var index = generatedNumbers.Count - 1;
             total += generatedNumbers[index] * CalculateWeight(i);
@@ -25,14 +24,14 @@ internal sealed class InscricaoEstadualAl : InscricaoEstadualBase
         return generatedNumbers.ToArray();
     }
 
-    private static int GetValidThirdDigit(Random random)
+    private static int GetValidThirdDigit()
     {
         int[] thirdDigitAllowed = { 0, 3, 5, 7, 8 };
 
         int value;
         do
         {
-            value = random.Next(10);
+            value = GetRandomInt(10);
         } while (!thirdDigitAllowed.Contains(value));
 
         return value;

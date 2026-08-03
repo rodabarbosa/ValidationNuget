@@ -1,4 +1,4 @@
-using Sirb.Validation.Documents.BR.Interfaces;
+﻿using Sirb.Validation.Documents.BR.Interfaces;
 using Sirb.Validation.Documents.BR.Validation.Ie;
 using System;
 using System.Collections.Generic;

@@ -1,13 +1,13 @@
-using Sirb.Validation.Documents.BR.Interfaces;
+﻿using Sirb.Validation.Documents.BR.Interfaces;
 using Sirb.Validation.Extensions;
 
 namespace Sirb.Validation.Documents.BR.Validation.Ie;
 
 internal class InscricaoEstadualSantaCatarinaValidation : IInscricaoEstadualValidation
 {
-    public bool IsValid(string ieNumber)
+    public bool IsValid(string value)
     {
-        var value = ieNumber?.OnlyNumbers();
+        value = value?.OnlyNumbers() ?? string.Empty;
         if (string.IsNullOrEmpty(value) || value.Length != 9)
             return false;
 

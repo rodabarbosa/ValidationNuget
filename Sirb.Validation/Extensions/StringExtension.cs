@@ -1,8 +1,8 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System;
 
 namespace Sirb.Validation.Extensions;
 
@@ -25,7 +25,7 @@ public static class StringExtension
 
     private static string Replace(string value, string pattern)
     {
-        return Regex.Replace(value, pattern, string.Empty);
+        return Regex.Replace(value, pattern, string.Empty, RegexOptions.None, TimeSpan.FromMilliseconds(100));
     }
 
     public static string ToCapitalizeAll(this string value)

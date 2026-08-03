@@ -1,6 +1,6 @@
-using Sirb.Validation.Exceptions;
-using System;
+﻿using Sirb.Validation.Exceptions;
 using Xunit;
+using System;
 
 namespace Sirb.Validation.Test.Exceptions;
 

@@ -11,7 +11,7 @@ internal class InscricaoEstadualMG : InscricaoEstadualBase
 
         for (var i = 0; i < 11; i++)
         {
-            generatedNumbers.Add(Random.Next(10));
+            generatedNumbers.Add(GetRandomInt(10));
 
             if (i == 3)
                 auxNumber.Add(0);

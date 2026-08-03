@@ -2,6 +2,7 @@
 using Sirb.Validation.Extensions;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System;
 
 namespace Sirb.Validation.Documents.BR.Validation;
 
@@ -73,6 +74,6 @@ public static class CnpjValidation
     {
         return string.IsNullOrEmpty(value?.Trim())
             ? default
-            : Regex.Replace(value.RemoveMask(), @"(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})", "$1.$2.$3/$4-$5");
+            : Regex.Replace(value.RemoveMask(), @"(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})", "$1.$2.$3/$4-$5", RegexOptions.None, TimeSpan.FromMilliseconds(100));
     }
 }

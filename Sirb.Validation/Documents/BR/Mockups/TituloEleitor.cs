@@ -1,5 +1,5 @@
 ﻿using Sirb.Validation.Extensions;
-using System;
+using System.Security.Cryptography;
 using System.Collections.Generic;
 
 namespace Sirb.Validation.Documents.BR.Mockups;
@@ -22,16 +22,15 @@ public static class TituloEleitor
     private static int[] GenerateNumbers()
     {
         var generatedNumbers = new List<int>();
-        var random = new Random();
 
         var total = 0;
         for (var i = 0; i < 8; i++)
         {
-            generatedNumbers.Add(random.Next(10));
+            generatedNumbers.Add(RandomNumberGenerator.GetInt32(0, 10));
             total += generatedNumbers[generatedNumbers.Count - 1] * CalculateWeight(i);
         }
 
-        GenerateAndIncludeCalculatedDigits(generatedNumbers, random, total);
+        GenerateAndIncludeCalculatedDigits(generatedNumbers, total);
 
         return generatedNumbers.ToArray();
     }
@@ -41,7 +40,7 @@ public static class TituloEleitor
         return index + 2;
     }
 
-    private static void GenerateAndIncludeCalculatedDigits(List<int> generatedNumbers, Random random, int total)
+    private static void GenerateAndIncludeCalculatedDigits(List<int> generatedNumbers, int total)
     {
         var validDigits = false;
         var ninethDigit = 0;
@@ -50,8 +49,8 @@ public static class TituloEleitor
         var twelfth = 0;
         while (!validDigits)
         {
-            ninethDigit = random.Next(10);
-            tenthDigit = random.Next(10);
+            ninethDigit = RandomNumberGenerator.GetInt32(0, 10);
+            tenthDigit = RandomNumberGenerator.GetInt32(0, 10);
             var stateDigit = int.Parse($"{ninethDigit}{tenthDigit}");
             var digitInValidRange = stateDigit >= 1 && stateDigit <= 28;
             if (!digitInValidRange)

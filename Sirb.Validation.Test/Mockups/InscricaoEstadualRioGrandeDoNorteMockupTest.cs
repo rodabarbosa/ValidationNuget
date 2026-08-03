@@ -1,11 +1,11 @@
-using Sirb.Validation.Documents.BR.Enumeration;
+﻿using Sirb.Validation.Documents.BR.Enumeration;
 using Sirb.Validation.Documents.BR.Mockups;
 using Sirb.Validation.Documents.BR.Mockups.Ie;
 using Sirb.Validation.Documents.BR.Validation;
-using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Xunit;
+using System;
 
 namespace Sirb.Validation.Test.Mockups;
 
@@ -31,21 +31,19 @@ public class InscricaoEstadualRioGrandeDoNorteMockupTest
     }
 
     /// <summary>
-    /// Covers GetRandomLength branches: random.Next(2) == 0 → returns 6; == 1 → returns 7.
-    /// Uses multiple seeds to ensure both branches are exercised.
+    /// Covers GetRandomLength branches: GetRandomInt(2) == 0 → returns 6; == 1 → returns 7.
+    /// Uses multiple iterations to ensure both branches are exercised.
     /// </summary>
     [Fact(DisplayName = "GetRandomLength covers both branches via reflection")]
     public void GetRandomLength_ViaReflection_CoversBothBranches()
     {
         var method = typeof(InscricaoEstadualRn).GetMethod("GetRandomLength",
-            BindingFlags.NonPublic | BindingFlags.Instance);
-        var instance = Activator.CreateInstance(typeof(InscricaoEstadualRn), true);
+            BindingFlags.NonPublic | BindingFlags.Static);
 
         var results = new HashSet<int>();
-        for (var seed = 0; seed < 100; seed++)
+        for (var i = 0; i < 1000; i++)
         {
-            var random = new Random(seed);
-            var result = (int)method!.Invoke(instance, new object[] { random });
+            var result = (int)method!.Invoke(null, Array.Empty<object>());
             results.Add(result);
         }
 
@@ -62,9 +60,8 @@ public class InscricaoEstadualRioGrandeDoNorteMockupTest
     public void TotalBase_ViaReflection(int length, int expected)
     {
         var method = typeof(InscricaoEstadualRn).GetMethod("TotalBase",
-            BindingFlags.NonPublic | BindingFlags.Instance);
-        var instance = Activator.CreateInstance(typeof(InscricaoEstadualRn), true);
-        var result = method!.Invoke(instance, new object[] { length });
+            BindingFlags.NonPublic | BindingFlags.Static);
+        var result = method!.Invoke(null, new object[] { length });
         Assert.Equal(expected, result);
     }
 

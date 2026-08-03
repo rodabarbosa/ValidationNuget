@@ -1,5 +1,6 @@
 ﻿using Sirb.Validation.Extensions;
 using System.Text.RegularExpressions;
+using System;
 
 namespace Sirb.Validation.Documents.BR.Validation;
 
@@ -77,6 +78,6 @@ public static class TituloEleitorValidation
         if (string.IsNullOrEmpty(value?.Trim()))
             return default;
 
-        return Regex.Replace(value.RemoveMask(), @"(\d{4})(\d{4})(\d{4})", "$1.$2.$3");
+        return Regex.Replace(value.RemoveMask(), @"(\d{4})(\d{4})(\d{4})", "$1.$2.$3", RegexOptions.None, TimeSpan.FromMilliseconds(100));
     }
 }
