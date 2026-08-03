@@ -35,7 +35,7 @@ public static class StringTest
         if (string.IsNullOrEmpty(cpf?.Trim()))
             return default;
 
-        return Regex.Replace(cpf, @"[^\d]", string.Empty);
+        return Regex.Replace(cpf, @"[^\d]", string.Empty, RegexOptions.None, TimeSpan.FromMilliseconds(100));
     }
 
     public static string Reverse1(string value)

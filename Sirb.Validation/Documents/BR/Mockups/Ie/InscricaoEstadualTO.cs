@@ -24,7 +24,7 @@ internal class InscricaoEstadualTO : InscricaoEstadualBase
         return generatedNumbers.ToArray();
     }
 
-    private void IncludeBusinessNumberValidation(List<int> partialGeneratedNumbers)
+    private static void IncludeBusinessNumberValidation(List<int> partialGeneratedNumbers)
     {
         if (GetRandomInt(10) != 9)
         {
