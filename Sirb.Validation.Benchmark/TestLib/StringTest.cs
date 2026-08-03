@@ -6,7 +6,7 @@ namespace Sirb.Validation.Benchmark.TestLib;
 
 public static class StringTest
 {
-    public static string RemoveMaskWithReplace(string cpf)
+    public static string? RemoveMaskWithReplace(string cpf)
     {
         if (string.IsNullOrEmpty(cpf?.Trim()))
             return default;
@@ -14,7 +14,7 @@ public static class StringTest
         return cpf.Trim().Replace(".", "").Replace("-", "");
     }
 
-    public static string RemoveMaskWithFor(string cpf)
+    public static string? RemoveMaskWithFor(string cpf)
     {
         if (string.IsNullOrEmpty(cpf?.Trim()))
             return default;
@@ -30,7 +30,7 @@ public static class StringTest
         return cpf;
     }
 
-    public static string RemoveMaskWithRegex(string cpf)
+    public static string? RemoveMaskWithRegex(string cpf)
     {
         if (string.IsNullOrEmpty(cpf?.Trim()))
             return default;

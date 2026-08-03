@@ -188,6 +188,20 @@ csharp_style_prefer_extended_property_pattern = true:suggestion
 csharp_style_var_for_built_in_types = false:silent
 csharp_style_var_when_type_is_apparent = false:silent
 
+# Prevent S2325 — CA1822: Instance members that do not use 'this' should be marked as static
+dotnet_diagnostic.CA1822.severity = warning
+
+# Prevent S1172 — CA1833: Unused parameters (upgrade from suggestion to error)
+dotnet_diagnostic.CA1833.severity = error
+
+# Prevent S2583 — CS0162: Unreachable code (enforce explicitly)
+dotnet_diagnostic.CS0162.severity = warning
+
+# Prevent S2259 — CS8602: Dereference of potentially null reference (requires NRT enabled)
+dotnet_diagnostic.CS8602.severity = warning
+dotnet_diagnostic.CS8603.severity = warning
+dotnet_diagnostic.CS8625.severity = warning
+
 # XML project files
 [*.{csproj,vbproj,vcxproj,vcxproj.filters,proj,projitems,shproj}]
 indent_size = 2
