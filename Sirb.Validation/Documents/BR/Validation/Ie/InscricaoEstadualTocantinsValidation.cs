@@ -12,7 +12,7 @@ internal class InscricaoEstadualTocantinsValidation : IInscricaoEstadualValidati
             return false;
 
         var valueAux = value;
-        if (value.Length == 9) valueAux = value.Substring(0, 2) + "02" + value.Substring(1, value.Length);
+        if (value.Length == 9) valueAux = value.Substring(0, 2) + "02" + value.Substring(2);
 
         var sum = 0;
         var weight = 9;

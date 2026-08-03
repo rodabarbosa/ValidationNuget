@@ -52,4 +52,21 @@ public class StringExtensionTest
         var result = ((string)null).RemoveMask();
         Assert.Null(result);
     }
+
+    [Theory(DisplayName = "RemoveMask should return empty string for empty input")]
+    [InlineData("")]
+    public void RemoveMask_Empty_ReturnsEmpty(string value)
+    {
+        var result = value.RemoveMask();
+        Assert.Equal(string.Empty, result);
+    }
+
+    [Theory(DisplayName = "RemoveMask should return only numbers for non-empty input")]
+    [InlineData("12.345.678-9", "123456789")]
+    [InlineData("abc123", "123")]
+    public void RemoveMask_Valid_ReturnsOnlyNumbers(string value, string expected)
+    {
+        var result = value.RemoveMask();
+        Assert.Equal(expected, result);
+    }
 }

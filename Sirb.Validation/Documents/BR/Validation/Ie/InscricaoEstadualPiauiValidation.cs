@@ -8,7 +8,7 @@ internal class InscricaoEstadualPiauiValidation : IInscricaoEstadualValidation
     public bool IsValid(string ieNumber)
     {
         var value = ieNumber?.OnlyNumbers();
-        if (value.Length != 9) return false;
+        if (string.IsNullOrEmpty(value) || value.Length != 9) return false;
 
         var sum = 0;
         for (var i = 0; i < 8; i++)

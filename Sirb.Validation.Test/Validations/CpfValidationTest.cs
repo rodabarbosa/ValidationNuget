@@ -158,4 +158,32 @@ public class CpfValidationTest
         var result = CpfValidation.GetIssuingState(cpf);
         Assert.Equal("PR, SC", result);
     }
+
+    [Fact(DisplayName = "GetIssuingState covers all ninth digits 0-9, default throw is unreachable")]
+    public void GetIssuingState_CoversAllNinthDigits_ReturnsExpectedStates()
+    {
+        // The 9th digit of a valid CPF is always 0-9, making the switch default
+        // (now throw new InvalidOperationException("Unreachable code")) unreachable.
+        // This test verifies every reachable case 0-9 returns the expected state string.
+        var stateByDigit = new (State state, string expected)[]
+        {
+            (State.AC, "RS"),
+            (State.AL, "DF, GO, MS, TO"),
+            (State.AM, "AC, AP, AM, PA, RO, RR"),
+            (State.AP, "CE, MA, PI "),
+            (State.BA, "PE, RN, PB, AL"),
+            (State.CE, "BA, SE"),
+            (State.DF, "MG"),
+            (State.ES, "RJ, ES"),
+            (State.GO, "SP"),
+            (State.MA, "PR, SC")
+        };
+
+        foreach (var (state, expected) in stateByDigit)
+        {
+            var cpf = Cpf.Generate(state);
+            var result = CpfValidation.GetIssuingState(cpf);
+            Assert.Equal(expected, result);
+        }
+    }
 }

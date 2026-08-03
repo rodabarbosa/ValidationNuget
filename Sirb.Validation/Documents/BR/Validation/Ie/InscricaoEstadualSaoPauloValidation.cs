@@ -8,6 +8,7 @@ internal class InscricaoEstadualSaoPauloValidation : IInscricaoEstadualValidatio
 {
     public bool IsValid(string value)
     {
+        if (string.IsNullOrEmpty(value)) return false;
         return value.StartsWith("P", StringComparison.OrdinalIgnoreCase)
             ? ValidateWithP(value.OnlyNumbers())
             : ValidateStandart(value.OnlyNumbers());

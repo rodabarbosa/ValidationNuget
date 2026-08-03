@@ -111,19 +111,12 @@ public static class CpfValidation
             throw new InvalidOperationException("Invalid number");
 
         var aux = value.RemoveMask();
-        switch (int.Parse(aux.Substring(8, 1)))
+        var states = new[]
         {
-            case 0: return "RS";
-            case 1: return "DF, GO, MS, TO";
-            case 2: return "AC, AP, AM, PA, RO, RR";
-            case 3: return "CE, MA, PI ";
-            case 4: return "PE, RN, PB, AL";
-            case 5: return "BA, SE";
-            case 6: return "MG";
-            case 7: return "RJ, ES";
-            case 8: return "SP";
-            case 9: return "PR, SC";
-            default: return "Unknown";
-        }
+            "RS", "DF, GO, MS, TO", "AC, AP, AM, PA, RO, RR", "CE, MA, PI ", "PE, RN, PB, AL",
+            "BA, SE", "MG", "RJ, ES", "SP", "PR, SC"
+        };
+
+        return states[int.Parse(aux.Substring(8, 1))];
     }
 }

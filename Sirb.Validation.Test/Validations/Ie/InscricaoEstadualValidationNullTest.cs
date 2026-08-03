@@ -9,7 +9,8 @@ namespace Sirb.Validation.Test.Validations.Ie;
 
 public class InscricaoEstadualValidationNullTest
 {
-    // 24 classes with null/empty guard (?. OnlyNumbers + string.IsNullOrEmpty check)
+    // 27 classes with null/empty guard (?. OnlyNumbers + string.IsNullOrEmpty check)
+    // PE, PI, and SP previously lacked a null guard; null/empty checks were added (ADR-006).
     private static readonly Type[] ClassesWithNullCheck =
     {
         typeof(InscricaoEstadualAcreValidation),
@@ -28,6 +29,8 @@ public class InscricaoEstadualValidationNullTest
         typeof(InscricaoEstadualParaValidation),
         typeof(InscricaoEstadualParaibaValidation),
         typeof(InscricaoEstadualParanaValidation),
+        typeof(InscricaoEstadualPernambucoValidation),
+        typeof(InscricaoEstadualPiauiValidation),
         typeof(InscricaoEstadualRioDeJaneiroValidation),
         typeof(InscricaoEstadualRioGrandeDoNorteValidation),
         typeof(InscricaoEstadualRioGrandeDoSulValidation),
@@ -35,15 +38,8 @@ public class InscricaoEstadualValidationNullTest
         typeof(InscricaoEstadualRoraimaValidation),
         typeof(InscricaoEstadualSantaCatarinaValidation),
         typeof(InscricaoEstadualSergipeValidation),
-        typeof(InscricaoEstadualTocantinsValidation),
-    };
-
-    // 3 classes WITHOUT null guard — NRE on null input
-    private static readonly Type[] ClassesWithoutNullCheck =
-    {
-        typeof(InscricaoEstadualPernambucoValidation),
-        typeof(InscricaoEstadualPiauiValidation),
         typeof(InscricaoEstadualSaoPauloValidation),
+        typeof(InscricaoEstadualTocantinsValidation),
     };
 
     [Theory(DisplayName = "IE validations with null guard should return false for null input")]
@@ -64,21 +60,8 @@ public class InscricaoEstadualValidationNullTest
         Assert.False(result);
     }
 
-    [Theory(DisplayName = "IE validations without null guard should throw NullReferenceException for null input")]
-    [MemberData(nameof(GetClassesWithoutNullCheck))]
-    public void IsValid_NullInput_ThrowsNullReferenceException(Type type)
-    {
-        var instance = (IInscricaoEstadualValidation)Activator.CreateInstance(type)!;
-        Assert.Throws<NullReferenceException>(() => instance.IsValid(null));
-    }
-
     public static IEnumerable<object[]> GetClassesWithNullCheck()
     {
         return new List<object[]>(ClassesWithNullCheck.Select(t => new object[] { t }));
-    }
-
-    public static IEnumerable<object[]> GetClassesWithoutNullCheck()
-    {
-        return new List<object[]>(ClassesWithoutNullCheck.Select(t => new object[] { t }));
     }
 }

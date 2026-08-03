@@ -32,4 +32,11 @@ public class InscricaoEstadualValidationSpTest
         var isValid = InscricaoEstadualValidation.IsValid(_state, value);
         Assert.False(isValid);
     }
+
+    [Fact(DisplayName = "Inscrição Estadual de São Paulo não deve ser válida para entrada nula")]
+    public void Validate_NullInput_ReturnsFalse()
+    {
+        var isValid = InscricaoEstadualValidation.IsValid(_state, null);
+        Assert.False(isValid);
+    }
 }

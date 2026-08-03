@@ -8,6 +8,7 @@ internal class InscricaoEstadualPernambucoValidation : IInscricaoEstadualValidat
     public bool IsValid(string ieNumber)
     {
         var value = ieNumber?.OnlyNumbers();
+        if (string.IsNullOrEmpty(value)) return false;
         var valueAux = value.PadRight(14, '0');
         var sum = 0;
         var weight = 2;
